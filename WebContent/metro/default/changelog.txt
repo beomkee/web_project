@@ -1,0 +1,109 @@
+**Changelog:**
+
+**Version 3.7.5:**
+
+- Updated Bootstrap to version 3.3.7 (both css and js file)
+- Updated font awesome icon to version 4.7.0 (font files and css file)
+
+**Version 3.7:**
+
+- Updated bootstrap to latest version 3.3.6.
+- Updated font awesome icons to version 4.6.1.
+- Updated full calendar to version 2.6.1.
+- Updated rateit plugin to 1.0.23. 
+
+**Version 3.6:**
+
+- Updated bootstrap css and js files from 3.3.4 to 3.3.5.
+- Updated jquery from 1.11.2 to 1.11.3.
+- Updated HTML5Shiv from 3.7.2 to 3.7.3.
+- Updated jQuery UI to version 1.11.4.
+- Updated Full Calendar to version 2.3.2. Included one more JS file moment.min.js. (calendar.html)
+- Updated excanvas and flot to version 0.8.3.
+- Updatd prettyPhoto to version 3.1.6. 
+- Minor style fix (style.css).
+
+**Version 3.5:**
+
+- Table responsiveness bug. (tables.html, media.html)
+- Updated Bootstrap to version 3.3.2.
+- Updated Fonts Awesome CSS to version 4.3.0.
+- Updated jQuery to version 1.11.2.
+- Updated HTML5Shiv to version 3.7.2.
+- Updated fonts folder to version 4.3.0.
+- Updated Bootstrap Switch Plugin to version 3.3.2.
+- Updated jQuery Plugin RateIt to version 1.0.22.
+- Updated jQuery Plugin UI to version 1.11.3.
+- Minor design fix.(style.css)
+- Included Sparkline JS file. (post.html)
+- Included UI and Datepicker JS file. (widget2.html)
+- Added Span and Changed CSS in Project widget.(index.html, style.css)
+
+**Version 3.0.1:**
+
+- Minor layout update. (style.css)
+
+**Version 3.0:**
+
+- Now, only including JS plugins where it is being used. 
+- Changed 'style' folder name  to 'css'.
+- Changed 'font' foldername to 'fonts'.
+- Updated Font awesome icon plugin.
+- Removed HTML5Shim and added HTML5Shiv.
+- Added Respond.min JS plugin.
+- Updated Bootstrap and jQuery.
+- Included minified version of font awesome icon css, bootstrap js and css to all html files. 
+- Removed Font awesome icon support for IE 7 CSS.
+- Added charset meta utf-8 in all html files.
+- Updated datetimepicket, bootstrap switch, full calendar, jquery ui, gritter, flot chart, rateit.
+- Removed CL editor plugin. 
+- jQuery UI Calendar bug fix. (style.css)
+- Set minimum height to 1200. (style.css)
+- Pagination bug fix. (style.css)
+- Removed sparkline chart from Notification box. (all html files)
+- Bug fix from scroll to top. (custom.js)
+- Updated navbar, sidebar, notification box in all html files. (all .html files, style.css)
+- Changed to normal ckeckbox for comment in Quick setting widget in widget1.html file. (widget1.html)
+- Updated color atribute for toggle button in ui.html file. (ui.html)
+- Added java script for toggle button in ui.html file. (ui.html)
+- Support page filter input box bug fix. (style.css)
+- Incresed the image size in gallery.html file. (style.css)
+- Fixed spacing from left & right for grids in grid.html file. (style.html)
+- Added table border for statement page table & invoice page table. (style.css)
+- Added border to navbar. (style.css)
+- Sidebar widget section padding. (style.css)
+- Button class updated.
+- Table borders update. (style.css)
+- Charts page input box update. (charts.html)
+- Max width to images in chat widget, recent post widget. (widgets.css)
+- Removed unnecessary From style. (style.css)
+- Added documentation.
+ 
+**Version 2.2.3:**
+
+- Gallery bug fix. Updated prettyPhoto js file. 
+
+**Version 2.2.2:**
+
+- UI Slider Handle update. (style.css)
+
+**Version 2.2.1:**
+
+- Typo - class "containerk" changed to class "container". (all html files).
+ 
+**Version 2.2:**
+
+- Bootstrap toggle plugin updated to Bootstrap switch https://github.com/nostalgiaz/bootstrap-switch. (new js file, new css file, style.css, ui.html, custom.js)
+- Mainbar width update for large screens. (style.css) 
+ 
+**Version 2.1:**
+
+- Sparkline Tootltip fix.
+
+**Version 2.0:**
+
+- Updated to Bootstrap 3.0
+
+**Version 1.0:**
+
+- Initial Release.

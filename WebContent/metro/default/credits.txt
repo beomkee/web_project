@@ -1,0 +1,17 @@
+**Credits:**
+
+- Bootstrap - http://getbootstrap.com
+- jQuery - http://jquery.com
+- HTML5Shiv - @afarkas @jdalton @jon_neal @rem
+- Respond - Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas.
+- Pattern - http://subtlepatterns.com/
+- Font awesome icon - http://fortawesome.github.io/Font-Awesome/
+- Photos - http://pixabay.com
+- prettyPhoto - http://www.no-margin-for-errors.com
+- CLEditor - http://premiumsoftware.net/CLEditor
+- Sparkline - http://omnipotent.net/jquery.sparkline/ 
+- Flot - http://www.flotcharts.org/
+- Rate It - http://rateit.codeplex.com/
+- Date-Time Picker - http://www.eyecon.ro/bootstrap-datepicker
+- Full Calendar - http://arshaw.com/fullcalendar/
+- Bootstrap Switch - http://www.bootstrap-switch.org

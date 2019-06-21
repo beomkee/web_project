@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.mypage.service.impl.CartMapper">
+
+<!-- 카트 항목 호출하는 쿼리문 -->
+<select id="selectCartItems" resultType="egovMap">
+	
+	SELECT ProD.PRODUCT_IMG
+		, ProD.PRODUCT_NM
+		, ProD.PRODUCT_PRICE
+		, (ProD.PRODUCT_PRICE*(0.1)) as ACCOUNTPOINT
+		,(ProD.PRODUCT_PRICE*(0.01)) as CARDPOINT
+		, Cart.CART_AMOUNT
+		, Cart.ENROLL_TIME
+		, Cart.CART_ID
+		, Cart.PRODUCT_ID
+		, S.SIZE_NAME
+    	, C.COLOR_NM
+    	, S.SIZE_AFTER_COUNT
+		
+	FROM I_ORDER_CART_T Cart
+	
+	INNER JOIN I_PRODUCT_T ProD
+		ON Cart.PRODUCT_ID = ProD.PRODUCT_ID
+		
+	INNER JOIN I_CUSTOMER_T Cus
+		ON Cart.CUS_ID = Cus.CUS_ID
+		AND Cus.CUS_ID = #{param1}
+	
+	INNER JOIN I_PRODUCT_SIZE_T S
+		ON S.SIZE_ID = Cart.SIZE_ID
+	    
+  	INNER JOIN I_PRODUCT_COLOR_T C
+    	ON C.COLOR_ID  = S.COLOR_ID
+			
+	ORDER BY Cart.ENROLL_TIME DESC
+	
+</select>
+
+<!-- 카트 윙배너 쿼리문 -->
+<select id="selectCartItemsToWing" resultType="egovMap">
+	
+	SELECT ProD.PRODUCT_IMG
+		, ProD.PRODUCT_ID
+		, Cart.CART_ID
+
+	FROM I_ORDER_CART_T Cart
+	
+	INNER JOIN I_PRODUCT_T ProD
+		ON Cart.PRODUCT_ID = ProD.PRODUCT_ID
+		
+	INNER JOIN I_CUSTOMER_T Cus
+		ON Cart.CUS_ID = Cus.CUS_ID
+		AND Cus.CUS_ID = #{_parameter}
+	
+	ORDER BY CART_ID DESC
+</select>
+
+<!-- 카트 새로 입력하는 인설트 쿼리문 -->
+<insert id="insertCart" parameterType="String">
+
+	<selectKey resultType="String" keyProperty="seq" order="BEFORE">
+		SELECT NVL(MAX(CART_ID),0)+1 AS seqNo
+		FROM I_ORDER_CART_T 
+	</selectKey>
+			Insert into I_ORDER_CART_T 
+				(CART_ID,
+				CART_AMOUNT,
+				ENROLL_TIME,
+				CUS_ID,
+				PRODUCT_ID,
+				SIZE_ID)
+			 values 
+				 (#{seq},
+				 #{param3},
+				 SYSDATE,
+				 #{param1},
+				 #{param2},
+				 #{param4})
+
+</insert>
+
+<!-- 카트 삭제 딜리트 쿼리문 -->
+<delete id="deleteCartitems" parameterType="String">
+	DELETE FROM I_ORDER_CART_T WHERE CART_ID = #{_parameter}
+</delete>
+
+<!--  쿼리문 -->
+<select id="selectProductIdList" resultType="egovMap">
+	SELECT PRODUCT_ID 
+	FROM I_ORDER_CART_T 
+	WHERE 1=1
+	AND CART_ID = #{param1}
+</select>
+
+<!-- 적립금 내역 가져오는 쿼리문 -->
+<select id="selectedPointList" resultType="egovMap">
+
+	SELECT * 
+	
+	FROM I_CUSTOMER_POINT_T 
+	
+	WHERE 1=1
+		  AND CUS_ID = #{_parameter}
+	
+	ORDER BY POINT_DATE DESC
+</select>
+</mapper>

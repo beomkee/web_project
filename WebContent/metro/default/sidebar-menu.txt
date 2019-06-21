@@ -1,0 +1,4 @@
+1. If you want to highlight the current page in main menu then add the class "current" to li. 
+2. If the main menu has sub menu then you need to add the class "has_submneu" to li.
+3. If you are in sub menu, then you need to add the class "current" & "open" to the "parent li" (the one which has "has_submenu" class). Then you need to add class "active" to the current page li.
+
