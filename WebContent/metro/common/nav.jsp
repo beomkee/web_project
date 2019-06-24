@@ -31,7 +31,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a href="../contentJSP/main_<%=div%>.jsp" class="navbar-brand"><%=position%>
+			<a href="<%= request.getContextPath() %>/metro/contentJSP/main_<%=div%>.jsp" class="navbar-brand"><%=position%>
 				<span class="bold">페이지</span></a>
 		</div>
 		<!-- Site name for smallar screens -->
@@ -58,4 +58,4 @@
 		</nav>
 	</div>
 </div>
-<jsp:include page="../left/left.jsp" />
+<jsp:include page="/metro/left/left.jsp" />

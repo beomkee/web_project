@@ -17,7 +17,7 @@
 <!-- Custom CSS -->
 <link href="<%= request.getContextPath()%>/metro/css/style.css" rel="stylesheet" type="text/css">
 <!-- Widgets stylesheet -->
-<link href=".<%= request.getContextPath()%>/metro/css/widgets.css" rel="stylesheet" type="text/css">
-
+<link href="<%= request.getContextPath()%>/metro/css/widgets.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="shortcut icon" href="#">
+<script src="<%= request.getContextPath()%>/metro/js/jquery/jquery-2.1.4.min.js"></script>

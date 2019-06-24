@@ -1,34 +1,35 @@
 <!-- Javascript files -->
 <!-- jQuery -->
-<script src="<%= request.getContextPath()%>/metro/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/jquery.js"></script>
 <!-- Bootstrap JS -->
-<script src="<%= request.getContextPath()%>/metro/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/bootstrap.min.js"></script>
 <!-- jQuery UI -->
-<script src="<%= request.getContextPath()%>/metro/js/jquery-ui.min.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/jquery-ui.min.js"></script>
 <!-- jQuery Flot -->
-<script src="<%= request.getContextPath()%>/metro/js/excanvas.min.js"></script>
-<script src="<%= request.getContextPath()%>/metro/js/jquery.flot.js"></script>
-<script src="<%= request.getContextPath()%>/metro/js/jquery.flot.resize.js"></script>
-<script src="<%= request.getContextPath()%>/metro/js/jquery.flot.pie.js"></script>
-<script src="<%= request.getContextPath()%>/metro/js/jquery.flot.stack.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/excanvas.min.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/jquery.flot.js"></script>
+<script
+	src="<%=request.getContextPath()%>/metro/js/jquery.flot.resize.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/jquery.flot.pie.js"></script>
+<script
+	src="<%=request.getContextPath()%>/metro/js/jquery.flot.stack.js"></script>
 <!-- Sparklines -->
-<script src="<%= request.getContextPath()%>/metro/js/sparklines.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/sparklines.js"></script>
 <!-- jQuery Gritter -->
-<script src="<%= request.getContextPath()%>/metro/js/jquery.gritter.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/metro/js/jquery.gritter.min.js"></script>
 <!-- Respond JS for IE8 -->
-<script src="<%= request.getContextPath()%>/metro/js/respond.min.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/respond.min.js"></script>
 <!-- HTML5 Support for IE -->
-<script src="<%= request.getContextPath()%>/metro/js/html5shiv.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/html5shiv.js"></script>
 <!-- Custom JS -->
-<script src="<%= request.getContextPath()%>/metro/js/custom.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/custom.js"></script>
 
 <!-- Script for this page -->
-<script src="<%= request.getContextPath()%>/metro/js/sparkline-index.js"></script>
+<script src="<%=request.getContextPath()%>/metro/js/sparkline-index.js"></script>
 <script type="text/javascript">
 	$(function() {
-
 		/* Bar Chart starts */
-
 		var d1 = [];
 		for (var i = 0; i <= 30; i += 1)
 			d1.push([ i, parseInt(Math.random() * 30) ]);
@@ -73,9 +74,7 @@
 				}
 			});
 		}
-
 		plotWithOptions();
-
 		$(".stackControls input").click(function(e) {
 			e.preventDefault();
 			stack = $(this).val() == "With stacking" ? true : null;
@@ -88,13 +87,9 @@
 			steps = $(this).val().indexOf("steps") != -1;
 			plotWithOptions();
 		});
-
 		/* Bar chart ends */
-
 	});
-
 	/* Curve chart starts */
-
 	$(function() {
 		var sin = [], cos = [];
 		for (var i = 0; i < 14; i += 0.5) {
@@ -136,7 +131,6 @@
 			},
 			colors : [ "#fa3031", "#43c83c" ]
 		});
-
 		function showTooltip(x, y, contents) {
 			$('<div id="tooltip">' + contents + '</div>').css({
 				position : 'absolute',
@@ -151,7 +145,6 @@
 				opacity : 0.9
 			}).appendTo("body").fadeIn(200);
 		}
-
 		var previousPoint = null;
 		$("#curve-chart")
 				.bind(
@@ -177,7 +170,6 @@
 								previousPoint = null;
 							}
 						});
-
 		$("#curve-chart").bind(
 				"plotclick",
 				function(event, pos, item) {
@@ -188,7 +180,6 @@
 						plot.highlight(item.series, item.datapoint);
 					}
 				});
-
 	});
 	/* Curve chart ends */
 </script>

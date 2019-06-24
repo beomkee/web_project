@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!-- Notification box starts -->
 <div class="slide-box">
 	<!-- Notification box head -->

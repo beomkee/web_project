@@ -15,21 +15,6 @@
 		div = "m";
 	}
 %>
-<script>
-	window.onload = function (){
-		var litag = document.getElementsByTagName("li");
-		var url = document.location.href.split("/");
-		if(url[url.length-2]=="member"){
-			litag[4].className += " w3-green";
-		}else if(url[url.length-2]=="chartjsPro"){
-			litag[5].className += " w3-green";
-		}else if(url[url.length-2]=="awesomePro"){
-			litag[6].className += " w3-green";
-		}<%-- else{
-			atag[<%= boardid %>].className += " w3-green";
-		} --%>
-	}
-</script>
 <div class="sidebar">
 	<div class="sidebar-dropdown">
 		<a href="#">Navigation</a>
@@ -44,22 +29,22 @@
 		<!--- Sidebar navigation -->
 		<ul class="navi">
 			<li class="nred current"><a
-				href="../contentJSP/main_<%= div %>.jsp"> <i class="fa fa-desktop"></i>
+				href="<%= request.getContextPath() %>/metro/contentJSP/main_<%=div%>.jsp"> <i class="fa fa-desktop"></i>
 					Dashboard
 			</a></li>
 			<!-- Menu with sub menu -->
 			<%
 				if (id.charAt(0) == '2') {
 			%>
-			<jsp:include page="left_m.jsp" />
+			<jsp:include page="/metro/left/left_m.jsp" />
 			<%
 				} else if (id.charAt(0) == '3') {
 			%>
-			<jsp:include page="left_p.jsp" />
+			<jsp:include page="/metro/left/left_p.jsp" />
 			<%
 				} else if (id.charAt(0) == '1') {
 			%>
-			<jsp:include page="left_e.jsp" />
+			<jsp:include page="/metro/left/left_e.jsp" />
 			<%
 				}
 			%>
