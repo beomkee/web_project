@@ -1,3 +1,4 @@
+<jsp:include page="/metro/common/slide_toTop.jsp" />
 <!-- Javascript files -->
 <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/metro/js/jquery.js"></script>

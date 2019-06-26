@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Notification box starts -->
-<div class="slide-box">
-	<!-- Notification box head -->
+<!-- <div class="slide-box">
+	Notification box head
 	<div class="slide-box-head borange">
-		<!-- Title -->
+		Title
 		<div class="pull-left">Notification Box</div>
-		<!-- Icon -->
+		Icon
 		<div class="slide-icons pull-right">
 			<a class="sminimize"><i class="fa fa-chevron-down"></i></a>
 			<a class="sclose"><i class="fa fa-times"></i></a>
@@ -14,19 +14,19 @@
 		<div class="clearfix"></div>
 	</div>
 	<div class="slide-content">
-		<!-- It is default bootstrap nav tabs. See official bootstrap doc for doubts -->
+		It is default bootstrap nav tabs. See official bootstrap doc for doubts
 		<ul class="nav nav-tabs">
-			<!-- Tab links -->
+			Tab links
 			<li class="active"><a href="#tab1" data-toggle="tab"><i
 					class="fa fa-file-o"></i></a></li>
 			<li><a href="#tab2" data-toggle="tab"><i class="fa fa-phone"></i></a></li>
 			<li><a href="#tab3" data-toggle="tab"><i
 					class="fa fa-comments"></i></a></li>
 		</ul>
-		<!-- Tab content -->
+		Tab content
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab1">
-				<!-- Earning item -->
+				Earning item
 				<div class="slide-data">
 					<div class="slide-data-text">Today Earnings</div>
 					<div class="slide-data-result">
@@ -34,7 +34,7 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<!-- Earning item -->
+				Earning item
 				<div class="slide-data">
 					<div class="slide-data-text">Yesterday Earnings</div>
 					<div class="slide-data-result">
@@ -42,7 +42,7 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<!-- Earning item -->
+				Earning item
 				<div class="slide-data">
 					<div class="slide-data-text">Weeks Earnings</div>
 					<div class="slide-data-result">
@@ -50,7 +50,7 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<!-- Earning item -->
+				Earning item
 				<div class="slide-data">
 					<div class="slide-data-text">Months Earnings</div>
 					<div class="slide-data-result">
@@ -58,7 +58,7 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<!-- Earning item -->
+				Earning item
 				<div class="slide-data">
 					<div class="slide-data-text">Years Earnings</div>
 					<div class="slide-data-result">
@@ -79,7 +79,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- Notification box ends -->
 <!-- Scroll to top -->
 <span class="totop"><a><i class="fa fa-chevron-up"></i></a></span>

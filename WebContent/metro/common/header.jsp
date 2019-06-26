@@ -1,3 +1,6 @@
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <meta charset="utf-8">
 <!--  Description, Keywords and Author  -->
 <meta name="description" content="Your description">
@@ -20,4 +23,3 @@
 <link href="<%= request.getContextPath()%>/metro/css/widgets.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="shortcut icon" href="#">
-<script src="<%= request.getContextPath()%>/metro/js/jquery/jquery-2.1.4.min.js"></script>

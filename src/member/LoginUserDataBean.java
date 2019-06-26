@@ -2,6 +2,7 @@ package member;
 
 public class LoginUserDataBean {
 	private String id;
+	private String passwd;
 	private String name;
 	private String tel;
 	private String birth;
@@ -16,14 +17,14 @@ public class LoginUserDataBean {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
 	public String getName() {
 		return name;
-	}
-	public String getContract_date() {
-		return contract_date;
-	}
-	public void setContract_date(String contract_date) {
-		this.contract_date = contract_date;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -58,10 +59,17 @@ public class LoginUserDataBean {
 	public void setPl_num(String pl_num) {
 		this.pl_num = pl_num;
 	}
+	public String getContract_date() {
+		return contract_date;
+	}
+	public void setContract_date(String contract_date) {
+		this.contract_date = contract_date;
+	}
 	@Override
 	public String toString() {
-		return "LoginUserDataBean [id=" + id + ", name=" + name + ", tel=" + tel + ", birth=" + birth + ", manager_num="
-				+ manager_num + ", f_num=" + f_num + ", pl_num=" + pl_num + ", contract_date=" + contract_date + "]";
+		return "{\"id\":\"" + id + "\", \"passwd\":\"" + passwd + "\", \"name\":\"" + name + "\", \"tel\":\"" + tel + "\", \"birth\":\""
+				+ birth + "\", \"manager_num\":\"" + manager_num + "\", \"f_num\":\"" + f_num + "\", \"pl_num\":\"" + pl_num
+				+ "\", \"contract_date\":\"" + contract_date + "\"}";
 	}
-	
+
 }

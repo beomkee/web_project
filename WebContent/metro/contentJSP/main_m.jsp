@@ -515,5 +515,4 @@
 	<div class="clearfix"></div>
 </div>
 <!--/ Content ends -->
-<jsp:include page="../common/slide_toTop.jsp" />
 

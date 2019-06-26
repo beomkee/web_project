@@ -7,7 +7,7 @@
 			class="fa fa-angle-right"></i></span>
 </a>
 	<ul>
-		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_emp_info.jsp?target=1">직원 조회</a></li>
+		<li><a href="<%= request.getContextPath()%>/metro/gridTable/m_info.jsp?target=1">직원 조회</a></li>
 		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_profile.jsp?target=1">등록 및 수정</a></li>
 		<li><a href="register.html">메세지</a></li>
 	</ul></li>
@@ -32,8 +32,8 @@
 			class="fa fa-angle-right"></i></span>
 </a>
 	<ul>
-		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_emp_info.jsp">거래정보</a></li>
-		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_emp_info.jsp?target=3">파트너 조회</a></li>
+		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_info.jsp">거래정보</a></li>
+		<li><a href="<%= request.getContextPath()%>/metro/gridTable/m_info.jsp?target=3">파트너 조회</a></li>
 		<li><a href="<%= request.getContextPath()%>/metro/contentJSP/manager/m_profile.jsp?target=3">등록 및 수정</a></li>
 	</ul></li>
 <!-- 페이지관리-->
