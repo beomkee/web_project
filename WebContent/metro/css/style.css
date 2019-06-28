@@ -188,11 +188,11 @@ a.btn{
 }
 
 .btn.btn-success{
-	background: #999966 !important;
+	background: #8dbcc4 !important;
 }
 
 .btn.btn-success:hover{
-	background: #3d3d29 !important;
+	background: #f58557 !important;
 }
 
 .btn.btn-warning{
@@ -205,6 +205,13 @@ a.btn{
 
 .btn.btn-danger{
 	background: #fa3031 !important;
+}
+
+.btn.btn-danger:hover{
+	background: #d82829 !important;
+}
+.btn.btn-a46260{
+	background: #a46260 !important;
 }
 
 .btn.btn-danger:hover{
@@ -247,6 +254,11 @@ a.btn{
 	color: #fff !important;	
 	border: 0px !important;
 }
+.bf5b351{
+	background:#f5b351 !important;
+	color: #fff !important;	
+	border: 0px !important;
+}
 
 .bgreen{
 	background: #43c83c !important;
@@ -274,6 +286,7 @@ a.btn{
 
 .blightblue h2,.blightblue h3, .blightblue h3, .blightblue h4, .blightblue h5, .blightblue h6,
 .bblue h2,.bblue h3, .bblue h3, .bblue h4, .bblue h5, .bblue h6,
+.bf5b351 h2,.bf5b351 h3, .bf5b351 h3, .bf5b351 h4, .bf5b351 h5, .bf5b351 h6,
 .bgreen h2,.bgreen h3, .bgreen h3, .bgreen h4, .bgreen h5, .bgreen h6,
 .bred h2,.bred h3, .bred h3, .bred h4, .bred h5, .bred h6,
 .bviolet h2,.bviolet h3, .bviolet h3, .bviolet h4, .bviolet h5, .bviolet h6,
@@ -283,6 +296,7 @@ a.btn{
  
 .blightblue a,
 .bblue a,
+.bf5b351 a,
 .bgreen a,
 .bred a,
 .borange a,
@@ -292,6 +306,7 @@ a.btn{
 
 .blightblue a:hover,
 .bblue a:hover,
+.bf5b351 a:hover,
 .bgreen a:hover,
 .bred a:hover,
 .borange a:hover,
@@ -678,6 +693,16 @@ form{
 .sidebar .navi > li.open.nred > a,
 .sidebar .navi > li.current.nred > a { 
   background:#fa3031 !important;
+  -webkit-transition:background 0.5s ease;
+  -moz-transition:background 0.5s ease;
+  -o-transition:background 0.5s ease;
+  transition:background 0.5s ease;
+}
+
+.sidebar .navi > li.nf5b351 > a:hover, 
+.sidebar .navi > li.open.nf5b351 > a,
+.sidebar .navi > li.current.nf5b351 > a { 
+  background:#f5b351 !important;
   -webkit-transition:background 0.5s ease;
   -moz-transition:background 0.5s ease;
   -o-transition:background 0.5s ease;
@@ -1148,6 +1173,26 @@ form{
   border: 1px solid #a6a6a6;
   color: #fff;
 }
+.widget.w597484 .widget-head{
+  background-color: #597484;
+  border: 1px solid #597484;
+  color: #fff;
+}
+.widget.wbd1550 .widget-head{
+  background-color: #bd1550;
+  border: 1px solid #bd1550;
+  color: #fff;
+}
+.widget.w79a8a9 .widget-head{
+  background-color: #79a8a9;
+  border: 1px solid #79a8a9;
+  color: #fff;
+}
+.widget.w435256 .widget-head{
+  background-color: #435256;
+  border: 1px solid #435256;
+  color: #fff;
+}
 
 .widget.wred .widget-head .widget-icons a,
 .widget.wblue .widget-head .widget-icons a,
@@ -1156,6 +1201,10 @@ form{
 .widget.wgreen .widget-head .widget-icons a,
 .widget.wviolet .widget-head .widget-icons a,
 .widget.wgray .widget-head .widget-icons a,
+.widget.w597484 .widget-head .widget-icons a,
+.widget.wb4cbd3 .widget-head .widget-icons a,
+.widget.w79a8a9 .widget-head .widget-icons a,
+.widget.wbd1550 .widget-head .widget-icons a,
 .widget.wgray2 .widget-head .widget-icons a{
 	color: #fff;
 }
@@ -1167,6 +1216,10 @@ form{
 .widget.wgreen .widget-head .widget-icons a:hover,
 .widget.wviolet .widget-head .widget-icons a:hover,
 .widget.wgray .widget-head .widget-icons a:hover,
+.widget.w597484 .widget-head .widget-icons a:hover,
+.widget.wb4cbd3 .widget-head .widget-icons a:hover,
+.widget.w79a8a9 .widget-head .widget-icons a:hover,
+.widget.wbd1550 .widget-head .widget-icons a:hover,
 .widget.wgray2 .widget-head .widget-icons a:hover{
 	color: #eee;
 }

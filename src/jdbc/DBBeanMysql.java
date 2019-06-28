@@ -209,20 +209,14 @@ public class DBBeanMysql {
 		ResultSet rs = null;
 		int stat = -1;
 		try {
-			System.out.println(dataBean);
 			conn = getConnection();
 			if (target.equals("직원")) {
-				System.out.println("1");
 				pstmt = conn.prepareStatement("select * from employee where e_id = ?");
-				System.out.println("2");
 				pstmt.setString(1, dataBean.getId());
 				rs = pstmt.executeQuery();
-				System.out.println("3");
 				if (rs.next()) {
-					System.out.println("4");
 					String dbpass = rs.getString("e_passwd");
 					if (dbpass.equals(dataBean.getPasswd())) {
-						System.out.println("5");
 						pstmt = conn.prepareStatement("update employee set "
 								+ " e_passwd=?, e_name=?, e_tel=?, e_birth=?, manager_num=?, f_num=?,"
 								+ "pl_num=? where e_id = ?");
@@ -235,13 +229,11 @@ public class DBBeanMysql {
 						pstmt.setString(7, dataBean.getPl_num());
 						pstmt.setString(8, dataBean.getId());
 						pstmt.executeUpdate();
-						System.out.println("6");
 						stat = 2;
 					} else {
 						stat = 3;
 					}
 				} else {
-					System.out.println("7");
 					pstmt = conn.prepareStatement("insert into employee values(?,?,?,?,?,?,?,?)");
 					pstmt.setString(1, dataBean.getId());
 					pstmt.setString(2, dataBean.getPasswd());
@@ -255,12 +247,10 @@ public class DBBeanMysql {
 					stat = 1;
 				}
 			} else {
-				System.out.println("8");
 				pstmt = conn.prepareStatement("select * from customer where c_id = ?");
 				pstmt.setString(1, dataBean.getId());
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					System.out.println("9");
 					String dbpass = rs.getString("e_passwd");
 					if (dbpass.equals(dataBean.getPasswd())) {
 						pstmt = conn.prepareStatement(
@@ -275,7 +265,6 @@ public class DBBeanMysql {
 						stat = 3;
 					}
 				} else {
-					System.out.println("10");
 					pstmt = conn.prepareStatement("insert into employee values(?,?,?,?)");
 					pstmt.setString(1, dataBean.getId());
 					pstmt.setString(2, dataBean.getPasswd());
@@ -285,7 +274,6 @@ public class DBBeanMysql {
 					stat = 1;
 				}
 			}
-			System.out.println("11");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -310,6 +298,7 @@ public class DBBeanMysql {
 		}
 		return stat;
 	}
+
 	public List<LoginUserDataBean> getEmpCusList(String target) {
 		LoginUserDataBean user = null;
 		Connection conn = null;
@@ -335,7 +324,7 @@ public class DBBeanMysql {
 						userList.add(user);
 					} while (rs.next());
 				}
-			}else {
+			} else {
 				stmt = conn.prepareStatement("select * from customer");
 				rs = stmt.executeQuery();
 				if (rs.next()) {
@@ -373,8 +362,8 @@ public class DBBeanMysql {
 		}
 		return userList;
 	}
+
 	public List<LoginUserDataBean> serchEmpCusList(String colum, String serchVar, String target) {
-		System.out.println(colum+","+serchVar+","+target);
 		LoginUserDataBean user = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -383,9 +372,8 @@ public class DBBeanMysql {
 		try {
 			conn = getConnection();
 			if (target.equals("직원")) {
-				stmt = conn.prepareStatement("select * from employee where ? = ?");
-				stmt.setString(1, colum);
-				stmt.setString(2, serchVar);
+				stmt = conn.prepareStatement("select * from employee where " + colum + " = ?");
+				stmt.setString(1, serchVar);
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
@@ -401,10 +389,9 @@ public class DBBeanMysql {
 						userList.add(user);
 					} while (rs.next());
 				}
-			}else {
-				stmt = conn.prepareStatement("select * from customer where ? = ?");
-				stmt.setString(1, colum);
-				stmt.setString(2, serchVar);
+			} else {
+				stmt = conn.prepareStatement("select * from customer where " + colum + " = ?");
+				stmt.setString(1, serchVar);
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
@@ -440,5 +427,119 @@ public class DBBeanMysql {
 			}
 		}
 		return userList;
+	}
+
+	public void deleteEmpCus(String id, String target) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = getConnection();
+			if (target.equals("직원")) {
+				stmt = conn.prepareStatement("delete from employee where e_id = ?");
+			} else {
+				stmt = conn.prepareStatement("delete from customer where c_id = ?");
+			}
+			stmt.setString(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+	}
+
+	public List<String> getFacs(String colum) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement("select distinct f_num from employee where f_num is not null");
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				do {
+					list.add(rs.getString(colum)); 
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return list;
+	}
+	public List<String> getPlMas(String colum, String param) {
+		System.out.println(colum+","+ param);
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		try {
+			conn = getConnection();
+			if(colum.equals("pl_num")) {
+				stmt = conn.prepareStatement("select distinct pl_num from employee where f_num = ? and pl_num is not null");
+				stmt.setString(1, param);
+			}else {
+				stmt = conn.prepareStatement("select distinct manager_num from employee where f_num = ? and manager_num is not null");
+				stmt.setString(1, param);
+			}
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				do {
+					list.add(rs.getString(colum)); 
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return list;
 	}
 }

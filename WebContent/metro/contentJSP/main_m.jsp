@@ -31,7 +31,7 @@
 						<!-- List starts -->
 						<ul class="today-datas">
 							<!-- List #1 -->
-							<li class="bblue">
+							<li class="bf5b351">
 								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark1" class="spark"></span>
@@ -43,7 +43,7 @@
 								<div class="clearfix"></div>
 							</li>
 							<a href="#">
-								<li class="bblue">
+								<li class="bf5b351">
 									<!-- Graph -->
 									<div class="pull-left">
 										<i class="fa fa-group"></i>
@@ -55,7 +55,7 @@
 									<div class="clearfix"></div>
 							</li>
 							</a>
-							<li class="bblue">
+							<li class="bf5b351">
 								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark2" class="spark"></span>
@@ -66,7 +66,7 @@
 
 								<div class="clearfix"></div>
 							</li>
-							<li class="bblue">
+							<li class="bf5b351">
 								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark3" class="spark"></span>
@@ -92,7 +92,7 @@
 				<!-- Chats, File upload and Recent Comments -->
 				<div class="row">
 					<div class="col-md-4">
-						<div class="widget wgray">
+						<div class="widget w597484">
 							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">상품관리</div>
@@ -153,7 +153,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="widget wgray">
+						<div class="widget w597484">
 							<div class="widget-head">
 								<div class="pull-left">빠른직원등록</div>
 								<div class="widget-icons pull-right">
@@ -224,7 +224,7 @@
 				<div class="row">
 					<div class="col-md-8">
 						<!-- Widget -->
-						<div class="widget wgray">
+						<div class="widget w435256">
 							<!-- Widget head -->
 							<div class="widget-head">
 								<div class="pull-left">Dashboard</div>
@@ -245,7 +245,7 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="widget wgray">
+						<div class="widget w435256">
 							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">Project</div>
@@ -324,7 +324,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-4">
-						<div class="widget wgray">
+						<div class="widget w597484">
 							<div class="widget-head">
 								<div class="pull-left">Today Status</div>
 								<div class="widget-icons pull-right">
@@ -356,7 +356,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="widget wgray">
+						<div class="widget w597484">
 							<div class="widget-head">
 								<div class="pull-left">Curve Chart</div>
 								<div class="widget-icons pull-right">
@@ -381,7 +381,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-4">
-						<div class="widget wgray">
+						<div class="widget w435256">
 							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">파트너관리</div>
@@ -425,7 +425,7 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="widget wgray">
+						<div class="widget w435256">
 							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">Project</div>
@@ -515,4 +515,4 @@
 	<div class="clearfix"></div>
 </div>
 <!--/ Content ends -->
-
+<jsp:include page="/metro/common/chartScript.jsp" />

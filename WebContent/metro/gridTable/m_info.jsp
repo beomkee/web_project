@@ -1,11 +1,7 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="member.LoginUserDataBean"%>
-<%@page import="jdbc.DBBeanMysql"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/metro/common/header.jsp" />
-<jsp:include page="/metro/common/nav.jsp" />                                                  
+<jsp:include page="/metro/common/nav.jsp" />
 <script src="https://code.jquery.com/jquery-1.7.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jqgrid/css/ui.jqgrid.css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/jqgrid/js/jquery.jqGrid.min.js"></script>
@@ -13,7 +9,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <%
 	String target = request.getParameter("target");
-
+	int division = Integer.parseInt(target); 
 	if (target.equals("1")) {
 		target = "직원";
 	} else {
@@ -21,21 +17,19 @@
 	}
 %>
 <title><%=target%> 조회</title>
-<%
-	DBBeanMysql db = DBBeanMysql.getInstance();
-	List<LoginUserDataBean> ecList = db.getEmpCusList(target);
-%>
 <script>   
 	var list = {};
-	
+	var target = "";
+/*===================================================== JqGrid 그리는 스크립트 ====================================================== */
 	function makeTable(id, array){
-		var target = "<%= target %>";
 		if (target == "직원") {
+			
+			
 			$("#"+id).jqGrid({
 				datatype: "local",                                                                    
-				height: 250,
+				height: 500,
 				autowidth: true,
-				colNames:['아이디','비밀번호','이름','전화번호','생년월일','매니저번호','공장번호','라인번호'],                                      
+				colNames:['아이디','비밀번호','이름','전화번호','생년월일','관리자번호','공장번호','라인번호'],                                      
 				colModel:[
 					{name:'id',align:'right'},
 					{name:'passwd',align:'right'},                                                     
@@ -46,14 +40,17 @@
 					{name:'f_num',align:'right'},
 					{name:'pl_num',align:'right'}                                                 
 				],                    
-				viewrecords		: true,
-				rownumbers 		: true, 
 				cellEdit		: true,
+				rownumbers 		: true, 
+				viewrecords		: true,
+				rownumbers  	: true, 
+				editable: true,
 				onCellSelect 	: function(){
 	    			//console.log("한번클릭")
 	    		},
-	    		ondblClickRow : function() {
-	    			//console.log("두번클릭")
+	    		ondblClickRow : function(rowId, iRow, iCol, e) {
+	    			var id = $("#ectable").getCell(rowId, 'id');
+	    			location.href="<%= request.getContextPath() %>/metro/contentJSP/manager/m_profile.jsp?target=<%=division%>&seletedId="+id;
 	   	       },
 				caption: "<%=target%> Data"
 				});
@@ -73,6 +70,13 @@
 					rownumbers 		: true, 
 					cellEdit		: true,
 					viewrecords 	: true,
+					onCellSelect 	: function(){
+		    			//console.log("한번클릭")
+		    		},
+		    		ondblClickRow : function(rowId, iRow, iCol, e) {
+		    			var id = $("#ectable").getCell(rowId, 'id');
+		    			location.href="<%= request.getContextPath() %>/metro/contentJSP/manager/m_profile.jsp?target=<%=division%>&seletedId="+id;
+		   	       },
 					caption			: "<%= target %> Data"
 				});
 			} 
@@ -81,20 +85,23 @@
 		} 
 	}
 	$(document).ready(function() {
-		list = <%= ecList %>;
-		var jsonString = JSON.stringify(list);
-		var json = JSON.parse(jsonString);
-		makeTable('ectable', json);
+		target = "<%= target %>";
+		resetSerch();
 	});
 	$(window).resize(function() {
 		$("#ectable").setGridWidth($('#container').width());
 	});
-
+/*===================================================== Ajax로 검색하는 스크립트 ====================================================== */
 	function serchResult(){
 		var serchVar =  $('#serchVar').val();
-		var target = "<%= target %>";
 		var colum = $("input[name=colum]:checked").val();
-
+		if (serchVar == '') {
+			alert("검색어를 입력해주세요");
+			return false;
+		}else if(colum == null){
+			alert("검색 조건을 선택해 주세요");
+			return false;
+		}
 		$.ajax({                          
 	        type: "POST",
 	        url: "<%=request.getContextPath()%>/metro/ajax/serchGridPro.jsp",
@@ -104,13 +111,29 @@
 				datatype : "json",
 				success : function(result) {
 					var temp = result.trim();
-					console.log("result: "+ temp);	
 					var json = JSON.parse(temp);
-					console.log("json: "+ json);	
 					list = json;
-					$("#ectable").trigger("reloadGrid");
+					$("#ectable").clearGridData();
+					makeTable('ectable', list);
 				}
 			});
+	}
+/*===================================================== 검색 결과 초기화 스크립트 ====================================================== */
+	function resetSerch(){
+		$('#serchVar').val('');
+		$.ajax({                          
+	        type: "POST",
+	        url: "<%=request.getContextPath()%>/metro/ajax/serchAllGridPro.jsp",
+			data : "target=" + target,
+			datatype : "json",
+			success : function(result) {
+				var temp = result.trim();
+				var json = JSON.parse(temp);
+				list = json;
+				$("#ectable").clearGridData();
+				makeTable('ectable', json);
+			}
+		});
 	}
 </script>
 <div class="content">
@@ -132,7 +155,7 @@
 			<div class="container" id="container">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="widget wred">
+						<div class="widget w79a8a9">
 							<div class="widget-head">
 								<div class="pull-left">
 									<%= target %> 검색 조건 설정
@@ -174,6 +197,7 @@
 														}
 													%>
 													<input type="text" id="serchVar"><input type="button" value="검색" onclick="serchResult();">
+													<input type="button" value="초기화" onclick="resetSerch();">
 												</td>
 											</tr>
 											<tr>
@@ -183,7 +207,6 @@
 									</table>
 								</div>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -193,17 +216,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<table id="ectable"></table>
-						<div class="widget-foot">
-							<ul class="pagination pull-right">
-								<li><a href="#">Prev</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">Next</a></li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
+						<div class="clearfix" id="jqGridPager"></div>
 					</div>
 				</div>
 			</div>

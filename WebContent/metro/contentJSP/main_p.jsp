@@ -327,4 +327,5 @@
 	<div class="clearfix"></div>
 </div>
 <!--/ Content ends -->
+<jsp:include page="/metro/common/chartScript.jsp" />
 
