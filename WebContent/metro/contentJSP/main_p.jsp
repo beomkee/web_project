@@ -3,7 +3,6 @@
 <title>Dashboard-partner</title>
 <!-- Main content starts -->
 <div class="content">
-	<jsp:include page="../left/left.jsp" />
 	<!-- Main bar -->
 	<div class="mainbar">
 		<!-- Page heading -->

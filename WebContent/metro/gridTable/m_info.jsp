@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/metro/common/header.jsp" />
 <jsp:include page="/metro/common/nav.jsp" />
-<script src="https://code.jquery.com/jquery-1.7.js"></script>
+<script src="https://code.jquery.com/jquery-1.7.js"></script>                                                       
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jqgrid/css/ui.jqgrid.css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/jqgrid/js/jquery.jqGrid.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-ui-1.12.1.custom/jquery-ui.css">

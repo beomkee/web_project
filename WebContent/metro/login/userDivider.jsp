@@ -23,7 +23,11 @@
 			%>
 			<jsp:forward page='<%="/metro/contentJSP/main_m.jsp"%>' /> 
 			<%
-		} 
+		}else if (loginId.equals("admin")) {
+			%>
+			<jsp:forward page='<%="/metro/contentJSP/main_a.jsp"%>' /> 
+			<%
+		}
 	}else if(check == 2){
 		%>
 		<script>

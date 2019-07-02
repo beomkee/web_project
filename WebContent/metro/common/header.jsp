@@ -14,4 +14,4 @@
 <link href="<%= request.getContextPath()%>/metro/css/style.css" rel="stylesheet" type="text/css">
 <link href="<%= request.getContextPath()%>/metro/css/widgets.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="#">
-<script src="https://code.jquery.com/jquery-1.7.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

@@ -1,40 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <title>Dashboard-manager</title>
-<!-- Main content starts -->
 <div class="content">
-	<!-- Main bar -->
 	<div class="mainbar">
-		<!-- Page heading -->
 		<div class="page-head">
-			<!-- Page heading -->
 			<h2 class="pull-left">
 				Dashboard
-				<!-- page meta -->
-				<span class="page-meta">관리자 페이지 입니다</span>
+				<span class="page-meta">ADMIN 페이지 입니다</span>
 			</h2>
-			<!-- Breadcrumb -->
 			<div class="bread-crumb pull-right">
 				<a href="index.jsp"><i class="fa fa-home"></i> Home</a>
-				<!-- Divider -->
 				<span class="divider">/</span> <a href="#" class="bread-current">Dashboard</a>
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<!--/ Page heading ends -->
-		<!-- Matter -->
 		<div class="matter">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<!-- List starts -->
 						<ul class="today-datas">
-							<!-- List #1 -->
 							<li class="bf5b351">
-								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark1" class="spark"></span>
-								</div> <!-- Text -->
+								</div> 
 								<div class="datas-text pull-right">
 									<span class="bold">12,000</span> Visitors/Day
 								</div>
@@ -43,10 +31,9 @@
 							</li>
 							<a href="#">
 								<li class="bf5b351">
-									<!-- Graph -->
 									<div class="pull-left">
 										<i class="fa fa-group"></i>
-									</div> <!-- Text -->
+									</div> 
 									<div class="datas-text pull-right">
 										<span class="bold">직원관리</span> 바로가기
 									</div>
@@ -55,10 +42,9 @@
 							</li>
 							</a>
 							<li class="bf5b351">
-								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark2" class="spark"></span>
-								</div> <!-- Text -->
+								</div> 
 								<div class="datas-text pull-right">
 									<span class="bold">15.66%</span> Bounce Rate
 								</div>
@@ -66,10 +52,9 @@
 								<div class="clearfix"></div>
 							</li>
 							<li class="bf5b351">
-								<!-- Graph -->
 								<div class="pull-left">
 									<span id="todayspark3" class="spark"></span>
-								</div> <!-- Text -->
+								</div> 
 								<div class="datas-text pull-right">
 									<span class="bold">$22,000</span> Total Profit
 								</div>
@@ -79,20 +64,9 @@
 						</ul>
 					</div>
 				</div>
-
-				<!-- Today status. jQuery Sparkline plugin used. -->
-
-
-
-				<!--/ Today status ends -->
-				<!-- Dashboard Graph starts -->
-
-				<!-- Dashboard graph ends -->
-				<!-- Chats, File upload and Recent Comments -->
 				<div class="row">
 					<div class="col-md-4">
 						<div class="widget w597484">
-							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">상품관리</div>
 								<div class="widget-icons pull-right">
@@ -103,8 +77,6 @@
 							</div>
 
 							<div class="widget-content referrer">
-								<!-- Widget content -->
-
 								<table class="table  table-bordered ">
 									<tr>
 										<th><center>#</center></th>
@@ -164,9 +136,7 @@
 							<div class="widget-content">
 								<div class="padd">
 									<div class="form quick-post">
-										<!-- Edit profile form (not working)-->
 										<form class="form-horizontal">
-											<!-- Cateogry -->
 											<div class="form-group">
 												<label class="control-label col-lg-3">Category</label>
 												<div class="col-lg-9">
@@ -179,32 +149,25 @@
 													</select>
 												</div>
 											</div>
-											<!-- Title -->
 											<div class="form-group">
 												<label class="control-label col-lg-3" for="title">Title</label>
 												<div class="col-lg-9">
 													<input type="text" class="form-control" id="title">
 												</div>
 											</div>
-											<!-- Content -->
 											<div class="form-group">
 												<label class="control-label col-lg-3" for="content">Content</label>
 												<div class="col-lg-9">
 													<textarea class="form-control" id="content"></textarea>
 												</div>
 											</div>
-
-											<!-- Tags -->
 											<div class="form-group">
 												<label class="control-label col-lg-3" for="tags">Tags</label>
 												<div class="col-lg-9">
 													<input type="text" class="form-control" id="tags">
 												</div>
 											</div>
-
-											<!-- Buttons -->
 											<div class="form-group">
-												<!-- Buttons -->
 												<div class="col-lg-offset-3 col-lg-9">
 													<button type="submit" class="btn btn-success">Publish</button>
 													<button type="submit" class="btn btn-success">Save
@@ -219,12 +182,9 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-8">
-						<!-- Widget -->
 						<div class="widget w435256">
-							<!-- Widget head -->
 							<div class="widget-head">
 								<div class="pull-left">Dashboard</div>
 								<div class="widget-icons pull-right">
@@ -233,10 +193,8 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
-							<!-- Widget content -->
 							<div class="widget-content">
 								<div class="padd">
-									<!-- Bar chart (Blue color). jQuery Flot plugin used. -->
 									<div id="bar-chart"></div>
 								</div>
 							</div>
@@ -256,20 +214,15 @@
 							</div>
 
 							<div class="widget-content">
-								<!-- Widget content -->
-								<!-- Task list starts -->
 								<ul class="project">
 									<li>
 										<p class="clearfix">
-											<!-- Checkbox -->
 											<input value="check1" type="checkbox" class="p-input">
-											<!-- Name -->
 											<span class="p-heading">Hospital Management System</span>
 										</p>
 										<p class="p-meta">
-											<!-- Due date & % Completed -->
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p> 
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-info"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -280,16 +233,12 @@
 									</li>
 									<li>
 										<p class="clearfix">
-											<!-- Checkbox -->
 											<input value="check1" type="checkbox" class="p-input">
-											<!-- Name -->
 											<span class="p-heading">School Download System</span>
 										</p>
-
 										<p class="p-meta">
-											<!-- Due date & % Completed -->
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p> 
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-warning"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -305,7 +254,7 @@
 										</p>
 										<p class="p-meta">
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p> 
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-danger"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -381,7 +330,6 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="widget w435256">
-							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">파트너관리</div>
 								<div class="widget-icons pull-right">
@@ -391,8 +339,6 @@
 								<div class="clearfix"></div>
 							</div>
 							<div class="widget-content">
-								<!-- Widget content -->
-
 								<table class="table  table-bordered ">
 									<tr>
 										<td>Domain</td>
@@ -425,7 +371,6 @@
 					</div>
 					<div class="col-md-4">
 						<div class="widget w435256">
-							<!-- Widget title -->
 							<div class="widget-head">
 								<div class="pull-left">Project</div>
 								<div class="widget-icons pull-right">
@@ -434,24 +379,17 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
-
 							<div class="widget-content">
-								<!-- Widget content -->
-								<!-- Task list starts -->
 								<ul class="project">
-
 									<li>
 										<p class="clearfix">
-											<!-- Checkbox -->
 											<input value="check1" type="checkbox" class="p-input">
-											<!-- Name -->
 											<span class="p-heading">Hospital Management System</span>
 										</p>
 
 										<p class="p-meta">
-											<!-- Due date & % Completed -->
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p> 
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-info"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -462,16 +400,13 @@
 									</li>
 									<li>
 										<p class="clearfix">
-											<!-- Checkbox -->
 											<input value="check1" type="checkbox" class="p-input">
-											<!-- Name -->
 											<span class="p-heading">School Download System</span>
 										</p>
 
 										<p class="p-meta">
-											<!-- Due date & % Completed -->
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p>
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-warning"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -482,15 +417,12 @@
 									</li>
 									<li>
 										<p class="clearfix">
-											<!-- Checkbox -->
 											<input value="check1" type="checkbox" class="p-input">
-											<!-- Name -->
 											<span class="p-heading">Question and Answers Script</span>
 										</p>
 										<p class="p-meta">
-											<!-- Due date & % Completed -->
 											<span>Due : 26/2/2012 - 80% Done</span>
-										</p> <!-- Progress bar -->
+										</p> 
 										<div class="progress progress-striped active">
 											<div class="progress-bar progress-bar-danger"
 												role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -508,10 +440,7 @@
 				</div>
 			</div>
 		</div>
-		<!--/ Matter ends -->
 	</div>
-	<!--/ Mainbar ends -->
 	<div class="clearfix"></div>
 </div>
-<!--/ Content ends -->
 <jsp:include page="/metro/common/chartScript.jsp" />

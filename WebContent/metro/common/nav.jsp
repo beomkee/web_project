@@ -16,7 +16,10 @@
 		position = "파트너";
 		div = "p";
 	} else if (id.charAt(0) == '2') {
-		position = "관리자";
+		position = "매니저";
+		div = "m";
+	} else{
+		position = "ADMIN";
 		div = "m";
 	}
 %>

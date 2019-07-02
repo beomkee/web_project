@@ -15,7 +15,6 @@
 	
 %>
 <title><%=target%> 등록 및 수정</title>
-
 <div class="content">
 	<div class="mainbar">
 		<div class="page-head">
@@ -73,7 +72,7 @@
 														name="id" id="id">
 												</div>
 												<button type="button" class="btn btn-default"
-													onclick="IDValidate()">ID중복검사</button>
+													onclick="idValCheck();">ID중복검사</button>
 											</div>
 											<div class="form-group">
 												<label class="control-label col-lg-2" for="name1">PASSWD</label>
@@ -148,7 +147,7 @@
 												<div class="col-lg-6 col-lg-offset-2">
 													<button type="submit" class="btn btn-success">등록/수정</button>
 													<button type="reset" class="btn"
-														onclick="$('#id').removeAttr('readonly')">리셋</button>
+														onclick="resetAll();">리셋</button>
 													<button type="button" class="btn btn-default"
 														onclick="location.href='<%=request.getContextPath()%>/metro/gridTable/m_info.jsp?target=<%=division%>'">목록</button>
 													<button type="button" class="btn btn-danger"
@@ -176,12 +175,22 @@
 			selected(); 
 		}
 		$('#f_num').on('change', function() {
-			console.log("asda");
 			var f_num = this.value;
 			setRest("pl_num",f_num);
 			setRest("manager_num",f_num); 
 		});
 	});
+	
+/* ================================================리셋버튼======================================================================== */
+	function resetAll(){
+		$('#id').removeAttr('readonly');
+		$("#selectID").val('');
+		$("#pl_num option").remove();
+		$("#manager_num option").remove();
+		$("#pl_num").append("<option value=''>공장번호를 선택해주세요</option>");
+		$("#manager_num").append("<option value=''>공장번호를 선택해주세요</option>");
+	}
+	
 /* ================================================초기 세팅======================================================================== */
 	function startSet(){
 		var f_list = "<%= f_list %>";
@@ -315,5 +324,28 @@
 					location.href="<%= request.getContextPath() %>/metro/gridTable/m_info.jsp?target=<%=division%>";
 				}
 			});
+	}
+
+/* ================================================아이디 중복검사======================================================================== */
+	function idValCheck(){
+		var id = $('#id').val();
+		if (id == '') {
+			alert("아이디를 입력하세요");                                                                                   
+		} else {
+			$.ajax({                          
+		        type: "POST",
+		        url: "<%=request.getContextPath()%>/metro/ajax/idCheckPro.jsp",
+				data : "id=" + id,
+				datatype : "json",
+				success : function(result) {
+					if (result == 'true') {
+						alert("중복된 아이디입니다");
+						 $('#id').val('')
+					}else{
+						alert("사용가능한 아이디 입니다");
+					}
+				}
+			});
+		}
 	}
 </script>
