@@ -96,6 +96,11 @@
 												<div class="col-lg-6">
 													<input type="text" class="form-control" required="required"
 														name="tel" id="tel">
+													<!-- <input type="text" class="form-control" required="required"
+														name="tel2" id="tel2">
+													<input type="text" class="form-control" required="required"
+														name="tel3" id="tel3">
+													<input type="hidden" name="tel" value=""> -->
 												</div>
 											</div>
 											<div class="form-group">

@@ -1,3 +1,4 @@
+<%@ page trimDirectiveWhitespaces="true" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>

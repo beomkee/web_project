@@ -1,26 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script>
+	var checkId = "<%=session.getAttribute("LOGINED_ID")%>"
+	$(document).ready(function(){
+		serch();
+	});
+	var serch = function() {	
+		$.ajax({                          
+	        type: "POST",
+	        url: "<%=request.getContextPath()%>/metro/ajax/checkEmpPro.jsp",
+				data : "checkId=" + checkId,
+				datatype : "json",
+				success : function(result) {
+					var temp = result.trim();
+					var json = JSON.parse(temp);
+					console.log(json);
+					$('#id').val(json['id']);
+					$('#passwd').val(json['passwd']);
+					$('#name').val(json['name']);
+					$('#tel').val(json['tel']);
+					$('#birth').val(json['birth']);
+					$('#f_num').val(json['f_num']);
+					$('#pl_num').val(json['pl_num']);
+					$('#manager_num').val(json['manager_num']);
+					$("#id").attr("readonly", true);
+					$("#name").attr("readonly", true);
+					$("#f_num").attr("readonly", true);
+					$("#pl_num").attr("readonly", true);
+					$("#manager_num").attr("readonly", true);
+				}
+			})
+		};
+</script>
 <div class="content">
-	<!-- Main bar -->
 	<div class="mainbar">
-		<!-- Page heading -->
 		<div class="page-head">
-			<!-- Page heading -->
 			<h2 class="pull-left">
-				Profile
-				<!-- page meta -->
-				<span class="page-meta">개인정보 조회</span>
+				Profile <span class="page-meta">개인정보 조회</span>
 			</h2>
-			<!-- Breadcrumb -->
 			<div class="bread-crumb pull-right">
-				<a href="index.html"><i class="fa fa-home"></i> Home</a>
-				<!-- Divider -->
-				<span class="divider">/</span> <a href="#" class="bread-current">Profile</a>
+				<a href="index.html"><i class="fa fa-home"></i> Home</a> <span class="divider">/</span> <a
+					href="#" class="bread-current"
+				>Profile</a>
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<!--/ Page heading ends -->
-		<!-- Matter -->
 		<div class="matter">
 			<div class="container">
 				<div class="row">
@@ -29,103 +52,67 @@
 							<div class="widget-head">
 								<div class="pull-left">Profile</div>
 								<div class="widget-icons pull-right">
-									<a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
-									<a href="#" class="wclose"><i class="fa fa-times"></i></a>
+									<a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> <a href="#"
+										class="wclose"
+									><i class="fa fa-times"></i></a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
-
 							<div class="widget-content">
 								<div class="padd">
-									<!-- Profile form -->
 									<div class="form profile">
-										<!-- Edit profile form (not working)-->
-										<form class="form-horizontal">
-											<!-- Name -->
+										<form class="form-horizontal" action="insertUpdateDo.jsp" method="post">
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="name1">Name</label>
+												<label class="control-label col-lg-2" for="name1">ID</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="name1">
+													<input type="text" class="form-control" required="required" name="id" id="id">
 												</div>
 											</div>
-											<!-- Email -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="email1">Email</label>
+												<label class="control-label col-lg-2" for="name1">PASSWD</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="email1">
+													<input type="text" class="form-control" required="required" name="passwd" id="passwd">
 												</div>
 											</div>
-											<!-- Telephone -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="telephone">Telephone</label>
+												<label class="control-label col-lg-2" for="email1">이름</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="telephone">
+													<input type="text" class="form-control" required="required" name="name" id="name">
 												</div>
 											</div>
-											<!-- Address -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="address">Address</label>
+												<label class="control-label col-lg-2" for="telephone">Tel</label>
 												<div class="col-lg-6">
-													<textarea class="form-control" id="address"></textarea>
+													<input type="text" class="form-control" required="required" name="tel" id="tel">
 												</div>
 											</div>
-											<!-- Country -->
 											<div class="form-group">
-												<label class="control-label col-lg-2">Country</label>
+												<label class="control-label col-lg-2" for="address">생년월일</label>
 												<div class="col-lg-6">
-													<select class="form-control">
-														<option value="">--- Please Select ---</option>
-														<option value="1">Afghanistan</option>
-														<option value="2">Albania</option>
-														<option value="3">Algeria</option>
-													</select>
+													<input type="text" class="form-control" required="required" name="birth" id="birth">
 												</div>
 											</div>
-											<!-- State -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="city">State</label>
+												<label class="control-label col-lg-2">공장번호</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="state">
+													<input type="text" class="form-control" required="required" name="f_num" id="f_num">
 												</div>
 											</div>
-											<!-- City -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="city">City</label>
+												<label class="control-label col-lg-2">라인번호</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="city">
+													<input type="text" class="form-control" required="required" name="pl_num" id="pl_num">
 												</div>
 											</div>
-											<!-- Username -->
 											<div class="form-group">
-												<label class="control-label col-lg-2" for="username2">Username</label>
+												<label class="control-label col-lg-2">관리자번호</label>
 												<div class="col-lg-6">
-													<input type="text" class="form-control" id="username2">
+													<input type="text" class="form-control" required="required" name="manager_num" id="manager_num">
 												</div>
 											</div>
-											<!-- Password -->
-											<div class="form-group">
-												<label class="control-label col-lg-2" for="password2">Password</label>
-												<div class="col-lg-6">
-													<input type="password" class="form-control" id="password2">
-												</div>
-											</div>
-											<!-- Checkbox -->
 											<div class="form-group">
 												<div class="col-lg-6 col-lg-offset-2">
-
-													<label class="checkbox inline"> <input
-														type="checkbox" id="inlineCheckbox3" value="agree">
-														Agree with Terms and Conditions
-													</label>
-												</div>
-											</div>
-
-											<!-- Buttons -->
-											<div class="form-group">
-												<!-- Buttons -->
-												<div class="col-lg-6 col-lg-offset-2">
-													<button type="submit" class="btn btn-success">Update</button>
-													<button type="reset" class="btn btn-default">Reset</button>
+													<button type="submit" class="btn btn-success">수정</button>
 												</div>
 											</div>
 										</form>
@@ -137,8 +124,6 @@
 				</div>
 			</div>
 		</div>
-		<!--/ Matter ends -->
 	</div>
-	<!--/ Mainbar ends -->
 	<div class="clearfix"></div>
 </div>

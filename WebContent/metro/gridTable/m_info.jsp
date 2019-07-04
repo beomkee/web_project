@@ -128,7 +128,9 @@
 			datatype : "json",
 			success : function(result) {
 				var temp = result.trim();
+				console.log(temp);
 				var json = JSON.parse(temp);
+				console.log(json);
 				list = json;
 				$("#ectable").clearGridData();
 				makeTable('ectable', json);
