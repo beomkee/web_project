@@ -38,15 +38,17 @@
 		<div class="sidebar-widget"></div>
 		<ul class="navi">
 			<li class="nred current"><a
-				href="<%=request.getContextPath()%>/metro/contentJSP/main_<%=div%>.jsp" >
-				<i class="fa fa-desktop"></i> Dashboard
+				href="<%=request.getContextPath()%>/metro/contentJSP/main_<%=div%>.jsp"
+			> <i class="fa fa-desktop"></i> Dashboard
 			</a></li>
 			<c:forEach var="i" items="${left}">
 				<c:if test="${i.collapse eq 'n'}">
-					<li class="has_submenu ngray"><a href="#"> <i class="fa fa-sitemap"></i>${i.text} <span
-							class="pull-right"
-						><i class="fa fa-angle-right"></i></span>
-					</a> <c:forEach var="j" items="${left}">
+					<li class="has_submenu ngray">
+						<a href="#"> 
+							<i class="fa fa-sitemap"></i>${i.text} 
+								<span class="pull-right"><i class="fa fa-angle-right"></i></span>
+						</a> 
+						<c:forEach var="j" items="${left}">
 							<c:if test="${i.num == j.parent_num}">
 								<ul>
 									<li><a href="<%=request.getContextPath()%>/metro/${j.url}">${j.text}</a></li>

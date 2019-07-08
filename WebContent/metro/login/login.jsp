@@ -34,10 +34,6 @@
 					<!-- Remember me checkbox and sign in button -->
 					<div class="form-group">
 						<div class="col-lg-9 col-lg-offset-3">
-							<div class="checkbox">
-								<label> <input type="checkbox"> ID 기억
-								</label>
-							</div>
 						</div>
 						<div class="col-lg-9 col-lg-offset-3">
 							<button type="submit" class="btn btn-danger">로그인</button>

@@ -2,15 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>ProjectNo1</display-name>
   <welcome-file-list>
-    <welcome-file>/metro/login/login.jsp</welcome-file>
+    <welcome-file>/concept-master/login/login.jsp</welcome-file>
   </welcome-file-list>
   
   <jsp-config>
     <jsp-property-group>
-      <url-pattern>/metro/contentJSP/*</url-pattern>
-      <include-prelude>/metro/common/header.jsp</include-prelude>
-      <include-prelude>/metro/common/nav.jsp</include-prelude>
-      <include-coda>/metro/common/footer.jsp</include-coda>
+      <url-pattern>/concept-master/content/*</url-pattern>
+      <include-prelude>/concept-master/common/header.jsp</include-prelude>
+      <include-prelude>/concept-master/common/nav.jsp</include-prelude>
+      <include-prelude>/concept-master/common/left.jsp</include-prelude>
+      <include-coda>/concept-master/common/footer.jsp</include-coda>
     </jsp-property-group>
   </jsp-config>
   

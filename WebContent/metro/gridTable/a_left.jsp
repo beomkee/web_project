@@ -53,8 +53,8 @@
 	    		},
 	    		ondblClickRow 	: function(rowId, iRow, iCol, e) {
 	    		
-	   	        },
-				caption: "Left Menu Data"
+	   	        }
+				//caption: "Left Menu Data"
 				});
 
 		for ( var row in array) {
