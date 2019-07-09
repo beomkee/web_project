@@ -12,21 +12,13 @@
 		session.setAttribute("LOGINED_ID", loginId);
 		
 		if (loginId.charAt(0) == '1') {
-			%>
-			<jsp:forward page='<%="/concept-master/content/emp/main_e.jsp"%>' /> 
-			<%
+			response.sendRedirect("/ProjectNo1/concept-master/content/emp/main_e.jsp");
 		} else if (loginId.charAt(0) == '3') {
-			%>
-			<jsp:forward page='<%="/concept-master/content/partner/main_p.jsp"%>' /> 
-			<%
+			response.sendRedirect("/ProjectNo1/concept-master/content/partner/main_p.jsp");
 		} else if (loginId.charAt(0) == '2') {
-			%>
-			<jsp:forward page='<%="/concept-master/content/manager/main_m.jsp"%>' /> 
-			<%
+			response.sendRedirect("/ProjectNo1/concept-master/content/manager/main_m.jsp");
 		}else if (loginId.equals("admin")) {
-			%>
-			<jsp:forward page='<%="/concept-master/content/admin/main_a.jsp"%>' /> 
-			<%
+			response.sendRedirect("/ProjectNo1/concept-master/content/admin/main_a.jsp");
 		}
 	}else if(check == 2){
 		%>

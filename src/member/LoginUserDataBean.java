@@ -9,6 +9,7 @@ public class LoginUserDataBean {
 	private String manager_num;
 	private String f_num;
 	private String pl_num;
+	private String email;
 	private String contract_date;
 	
 	public String getId() {
@@ -59,6 +60,13 @@ public class LoginUserDataBean {
 	public void setPl_num(String pl_num) {
 		this.pl_num = pl_num;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getContract_date() {
 		return contract_date;
 	}
@@ -69,7 +77,7 @@ public class LoginUserDataBean {
 	public String toString() {
 		return "{\"id\":\"" + id + "\", \"passwd\":\"" + passwd + "\", \"name\":\"" + name + "\", \"tel\":\"" + tel + "\", \"birth\":\""
 				+ birth + "\", \"manager_num\":\"" + manager_num + "\", \"f_num\":\"" + f_num + "\", \"pl_num\":\"" + pl_num
-				+ "\", \"contract_date\":\"" + contract_date + "\"}";
+				+ "\", \"email\":\"" + email + "\", \"contract_date\":\"" + contract_date + "\"}";
 	}
 
 }

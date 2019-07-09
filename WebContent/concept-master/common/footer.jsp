@@ -1,7 +1,4 @@
- <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <div class="footer">
+            <!-- <div class="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -16,39 +13,37 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- end footer -->
-            <!-- ============================================================== -->
+            </div> -->
         </div>
-        <!-- ============================================================== -->
-        <!-- end wrapper  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <!-- jquery 3.3.1 
-    <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/jquery/jquery-3.3.1.min.js"></script>-->
-    <!-- bootstap bundle js -->
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
     <script src="<%= request.getContextPath() %>/concept-master/assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <!--<script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/morris.js"></script> -->
-    <!-- chart c3 js 
+    <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/select2/js/select2.min.js"></script>
+    <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/summernote/js/summernote-bs4.js"></script>
+    
+    <!--  <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/morris.js"></script> 
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/libs/js/dashboard-ecommerce.js"></script>-->
+    
+     <script>
+		    $(document).ready(function() {
+		        $('.js-example-basic-multiple').select2({ tags: true });
+		    });
+		    </script>
+		    <script>
+		    $(document).ready(function() {
+		        $('#summernote').summernote({
+		            height: 300
+		
+		        });
+		    });
+	</script>
 </body>
  
 </html>

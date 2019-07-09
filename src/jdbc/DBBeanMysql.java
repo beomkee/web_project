@@ -133,6 +133,7 @@ public class DBBeanMysql {
 					member.setManager_num(rs.getString("manager_num"));
 					member.setF_num(rs.getString("f_num"));
 					member.setPl_num(rs.getString("pl_num"));
+					member.setEmail(rs.getString("e_email"));
 				}
 			}
 		} catch (Exception e) {

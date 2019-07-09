@@ -35,7 +35,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><img class="LoginLogo" src="<%= request.getContextPath() %>/concept-master/img/dow_mainLogo.png" alt="logo"></div>
+            <div class="card-header text-center"><img class="LoginLogo" style="height:37px;"src="<%= request.getContextPath() %>/concept-master/img/dow_mainLogo.png" alt="logo"></div>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/concept-master/login/userDivider.jsp" method="post">
                     <div class="form-group">

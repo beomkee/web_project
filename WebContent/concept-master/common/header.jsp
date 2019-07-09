@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="<%= request.getContextPath() %>/concept-master/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/libs/css/style.css">
@@ -14,6 +12,9 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <!--  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script> -->
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/select2/css/select2.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/summernote/css/summernote-bs4.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <script src="<%= request.getContextPath() %>/concept-master/jquery-3.3.1.js"></script>
+    
 </head>
