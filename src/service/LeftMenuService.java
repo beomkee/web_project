@@ -3,11 +3,11 @@ package service;
 import java.sql.Connection;
 import java.util.List;
 
-import connection.ConnectionProvider;
-import connection.JdbcUtil;
+import dao.LeftMenuDAO;
 import exception.ServiceException;
-import left.LeftMenuDAO;
-import left.LeftMenuDataBean;
+import jdbc.ConnectionProvider;
+import jdbc.JdbcUtil;
+import model.LeftMenu;
 
 public class LeftMenuService {
 	private static LeftMenuService instance = new LeftMenuService();
@@ -19,7 +19,7 @@ public class LeftMenuService {
 	private LeftMenuService() {
 	}
 	
-	public List<LeftMenuDataBean> getLeftMenu(int division) {
+	public List<LeftMenu> getLeftMenu(int division) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -31,7 +31,7 @@ public class LeftMenuService {
 			JdbcUtil.close(conn);
 		}
 	}
-	public List<LeftMenuDataBean> selectAllLeft() {
+	public List<LeftMenu> selectAllLeft() {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();

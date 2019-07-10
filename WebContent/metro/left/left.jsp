@@ -1,8 +1,8 @@
 <%@page import="service.LeftMenuService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="left.LeftMenuDataBean"%>
+<%@page import="model.LeftMenu"%>
 <%@page import="java.util.List"%>
-<%@page import="left.LeftMenuDAO"%>
+<%@page import="dao.LeftMenuDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String id = (String) session.getAttribute("LOGINED_ID");
@@ -27,7 +27,7 @@
 		division = 4;
 	}
 	LeftMenuService leftService = LeftMenuService.getInstance();
-	List<LeftMenuDataBean> left = leftService.getLeftMenu(division);
+	List<LeftMenu> left = leftService.getLeftMenu(division);
 %>
 <c:set var="left" value="<%=left%>" />
 <div class="sidebar">

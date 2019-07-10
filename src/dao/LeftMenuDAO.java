@@ -1,4 +1,4 @@
-package left;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import connection.JdbcUtil;
+import jdbc.JdbcUtil;
+import model.LeftMenu;
 
 public class LeftMenuDAO {
 
@@ -21,11 +22,11 @@ public class LeftMenuDAO {
 	private LeftMenuDAO() {
 	}
 
-	public List<LeftMenuDataBean> getLeftMenu(Connection conn, int div) {
+	public List<LeftMenu> getLeftMenu(Connection conn, int div) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LeftMenuDataBean left = null;
-		List<LeftMenuDataBean> list = new ArrayList<LeftMenuDataBean>();
+		LeftMenu left = null;
+		List<LeftMenu> list = new ArrayList<LeftMenu>();
 		try {
 			String query = "select * from left_menu where division = ? and use_yn = 'y'";
 			stmt = conn.prepareStatement(query);
@@ -33,7 +34,7 @@ public class LeftMenuDAO {
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				do {
-					left = new LeftMenuDataBean();
+					left = new LeftMenu();
 					left.setNum(rs.getInt("num"));
 					left.setText(rs.getString("text"));
 					left.setDepth(rs.getInt("depth"));
@@ -51,18 +52,18 @@ public class LeftMenuDAO {
 		}
 		return list;
 	}
-	public List<LeftMenuDataBean>  selectAllLeft(Connection conn) {
+	public List<LeftMenu>  selectAllLeft(Connection conn) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LeftMenuDataBean left = null;
-		List<LeftMenuDataBean> list = new ArrayList<LeftMenuDataBean>();
+		LeftMenu left = null;
+		List<LeftMenu> list = new ArrayList<LeftMenu>();
 		try {
 			String query = "select * from left_menu";
 			stmt = conn.prepareStatement(query);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				do {
-					left = new LeftMenuDataBean();
+					left = new LeftMenu();
 					left.setNum(rs.getInt("num"));
 					left.setText(rs.getString("text"));
 					left.setDepth(rs.getInt("depth"));

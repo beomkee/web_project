@@ -10,9 +10,8 @@
 		target = "파트너";
 	}
 	String seletedId = request.getParameter("seletedId");
-	DBBeanMysql db = DBBeanMysql.getInstance();
+	UserDao db = UserDao.getInstance();
 	List<String> f_list = db.getFacs("f_num");
-	
 %>
 <title><%=target%> 등록 및 수정</title>
 <div class="content">

@@ -1,4 +1,4 @@
-package jdbc;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,18 +9,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.SaleDataBean;
-import member.LoginUserDataBean;
+import model.LoginUser;
+import model.Sales;
 
-public class DBBeanMysql {
+public class UserDao {
 
-	private static DBBeanMysql instance = new DBBeanMysql();
+	private static UserDao instance = new UserDao();
 
-	public static DBBeanMysql getInstance() {
+	public static UserDao getInstance() {
 		return instance;
 	}
 
-	private DBBeanMysql() {
+	private UserDao() {
 	}
 
 	private Connection getConnection() throws Exception {
@@ -98,8 +98,8 @@ public class DBBeanMysql {
 		return 2;
 	}
 
-	public LoginUserDataBean getUserInfo(String id) {
-		LoginUserDataBean member = new LoginUserDataBean();
+	public LoginUser getUserInfo(String id) {
+		LoginUser member = new LoginUser();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -161,12 +161,12 @@ public class DBBeanMysql {
 		return member;
 	}
 
-	public List<SaleDataBean> getSalesList(String id) {
-		SaleDataBean sale = null;
+	public List<Sales> getSalesList(String id) {
+		Sales sale = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<SaleDataBean> salesList = new ArrayList<SaleDataBean>();
+		List<Sales> salesList = new ArrayList<Sales>();
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement("select * from sales where e_id = ?");
@@ -174,7 +174,7 @@ public class DBBeanMysql {
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				do {
-					sale = new SaleDataBean();
+					sale = new Sales();
 					sale.setS_num(rs.getString("s_num"));
 					sale.setMf_num(rs.getString("mf_num"));
 					sale.setE_id(rs.getString("e_id"));
@@ -212,7 +212,7 @@ public class DBBeanMysql {
 		return salesList;
 	}
 
-	public int insertUpdate(LoginUserDataBean dataBean, String target) {
+	public int insertUpdate(LoginUser dataBean, String target) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -308,12 +308,12 @@ public class DBBeanMysql {
 		return stat;
 	}
 
-	public List<LoginUserDataBean> getEmpCusList(String target) {
-		LoginUserDataBean user = null;
+	public List<LoginUser> getEmpCusList(String target) {
+		LoginUser user = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<LoginUserDataBean> userList = new ArrayList<LoginUserDataBean>();
+		List<LoginUser> userList = new ArrayList<LoginUser>();
 		try {
 			conn = getConnection();
 			if (target.equals("직원")) {
@@ -321,7 +321,7 @@ public class DBBeanMysql {
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
-						user = new LoginUserDataBean();
+						user = new LoginUser();
 						user.setId(rs.getString("e_id"));
 						user.setPasswd(rs.getString("e_passwd"));
 						user.setName(rs.getString("e_name"));
@@ -338,7 +338,7 @@ public class DBBeanMysql {
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
-						user = new LoginUserDataBean();
+						user = new LoginUser();
 						user.setId(rs.getString("c_id"));
 						user.setPasswd(rs.getString("c_passwd"));
 						user.setName(rs.getString("c_name"));
@@ -372,12 +372,12 @@ public class DBBeanMysql {
 		return userList;
 	}
 
-	public List<LoginUserDataBean> serchEmpCusList(String colum, String serchVar, String target) {
-		LoginUserDataBean user = null;
+	public List<LoginUser> serchEmpCusList(String colum, String serchVar, String target) {
+		LoginUser user = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<LoginUserDataBean> userList = new ArrayList<LoginUserDataBean>();
+		List<LoginUser> userList = new ArrayList<LoginUser>();
 		try {
 			conn = getConnection();
 			if (target.equals("직원")) {
@@ -386,7 +386,7 @@ public class DBBeanMysql {
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
-						user = new LoginUserDataBean();
+						user = new LoginUser();
 						user.setId(rs.getString("e_id"));
 						user.setPasswd(rs.getString("e_passwd"));
 						user.setName(rs.getString("e_name"));
@@ -404,7 +404,7 @@ public class DBBeanMysql {
 				rs = stmt.executeQuery();
 				if (rs.next()) {
 					do {
-						user = new LoginUserDataBean();
+						user = new LoginUser();
 						user.setId(rs.getString("c_id"));
 						user.setPasswd(rs.getString("c_passwd"));
 						user.setName(rs.getString("c_name"));

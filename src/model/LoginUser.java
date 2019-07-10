@@ -1,6 +1,6 @@
-package member;
+package model;
 
-public class LoginUserDataBean {
+public class LoginUser {
 	private String id;
 	private String passwd;
 	private String name;

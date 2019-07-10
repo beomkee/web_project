@@ -1,6 +1,6 @@
-<%@page import="left.LeftMenuDataBean"%>
+<%@page import="model.LeftMenu"%>
 <%@page import="java.util.List"%>
-<%@page import="left.LeftMenuDAO"%>
+<%@page import="dao.LeftMenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <li class="has_submenu ngray"><a href="#">

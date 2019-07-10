@@ -1,12 +1,12 @@
-<%@page import="member.LoginUserDataBean"%>
-<%@page import="jdbc.DBBeanMysql"%>
+<%@page import="model.LoginUser"%>
+<%@page import="dao.UserDao"%>
 <%@page import="loginCookie.LoginCookie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String id = (String) session.getAttribute("LOGINED_ID");
-	DBBeanMysql manager = DBBeanMysql.getInstance();
-	LoginUserDataBean userInfo = manager.getUserInfo(id);
+	UserDao manager = UserDao.getInstance();
+	LoginUser userInfo = manager.getUserInfo(id);
 	String position = null;
 	String div = null;
 	if (id.charAt(0) == '1') {

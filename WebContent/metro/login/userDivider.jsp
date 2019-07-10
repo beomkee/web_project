@@ -1,18 +1,18 @@
-<%@page import="jdbc.DBBeanMysql"%>
+<%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%
 	String loginId = request.getParameter("id");
 	String passwd = request.getParameter("passwd");
 
-	DBBeanMysql manager = DBBeanMysql.getInstance();
+	UserDao manager = UserDao.getInstance();
 	int check = manager.userCheck(loginId,passwd);
 	
 	if(check == 1){
 		session.setAttribute("LOGINED_ID", loginId);
 		
 		if (loginId.charAt(0) == '1') {
-			%>
+%>
 			<jsp:forward page='<%="/metro/contentJSP/main_e.jsp"%>' /> 
 			<%
 		} else if (loginId.charAt(0) == '3') {

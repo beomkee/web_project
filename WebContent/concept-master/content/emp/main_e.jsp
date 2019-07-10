@@ -1,12 +1,6 @@
-<%@page import="member.LoginUserDataBean"%>
-<%@page import="jdbc.DBBeanMysql"%>
+<%@page import="model.LoginUser"%>
+<%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%  
-	String checkId = (String)session.getAttribute("LOGINED_ID");
-	DBBeanMysql manager = DBBeanMysql.getInstance();
-	LoginUserDataBean user = manager.getUserInfo(checkId);
-%>
-<c:set var="user" value="<%=user%>" />
  <title>직원 메인</title>
         <div class="dashboard-wrapper">
             <div class="influence-profile">

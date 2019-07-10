@@ -1,6 +1,6 @@
-package left;
+package model;
 
-public class LeftMenuDataBean {
+public class LeftMenu {
 	
 	private int num;
 	private String text;

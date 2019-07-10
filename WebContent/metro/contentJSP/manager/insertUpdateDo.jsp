@@ -5,14 +5,14 @@
 </jsp:useBean>
 <%
 	String target = request.getParameter("target");
-	DBBeanMysql db = DBBeanMysql.getInstance();
+	UserDao db = UserDao.getInstance();
 	int check = db.insertUpdate(dataBean, target);
 
 	if (check == 1) {
 		if (target.equals("직원")) {
-			response.sendRedirect("/ProjectNo1/metro/gridTable/m_info.jsp?target=1");
+	response.sendRedirect("/ProjectNo1/metro/gridTable/m_info.jsp?target=1");
 		} else {
-			response.sendRedirect("/ProjectNo1/metro/gridTable/m_info.jsp?target=2");
+	response.sendRedirect("/ProjectNo1/metro/gridTable/m_info.jsp?target=2");
 		}
 	} else if (check == 2) {
 %>

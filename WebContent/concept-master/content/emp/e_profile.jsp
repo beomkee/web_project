@@ -1,75 +1,97 @@
-<%@page import="member.LoginUserDataBean"%>
-<%@page import="jdbc.DBBeanMysql"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="model.LoginUser"%>
+<%@page import="dao.UserDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>개인 정보 상세</title>
-<%  
-	String checkId = (String)session.getAttribute("LOGINED_ID");
-	DBBeanMysql manager = DBBeanMysql.getInstance();
-	LoginUserDataBean user = manager.getUserInfo(checkId);
-%>
-<c:set var="user" value="<%=user%>" />
-		<div class="dashboard-wrapper">
-            <div class="container-fluid dashboard-content">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="width: 847px; margin-left: auto; margin-right: auto">
-                            <div class="card">
-                                <h5 class="card-header">${user.name}'s Profile</h5>
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                            <tr>
-                                                <td >ID</td>
-                                                <td>${user.id}</td>
-                                            </tr>
-                                            <tr>
-                                                <td >PW</td>
-                                                <td>
-                                                <input type="password" class="form-control is-valid" id="validationServer01" name="password" placeholder="password" required>
-												</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">PW-CHECK</td>
-                                                <td>
-                                                <input type="password" required="" class="form-control is-invalid" id="validationCustom02">
-                                               </td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">NAME</td>
-                                                <td colspan="2">${user.name}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">EMAIL</td>
-                                                <td colspan="2">${user.email}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">TEL</td>
-                                                <td colspan="2">${user.tel}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">BIRTH</td>
-                                                <td colspan="2">${user.birth}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">MANAGER_NUM</td>
-                                                <td colspan="2">${user.manager_num}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">F_NUM</td>
-                                                <td colspan="2">${user.f_num}</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">PL_NUM</td>
-                                                <td colspan="2">${user.pl_num}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-	                </div>
-	            </div>
+<div class="dashboard-wrapper">
+	<div class="container-fluid dashboard-content">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"></div>
+		</div>
+		<div class="row">
+			<div style="width: 847px; margin-left: auto; margin-right: auto">
+				<c:if test="${stat.notEq}">
+					<div class="alert alert-warning" role="alert">비밀번호가 일치하지 않습니다</div>
+				</c:if>
+				<c:if test="${stat.success}">
+					<div class="alert alert-success" role="alert">수정되었습니다.</div>
+				</c:if>
+				<div class="card">
+					<h5 class="card-header">${user.name}'s Profile</h5>
+					<div class="card-body">
+						<form action="<%=request.getContextPath()%>/changePW.do" method="post">
+							<input type="hidden" name="id" id="id" value="${user.id}" />
+							<table class="table table-hover">
+								<tbody>
+									<tr>
+										<td>ID</td>
+										<td>${user.id}</td>
+									</tr>
+									<tr>
+										<td>PW</td>
+										<td>
+											<input type="password" name="passwd" class="form-control form-control-sm"
+												placeholder="비밀번호를 변경하려면 입력하세요" required="required"
+											>
+										</td>
+									</tr>
+									<tr>
+										<td scope="row">PW-CHECK</td>
+										<td>
+											<input type="password" name="passwdCheck" class="form-control form-control-sm"
+												required="required"
+											>
+										</td>
+									</tr>
+									<tr>
+										<td scope="row">NAME</td>
+										<td>${user.name}</td>
+									</tr>
+									<tr>
+										<td scope="row">EMAIL</td>
+										<td>${user.email}</td>
+									</tr>
+									<tr>
+										<td scope="row">TEL</td>
+										<td>
+											<select class="form-control-small" name="tel1" id="input-select">
+												<option selected="selected">010</option>
+												<option>011</option>
+												<option>017</option>
+												<option>019</option>
+											</select>
+											- <input type="text" name="tel2" class="form-control-small" size="4"
+												value="${user.tel.substring(4,8)}" required="required"
+											>- <input type="text" name="tel3" class="form-control-small" size="4"
+												value="${user.tel.substring(9)}" required="required"
+											>
+										</td>
+									</tr>
+									<tr>
+										<td scope="row">BIRTH</td>
+										<td>${user.birth}</td>
+									</tr>
+									<tr>
+										<td scope="row">MANAGER_NUM</td>
+										<td>${user.manager_num}</td>
+									</tr>
+									<tr>
+										<td scope="row">F_NUM</td>
+										<td>${user.f_num}</td>
+									</tr>
+									<tr>
+										<td scope="row">PL_NUM</td>
+										<td>${user.pl_num}</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: right;">
+											<input type="submit" class="btn btn-outline-primary" value="수정" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
