@@ -23,7 +23,6 @@
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/select2/js/select2.min.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/summernote/js/summernote-bs4.js"></script>
-    
     <!--  <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/morris-bundle/morris.js"></script> 
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/c3.min.js"></script>

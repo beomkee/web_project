@@ -1,6 +1,7 @@
+<%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="dataBean" class="member.LoginUserDataBean">
+<jsp:useBean id="dataBean" class="model.LoginUser">
 	<jsp:setProperty name="dataBean" property="*" />
 </jsp:useBean>
 <%

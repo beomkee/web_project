@@ -16,5 +16,10 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/summernote/css/summernote-bs4.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/concept-master/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <script src="<%= request.getContextPath() %>/concept-master/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Guriddo_jqGrid_JS_5.3.2/css/ui.jqgrid.css"/>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/Guriddo_jqGrid_JS_5.3.2/js/jquery.jqGrid.min.js" ></script>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-ui-1.12.1.custom/jquery-ui.css" >
+	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-ui-1.12.1.custom/jquery-ui.js" ></script>
+	<script src="<%=request.getContextPath()%>/Guriddo_jqGrid_JS_5.3.2/js/i18n/grid.locale-kr.js"></script>
     
 </head>

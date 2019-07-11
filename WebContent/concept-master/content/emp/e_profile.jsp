@@ -10,10 +10,18 @@
 		<div class="row">
 			<div style="width: 847px; margin-left: auto; margin-right: auto">
 				<c:if test="${stat.notEq}">
-					<div class="alert alert-warning" role="alert">비밀번호가 일치하지 않습니다</div>
+					<div class="alert alert-warning alert-dismissible fade show"  role="alert">비밀번호가 일치하지 않습니다
+						<a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                        	<span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
 				</c:if>
 				<c:if test="${stat.success}">
-					<div class="alert alert-success" role="alert">수정되었습니다.</div>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">수정되었습니다.
+					<a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                        	<span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
 				</c:if>
 				<div class="card">
 					<h5 class="card-header">${user.name}'s Profile</h5>
