@@ -1,4 +1,6 @@
 	var list = {};
+	var colNames = null;
+	var colModel = null;
 /*===================================================== JqGrid 그리는 스크립트 ====================================================== */
 	function makeTable(id, array){
 			$("#"+id).jqGrid({

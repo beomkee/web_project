@@ -16,6 +16,7 @@
             </div> -->
         </div>
     </div>
+    <div>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/libs/js/main-js.js"></script>
@@ -29,7 +30,7 @@
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="<%= request.getContextPath() %>/concept-master/assets/libs/js/dashboard-ecommerce.js"></script>-->
-    
+   
      <script>
 		    $(document).ready(function() {
 		        $('.js-example-basic-multiple').select2({ tags: true });
@@ -43,6 +44,7 @@
 		        });
 		    });
 	</script>
+	 </div>
 </body>
  
 </html>

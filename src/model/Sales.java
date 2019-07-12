@@ -10,6 +10,7 @@ public class Sales {
 	private String s_obtain_date;
 	private String s_contract_sum;
 	private String s_complete_date;
+	
 	public String getS_num() {
 		return s_num;
 	}
