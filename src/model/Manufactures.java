@@ -51,6 +51,11 @@ public class Manufactures {
 	public void setMf_date(String mf_date) {
 		this.mf_date = mf_date;
 	}
+	@Override
+	public String toString() {
+		return " {\"mf_num\":\"" + mf_num + "\", \"f_num\":\"" + f_num + "\", \"pl_num\":\"" + pl_num + "\", \"e_id\":\"" + e_id
+				+ "\", \"p_num\":\"" + p_num + "\", \"mf_count\":\"" + mf_count + "\", \"mf_date\":\"" + mf_date + "\"}";
+	}
 	
 	
 }

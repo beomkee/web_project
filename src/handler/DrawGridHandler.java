@@ -2,6 +2,8 @@ package handler;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -59,8 +61,21 @@ public class DrawGridHandler implements CommandHandler {
 			
 			break;
 		}
-		request.setAttribute("data", list);
-
-		return "";
+		String result = "[";
+		for (Object ob : list) {
+			result += ob.toString()+",";
+		}
+		result = result.substring(0, result.length() - 1);
+		result += "]";
+		Map<String, String> ttt = new HashMap<String, String>();
+		ttt.put("colNames", json.getKey()+"\n\n");
+		ttt.put("colModel", json.getValue()+"\n\n");
+		ttt.put("data", result);
+			
+		request.setAttribute("data", ttt);
+		System.out.println("colNames: \n"+ttt.get("colNames"));
+		System.out.println("colModel: \n"+ttt.get("colModel"));
+		System.out.println("data:\n"+ttt.get("data"));
+		return "/concept-master/jqgrid/commonGrid.js";
 	}
 }

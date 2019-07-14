@@ -128,8 +128,12 @@
 			data : "target=" + target,
 			datatype : "json",
 			success : function(result) {
+				console.log(result);
 				var json = JSON.parse(result);
+				console.log(json);
+				console.log(typeof(json));
 				list = json;
+				console.log(list);
 				$("#jqGrid").clearGridData();
 				makeTable('jqGrid', json);
 			}

@@ -98,6 +98,7 @@
 				<div class="card">
 					<h5 class="card-header">생산 LIST</h5>
 					<div class="card-body">
+						<input type="button" value="그리드실행" onclick="grid();">
 						<table id="gridTable" class="table table-bordered">
 						</table>
 						<div id="gridPaging"></div>
@@ -121,22 +122,30 @@
 		var tableName = "manufactures";
 		var options = "0,2,1,0,2,1,0";
 		$(document).ready(function() {
+			
+		});
+		
+		function grid() {
 			$.ajax({                          
 		        type: "POST",
-		        url: "<%=request.getContextPath() %>/drawGrid.do",
+		        url: "<%=request.getContextPath()%>/drawGrid.do",
 				data : {"colNames" 	:	colNames,
 						"tableName" : 	tableName,
 						"options"	:	options},
 				datatype : "json",
 				success : function(result) {
-					console.log(result);
-					console.log("<%= request.getParameter("data") %>");
+					<%-- console.log(result);
+					console.log("<%= request.getParameter("data") %>"); --%>
+					<% String data = (String)request.getAttribute("data"); %>
+					console.log(<%= data %>);
+					console.log(${data});
+					console.log(${param});
 					/* var json = JSON.parse(result);
 					list = json;
 					$("#gridTable").clearGridData();
 					makeTable('gridTable', json); */
 				}
 			});
-		});
+		}
 	</script>
 	
