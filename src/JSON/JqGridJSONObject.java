@@ -8,9 +8,14 @@ public class JqGridJSONObject {
 	public void putKey(String cols) {
 		String[] str = cols.split(",");
 		keyName = new String[str.length];
-		keyValue = new String[str.length];
 		for (int i = 0; i < str.length; i++) {
 			keyName[i] = str[i];
+		}
+	}
+	public void putVal(String cols) {
+		String[] str = cols.split(",");
+		keyValue = new String[str.length];
+		for (int i = 0; i < str.length; i++) {
 			keyValue[i] = str[i];
 		}
 	}
@@ -20,13 +25,16 @@ public class JqGridJSONObject {
 		for (int i = 0; i < keyValue.length; i++) {
 			switch (option[i]) {
 			case "0":
-				keyValue[i] += "";
+				keyValue[i] += "'";
 				break;
 			case "1":
-				keyValue[i] += ",\tsortable:false";
+				keyValue[i] += "',align:'center'";
 				break;
 			case "2":
-				keyValue[i] += "";
+				keyValue[i] += "',align:'right'";
+				break;
+			case "3":
+				keyValue[i] += "',sortable:false";
 				break;
 			}
 		}
@@ -35,9 +43,9 @@ public class JqGridJSONObject {
 	public String getValue() {
 		String line = "[";
 		for (String str : keyValue) {
-			line += "{ name:'" + str + "'},";
+			line += "{ name:'" + str + "},";
 		}
-		line = line.substring(0, line.length() - 1);
+		line += "{name:'btn',align:'center',formatter: delButton}";
 		line += "]";
 		return line;
 	}

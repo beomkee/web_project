@@ -60,7 +60,7 @@
 								<ul class="nav flex-column">
 									<c:forEach var="j" items="${left}">
 										<c:if test="${i.num == j.parent_num}">
-											<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/concept-master/content/${j.url}.jsp">${j.text}</a></li>
+											<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/${j.url}">${j.text}</a></li>
 										</c:if>
 									</c:forEach>
 								</ul>

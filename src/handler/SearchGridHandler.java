@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import JSON.JqGridJSONObject;
-import service.manufacturesService;
+import service.ManufacturesService;
 
-public class DrawGridHandler implements CommandHandler {
+public class SearchGridHandler implements CommandHandler {
 
-	private manufacturesService manufacturesService = new manufacturesService();
+	private ManufacturesService manufacturesService = new ManufacturesService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

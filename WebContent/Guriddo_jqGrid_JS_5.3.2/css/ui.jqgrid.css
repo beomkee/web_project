@@ -366,7 +366,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 
 .ui-jqgrid .ui-jqgrid-htable .ui-th-div {
-	height:17px;
+	height:20px;
 	margin-top:5px;
 }
 .column-menu, .ui-search-menu {

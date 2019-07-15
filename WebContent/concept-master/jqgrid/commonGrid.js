@@ -1,50 +1,15 @@
 	var list = {};
-	var aaaaa= ['num','text','depth','collapse','division','url','use_yn','parent_num','del'];
-	var bbbbb = [
-		{name:'num',		width: 80,			align:'center',			key: true},
-		{name:'text',		width:250,			align:'right', 			editable: true,			sortable:false},                                        
-		{name:'depth',		align:'right', 		editable: true, 		},                                     
-		{name:'collapse',	align:'right', 		editable: true,
-			edittype   : "select",
-			editoptions : {                     
-              value : { "1" : "y","2" : "n"}   
-           }},
-		{name:'division',	align:'right', 		editable: true},
-		{name:'url',		width:600,		 	align:'right', 			editable: true,			sortable:false},
-		{name:'use_yn',		align:'right', 		editable: true,
-			edittype   : "select",
-			editoptions : {                     
-                  value : { "1" : "y","2" : "n"}   
-               }},
-		{name:'parent_num',	align:'right', 		editable: true,			sortable:false},
-		{name:'btn',		align:'center'}
-	]
-	/*var datas = [
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}",
-		"{\"mf_num\":\"1901\", \"f_num\":\"sw_12345\", \"pl_num\":\"p_1\", \"e_id\":\"12345\", \"p_num\":\"b_111\", \"mf_count\":\"40000\", \"mf_date\":\"19/01/01\"}"
-	]*/
-	/*var list = {};
-	list = datas;*/
-	
 	/*===================================================== JqGrid 그리는 스크립트 ====================================================== */
 	function makeTable(id, array, name, model){
-		console.log(list);
-		var json = JSON.parse(data);
-			array = json;
 			$("#"+id).jqGrid({
 				datatype: "local",                                                                              
 				height: 'auto',
 				autowidth: true,
-				colNames: aaaaa,                                      
-				colModel: bbbbb,                    
+				colNames: name,                                      
+				colModel: model,                    
 				editable		: true,
-				rowNum			: 10,
-				rowList			: [10,20,30],
+				rowNum			: 15,
+				rowList			: [15,20,25],
 				pager			: '#gridPaging',
 		        loadonce   		: false,
 		        sortname		: 'division',
@@ -60,24 +25,26 @@
 	    		ondblClickRow 	: function(rowId, iRow, iCol, e) {
 	    		
 	   	        }
-				//caption: "Left Menu Data"
+				//caption: "Data"
 				});
 
 		for ( var row in list) {
 			$("#" + id).jqGrid('addRowData', row + 1, list[row]);
 		} 
-		function delButton (cellvalue, options, rowObject) {
-   	    	return '<button class="btn" type="button" onclick="deleteGridRow('+options.rowId+')">DEL</button>'; 
-   	    };
 	}
+	function delButton (cellvalue, options, rowObject) {
+		return '<input type="button" class="btn btn-outline-warning btn-xs" onclick="deleteGridRow('+options.rowId+')" value="del"/>'; 
+	};
 	$(document).ready(function() {
-		resetSerch();
+		list = data;
+		$("#gridTable").clearGridData();
+		makeTable('gridTable', list, colNames, colModel);
 	});
 	$(window).resize(function() {
 		$("#gridTable").setGridWidth($('#container').width());
 	});
 	
-	/*function deleteGridRow(rowId, text){
+	function deleteGridRow(rowId, text){
 		//$("#jqGrid").delRowData(rowid);
 		if (confirm("정말로 삭제 하시겠습니까?")){
 			$.ajax({                          
@@ -98,7 +65,7 @@
 		}
 		
 	}
-===================================================== Ajax로 검색하는 스크립트 ======================================================  
+//===================================================== Ajax로 검색하는 스크립트 ======================================================  
 	function serchResult(){
 		var serchVar =  $('#serchVar').val();
 		var colum = $("input[name=colum]:checked").val();
@@ -123,21 +90,21 @@
 					$("#gridTable").clearGridData();
 					makeTable('gridTable', list);
 				}
-			});
-	}*/
+		});
+	}
 //===================================================== 검색 결과 초기화 스크립트 ====================================================== 
 	function resetSerch(){
-		$('#serchVar').val('');
 		$.ajax({                          
 	        type: "POST",
-	        url: "<%= request.getContextPath() %>/concept-master/ajax/leftSearchPro.jsp",
-			data : "target=" + "",
-			datatype : "json",
-			success : function(result) {
-				var json = JSON.parse(result);
-				list = json;
-				$("#gridTable").clearGridData();
-				makeTable('gridTable', json);
-			}
+	        url: "<%=request.getContextPath()%>/manufacture.do",
+				datatype : "json",
+				success : function(result) {
+					var json = JSON.parse(temp);
+					list = json;
+					$("#gridTable").clearGridData();
+					makeTable('gridTable', list);
+				}
 		});
+		/*$("#gridTable").clearGridData();
+		makeTable('gridTable', list, colNames, colModel);*/
 	}

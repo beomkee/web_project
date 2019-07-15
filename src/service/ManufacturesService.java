@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ChangePwDao;
@@ -11,54 +12,39 @@ import jdbc.JdbcUtil;
 import model.ChangePwRequest;
 import model.Manufactures;
 
-public class DrawGridService {
+public class ManufacturesService {
 	private GridDataDao dataDao = new GridDataDao();
-
-	public List<String> empNums() {
+	
+	public List<Manufactures> selectData() {
+		List<Manufactures> list = new ArrayList<Manufactures>();
 		Connection conn = null;
-		List<String> list = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			list = dataDao.selectENum(conn);
+			list = dataDao.selectManufactures(conn);
+			return list;
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();
 		} finally {
 			JdbcUtil.close(conn);
 		}
-		return list;
 	}
-
-	public List<String> cusNums() {
+	
+	public List<Manufactures> searchData() {
+		List<Manufactures> list = new ArrayList<Manufactures>();
 		Connection conn = null;
-		List<String> list = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			list = dataDao.selectCNum(conn);
+			list = dataDao.selectManufactures(conn);
+			return list;
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();
 		} finally {
 			JdbcUtil.close(conn);
 		}
-		return list;
 	}
-
-	public List<String> facNums() {
-		Connection conn = null;
-		List<String> list = null;
-		try {
-			conn = ConnectionProvider.getConnection();
-			list = dataDao.selectFNum(conn);
-		} catch (SQLException e) {
-			JdbcUtil.rollback(conn);
-			throw new RuntimeException();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-		return list;
-	}
-
+	
 	public List<String> proNums() {
 		Connection conn = null;
 		List<String> list = null;
@@ -73,13 +59,13 @@ public class DrawGridService {
 		}
 		return list;
 	}
-
-	public List<String> saleNums() {
+	
+	public List<String> empNums() {
 		Connection conn = null;
 		List<String> list = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			list = dataDao.selectSaleNum(conn);
+			list = dataDao.selectENum(conn);
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();
@@ -88,13 +74,13 @@ public class DrawGridService {
 		}
 		return list;
 	}
-
-	public List<String> manuNums() {
+	
+	public List<String> facNums() {
 		Connection conn = null;
 		List<String> list = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			list = dataDao.selectManuNum(conn);
+			list = dataDao.selectFNum(conn);
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();
