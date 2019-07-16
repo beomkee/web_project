@@ -1,56 +1,37 @@
 package handler;
 
-import java.io.BufferedReader;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import JSON.JqGridJSONObject;
 import model.Manufactures;
-import service.DrawGridService;
 import service.ManufacturesService;
 
 public class SearchManufactureHandler implements CommandHandler {
 
-	private static final String FORM_VIEW = "/concept-master/content/emp/e_sample.jsp";
+	private static final String FORM_VIEW = "/concept-master/ajaxResult/mfResult.jsp";
 	private ManufacturesService manufacturesService = new ManufacturesService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return processSubmit(request, response);
-	}
+		
+		String dataSet = request.getParameter("dataSet");
+		
+		String[] datas = dataSet.split(",",7);
 
-	public String processForm(HttpServletRequest request, HttpServletResponse response) {
-		return FORM_VIEW;
-	}
-
-	public String processSubmit(HttpServletRequest request, HttpServletResponse response) {
-
-		String temp = request.getParameter("searchData");
-		System.out.println(temp);
-		String[] datas = temp.split(",");
-		for (String str : datas) {
-			System.out.println(str);
+		for (int i = 0; i < datas.length; i++) {
+			System.out.println("데이터"+ (i+1)+": "+datas[i]);
 		}
-		/*
-		 * String searchData = readJSONStringFromRequestBody(request);
-		 * System.out.println(searchData);
-		 */
-		// List<Manufactures> list = null;
-
-		// list = manufacturesService.selectData();
-		/*
-		 * String data = "["; for (Object ob : list) { data += ob.toString() + ","; }
-		 * data = data.substring(0, data.length() - 1); data += "]";
-		 * 
-		 * System.out.println(data);
-		 * 
-		 * request.setAttribute("data", data);
-		 */
-        //request.setAttribute("searchData", searchData);
+		System.out.println("\n");
+		
+		List<Manufactures> searchList = manufacturesService.searchData(datas);
+		
+		request.setAttribute("list", searchList);
+	
 		return FORM_VIEW;
 	}
+
 
 	/*
 	 * private String readJSONStringFromRequestBody(HttpServletRequest request) {

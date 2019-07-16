@@ -5,14 +5,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.ChangePwDao;
-import dao.GridDataDao;
+import dao.ManufactureDao;
 import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
 import model.ChangePwRequest;
 import model.Manufactures;
 
 public class DrawGridService {
-	private GridDataDao dataDao = new GridDataDao();
+	private ManufactureDao dataDao = new ManufactureDao();
 
 	public List<String> empNums() {
 		Connection conn = null;

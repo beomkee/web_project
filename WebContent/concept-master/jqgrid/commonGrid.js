@@ -8,7 +8,7 @@
 				colNames: name,                                      
 				colModel: model,                    
 				editable		: true,
-				rowNum			: 15,
+				rowNum			: 5,
 				rowList			: [15,20,25],
 				pager			: '#gridPaging',
 		        loadonce   		: false,
@@ -23,7 +23,11 @@
 	    			$("#gridTable").trigger("reloadGrid");
 	    		},
 	    		ondblClickRow 	: function(rowId, iRow, iCol, e) {
-	    		
+	    			var values = [];
+	    			for (var i = 1; i <= columLength; i++) {
+						values.push($("#gridTable").getCell(rowId, i));
+					}
+	    			dubleClick(values);
 	   	        }
 				//caption: "Data"
 				});
