@@ -17,14 +17,11 @@ public class SearchManufactureHandler implements CommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String dataSet = request.getParameter("dataSet");
-		
 		String[] datas = dataSet.split(",",7);
-
-		for (int i = 0; i < datas.length; i++) {
-			System.out.println("데이터"+ (i+1)+": "+datas[i]);
-		}
-		System.out.println("\n");
-		
+		/*
+		 * for (int i = 0; i < datas.length; i++) { System.out.println("데이터"+
+		 * (i+1)+": "+datas[i]); }
+		 */
 		List<Manufactures> searchList = manufacturesService.searchData(datas);
 		
 		request.setAttribute("list", searchList);

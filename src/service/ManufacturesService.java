@@ -69,6 +69,24 @@ public class ManufacturesService {
 		}
 	}
 	
+	public List<Manufactures> delete(String num) {
+		Connection conn = null;
+		List<Manufactures> list = new ArrayList<Manufactures>();
+		try {
+			conn = ConnectionProvider.getConnection();
+			dataDao.delete(conn, num);
+			list = dataDao.selectManufactures(conn);
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		}finally {
+			JdbcUtil.close(conn);
+		}
+				
+	}
+	
 	public List<String> proNums() {
 		Connection conn = null;
 		List<String> list = null;

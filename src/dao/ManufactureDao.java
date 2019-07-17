@@ -89,6 +89,17 @@ public class ManufactureDao {
 		return false;
 	}
 
+	// 삭제======================================================================================================
+	public void delete(Connection conn, String num) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("delete from manufactures where mf_num = ?");
+			pstmt.setString(1, num);
+			pstmt.executeUpdate();
+		} finally {
+		}
+	}
+
 	public int maxNum(Connection conn, String num) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -99,7 +110,7 @@ public class ManufactureDao {
 			if (rs.next()) {
 				maxNum = rs.getInt(1);
 			}
-			return maxNum+1;
+			return maxNum + 1;
 		} finally {
 		}
 	}
@@ -124,7 +135,6 @@ public class ManufactureDao {
 			pstmt = conn.prepareStatement("update manufactures "
 					+ "set f_num = ?, pl_num = ?,e_id = ?,p_num = ?, mf_count = ?, mf_date = ? where mf_num = ?");
 			for (int i = 1; i < dataset.length; i++) {
-				System.out.println("update: " + dataset[i]);
 				pstmt.setString(i, dataset[i]);
 			}
 			pstmt.setString(7, mfId);

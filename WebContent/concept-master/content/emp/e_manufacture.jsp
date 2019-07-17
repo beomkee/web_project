@@ -1,5 +1,7 @@
+<%@page import="JSON.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script src="<%=request.getContextPath()%>/concept-master/jqgrid/commonGrid.js"></script>
+<script src="<%=request.getContextPath()%>/concept-master/customJs/commonGrid.js"></script>
+<script src="<%=request.getContextPath()%>/concept-master/customJs/Chart.min.js"></script>
 <title>생산 현황</title>
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
@@ -86,7 +88,7 @@
 			<div style="width: 847px; margin-left: auto; margin-right: auto">
 				<div class="card">
 					<h5 class="card-header">생산 LIST</h5>
-					<div class="card-body">
+					<div class="card-body" id="gridbody">
 						<table id="gridTable" class="table table-bordered">
 						</table>
 						<div id="gridPaging"></div>
@@ -98,119 +100,48 @@
 			<div style="width: 847px; margin-left: auto; margin-right: auto">
 				<div class="card">
 					<h5 class="card-header">생산 분석</h5>
-					<input type="button" onclick="resetSerch()">
 					<div class="card-body">
-						<canvas id="chartjs_bar"></canvas>
+						<button onclick="makeBar()">막대그래프</button>
+						<canvas id="canvas_bar" height="450" width="600"></canvas>
+						<canvas id="canvas_curve" height="450" width="600"></canvas>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--======================= JqGrid 스크립트 =======================  -->
 	<script>
+		/* var facs = ${facs};
+		var emps = %{emps};
+		var products = ${products};
+		*/
+		function drawGraph(){
+			makeBarGraph();
+		}
+		//그리드 속성=====================
 		var colNames = ${colNames};
 		var colModel = ${colModel};
 		var data = ${data};
-		var mf_num = "";
-		var f_num = "";
-		var pl_num = "";
-		var e_id = "";
-		var p_num = "";
-		var mf_count = "";
-		var mf_date = "";
-		var origin = {};
-		var dataSet = "";
-		var id = "mf_num";
-		var columLength = 7;
-		
-		function reset() {
-			$('#mf_num').val('');
-			$('#f_num').val('');
-			$('#pl_num').val('');
-			$('#e_id').val('');
-			$('#p_num').val('');
-			$('#mf_count').val('');
-			$('#mf_date').val('');
-			//list = data;
-			$("#gridTable").clearGridData();
-			makeTable('gridTable', list, colNames, colModel);
-		}
-
-		function search() {
-			setData();
-			var tableName = "manufacture";
-			console.log(searchData);
-			 $.ajax({                          
-		        type: "POST",
-		        url: "<%=request.getContextPath()%>/searchMf.do",
-				data : {"searchData" : dataSet},
-				datatype : "json",
-				success : function(result) {
-					var json = JSON.parse(result); 
-					list = json;
-					$("#gridTable").clearGridData();
-					makeTable('gridTable', list, colNames, colModel);
-				} 
-			}); 
-		}
+	</script>
+	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
 	
-		function dubleClick(values){
-			$('#mf_num').val(values[0]);
-			$('#f_num').val(values[1]);
-			$('#pl_num').val(values[2]);
-			$('#e_id').val(values[3]);
-			$('#p_num').val(values[4]);
-			$('#mf_count').val(values[5]);
-			$('#mf_date').val(values[6]);	
-		}
+	<!--======================= BarChart 스크립트 =======================  -->
+	
+	<script>
+		//bar graph 속성=====================
+		var barGraph = {};
+		console.log(typeof(barGraph));
+		var barKey = "January,"+ "February,"+ "March,"+ "April,"+ "May,"+ "June,"+ "July,"+ "August,"+ "September,"+ "October,"+ "November,"+ "December";
+		var barValue1 = "30"+ ",65"+ ",97"+ ",84"+ ",78"+ ",94"+ ",15"+ ",35"+ ",65"+ ",75"+ ",15"+ ",35";
+		var barValue2 = "65, 87, 54, 15, 65, 45, 85, 32, 47, 85, 96, 15";
+		var name = "mf";
 		
-		function insertUpdate() {
-			setData();
-			if (!isFilled()) {
-				alert("입력란을 모두 채워주세요");
-			} else {
-				 $.ajax({                          
-			        type: "POST",
-			        url: "<%=request.getContextPath()%>/insertUpdateMf.do",
-			        data : {
-						"dataSet" : dataSet
-					},
-					datatype : "json",
-					success : function(result) {
-						var json = JSON.parse(result);
-						list = json;
-						$("#gridTable").clearGridData();
-						makeTable('gridTable', list, colNames, colModel);
-						$("#main").append("<div class='alert alert-success alert-dismissible fade show'  role='alert'>등록/수정 되었습니다.<a href='#' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></a></div>");
-					}
-				});
-			}
-		}
-
-		function setData() {
-			mf_num = $('#mf_num').val();
-			f_num = $('#f_num option:selected').val();
-			pl_num = $('#pl_num option:selected').val();
-			e_id = $('#e_id option:selected').val();
-			p_num = $('#p_num option:selected').val();
-			mf_count = $('#mf_count').val();
-			mf_date = $('#mf_date').val();
-			dataSet = $('#mf_num').val() + ","
-					+ $('#f_num option:selected').val() + ","
-					+ $('#pl_num option:selected').val() + ","
-					+ $('#e_id option:selected').val() + ","
-					+ $('#p_num option:selected').val() + ","
-					+ $('#mf_count').val() + "," + $('#mf_date').val();
-		}
-		function isFilled() {
-			setData();
-			if (mf_num == null || f_num == null || pl_num == null
-					|| e_id == null || p_num == null || mf_count == null
-					|| mf_date == null || mf_num == "" || f_num == ""
-					|| pl_num == "" || e_id == "" || p_num == ""
-					|| mf_count == "" || mf_date == "") {
-				return false;
-			} else {
-				return true;
-			}
-		}
+		
+		
+	</script>
+	<script src="<%=request.getContextPath()%>/concept-master/customJs/barChart.js"></script>
+	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/curveChart.js"></script> --%>
+	
+	<script>
+		
 	</script>
