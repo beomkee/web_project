@@ -1,7 +1,6 @@
 <%@page import="JSON.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/concept-master/customJs/commonGrid.js"></script>
-
 <title>생산 현황</title>
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
@@ -76,9 +75,9 @@
 							</tbody>
 						</table>
 						<div style="text-align: right; margin-top: 10px">
-							<input type="button" onclick="search()" class="btn btn-outline-primary btn-xs" value="검색">
-							<input type="button" onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="등록/수정">
-							<input type="button" onclick="reset()" class="btn btn-outline-light btn-xs" value="초기화">
+							<input type="button" onclick="search()" class="btn btn-outline-primary btn-xs" value="검색"> <input type="button"
+								onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="등록/수정"
+							> <input type="button" onclick="reset()" class="btn btn-outline-light btn-xs" value="초기화">
 						</div>
 					</div>
 				</div>
@@ -97,14 +96,36 @@
 			</div>
 		</div>
 		<div class="row">
-			<div style="width: 847px; margin-left: auto; margin-right: auto">
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 				<div class="card">
-					<h5 class="card-header">생산 분석</h5>
+					<h5 class="card-header">Line Charts</h5>
 					<div class="card-body">
-						<canvas id="myChart" height="450" width="780"></canvas>
-						<canvas id="myChart2" height="450" width="780"></canvas>
+						<canvas id="chartjs_line"></canvas>
 					</div>
-					<button onclick="add();">추가</button>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+				<div class="card">
+					<h5 class="card-header">Bar Charts</h5>
+					<div class="card-body">
+						<canvas id="chartjs_bar"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+				<div class="card">
+					<h5 class="card-header">Pie Charts</h5>
+					<div class="card-body">
+						<canvas id=chartjs_doughnut></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+				<div class="card">
+					<h5 class="card-header">Mix Charts</h5>
+					<div class="card-body">
+						<canvas id="chartjs_polar"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -114,8 +135,8 @@
 		/* var facs = ${facs};
 		var emps = %{emps};
 		var products = ${products};
-		*/
-		function drawGraph(){
+		 */
+		function drawGraph() {
 			makeBarGraph();
 		}
 		//그리드 속성=====================
@@ -126,27 +147,70 @@
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
 	
 	<!--======================= BarChart 스크립트 =======================  -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+	<script src="<%=request.getContextPath() %>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
 	<script>
 		//bar graph 속성=====================
 		var barGraph = {};
-		var barKey = "January,"+ "February,"+ "March,"+ "April,"+ "May,"+ "June,"+ "July,"+ "August,"+ "September,"+ "October,"+ "November,"+ "December";
+		var barKey = "January," + "February," + "March," + "April," + "May,"
+				+ "June," + "July," + "August," + "September," + "October,"
+				+ "November," + "December";
 		var barValue1 = "30 ,65 ,97,84,78,94,15,35,65,75,15,35";
 		var barValue2 = "65, 87, 54, 15, 65, 45, 85, 32, 47, 85, 96, 15";
 		var name = "mf";
-		var keyData = ["1","2","3","4","5","6","7","8","9","10","11","12"];
-		var data1 = [1,2,3,4,5,6,7,8,9,10,11,12];
-		var data2 = [5,2,1,6,4,8,6,1,6,5,4,8];
+		var keyData = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ];
+		var data1 = {};
+		var data2 = {};
+		var data3 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
+
+		var mix = null;
+		var bar = null;
+		var line = null;
+		var pie = null;
 		
-		function changdata(){
-			new Chart(ctx, options);
-			new Chart(ctx2, options2);
-			data2 = [5,5,5,5,5,5,5,5,5,5,5,5];
+		function setData(){
+			data1 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
+			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
+			data3 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
 		}
-		function add(){
-			barChart.addData([data1[1],
-				 data2[2]],
-				 months[(barChart.datasets[0].bars.length) % 12]);
+		function drawGraph() {
+			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
+			line = new Chart(chartjs_line, LineOptions);
+			bar = new Chart(chartjs_bar, barOptions);
+			doughnut = new Chart(chartjs_doughnut, doughnutOptions);
+			polar = new Chart(chartjs_polar, polarOptions);
+		}
+		function removeData(chart) {		
+			chart.data.labels.pop();
+			chart.data.datasets.pop();
+			chart.update();
+		}
+		var ttt =  {
+					label : 'sw_12345',
+					data : data1,
+					backgroundColor : "rgba(89, 105, 255,0.5)",
+					borderColor : "rgba(89, 105, 255,0.7)",
+					borderWidth : 2
+		}
+		var aaa= {
+					label : 'yi_45678',
+					data : data2,
+					backgroundColor : "rgba(255, 64, 123,0.5)",
+					borderColor : "rgba(255, 64, 123,0.7)",
+					borderWidth : 2
+				} 
+		
+		function changeData(chart, datas) {	
+				chart.data.datasets.push({
+					datas
+				});
+			console.dir(chart.data.datasets);
+		    chart.update();
+		}
+		 
+		function add() {
+			barChart.addData([ data1[1], data2[2] ],
+					months[(barChart.datasets[0].bars.length) % 12]);
 		}
 		function makeBarGraph() {
 			$.ajax({
@@ -156,7 +220,7 @@
 					"barKey" : barKey,
 					"barValue1" : barValue1,
 					"barValue2" : barValue2
-					},
+				},
 				datatype : "json",
 				success : function(result) {
 					var json = JSON.parse(result);
@@ -169,11 +233,10 @@
 				}
 			});
 		}
-		
 	</script>
-	<script src="<%=request.getContextPath()%>/concept-master/customJs/mixChart.js"></script>
+	<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>
+	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/mixChart.js"></script> --%>
 	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/curveChart.js"></script> --%>
-	
 	<script>
 		
 	</script>
