@@ -1,7 +1,7 @@
 <%@page import="JSON.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/concept-master/customJs/commonGrid.js"></script>
-<script src="<%=request.getContextPath()%>/concept-master/customJs/Chart.min.js"></script>
+
 <title>생산 현황</title>
 <div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
@@ -101,10 +101,10 @@
 				<div class="card">
 					<h5 class="card-header">생산 분석</h5>
 					<div class="card-body">
-						<button onclick="makeBar()">막대그래프</button>
-						<canvas id="canvas_bar" height="450" width="600"></canvas>
-						<canvas id="canvas_curve" height="450" width="600"></canvas>
+						<canvas id="myChart" height="450" width="780"></canvas>
+						<canvas id="myChart2" height="450" width="780"></canvas>
 					</div>
+					<button onclick="add();">추가</button>
 				</div>
 			</div>
 		</div>
@@ -126,20 +126,52 @@
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
 	
 	<!--======================= BarChart 스크립트 =======================  -->
-	
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script>
 		//bar graph 속성=====================
 		var barGraph = {};
-		console.log(typeof(barGraph));
 		var barKey = "January,"+ "February,"+ "March,"+ "April,"+ "May,"+ "June,"+ "July,"+ "August,"+ "September,"+ "October,"+ "November,"+ "December";
-		var barValue1 = "30"+ ",65"+ ",97"+ ",84"+ ",78"+ ",94"+ ",15"+ ",35"+ ",65"+ ",75"+ ",15"+ ",35";
+		var barValue1 = "30 ,65 ,97,84,78,94,15,35,65,75,15,35";
 		var barValue2 = "65, 87, 54, 15, 65, 45, 85, 32, 47, 85, 96, 15";
 		var name = "mf";
+		var keyData = ["1","2","3","4","5","6","7","8","9","10","11","12"];
+		var data1 = [1,2,3,4,5,6,7,8,9,10,11,12];
+		var data2 = [5,2,1,6,4,8,6,1,6,5,4,8];
 		
-		
+		function changdata(){
+			new Chart(ctx, options);
+			new Chart(ctx2, options2);
+			data2 = [5,5,5,5,5,5,5,5,5,5,5,5];
+		}
+		function add(){
+			barChart.addData([data1[1],
+				 data2[2]],
+				 months[(barChart.datasets[0].bars.length) % 12]);
+		}
+		function makeBarGraph() {
+			$.ajax({
+				type : "POST",
+				url : "/ProjectNo1/graph/bar.do",
+				data : {
+					"barKey" : barKey,
+					"barValue1" : barValue1,
+					"barValue2" : barValue2
+					},
+				datatype : "json",
+				success : function(result) {
+					var json = JSON.parse(result);
+					//graphData = json;
+					barGraph = json;
+					data1 = json.data[0];
+					data2 = json.data[1];
+					console.log(json);
+					makeBar();
+				}
+			});
+		}
 		
 	</script>
-	<script src="<%=request.getContextPath()%>/concept-master/customJs/barChart.js"></script>
+	<script src="<%=request.getContextPath()%>/concept-master/customJs/mixChart.js"></script>
 	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/curveChart.js"></script> --%>
 	
 	<script>

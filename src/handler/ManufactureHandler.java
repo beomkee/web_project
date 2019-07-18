@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import JSON.JSONObject;
 import JSON.JqGridJSONObject;
 import model.Manufactures;
 import service.DrawGridService;
@@ -59,13 +60,24 @@ public class ManufactureHandler implements CommandHandler {
 		 * System.out.println("\ncolModel:"); System.out.println(json.getValue());
 		 * System.out.println("\ndata:"); System.out.println(data);
 		 */
-
+		
+		
+		//바그래프 정보넘기는 부분
+		JSONObject bars = new JSONObject();
+		
+		bars.setName("data");
+		bars.putKey(mods);
+		/*
+		 * bars.putValue(barValue1); bars.putValue(barValue2);
+		 */
+		
 		request.setAttribute("colNames", json.getKey());
 		request.setAttribute("colModel", json.getValue());
 		request.setAttribute("data", data);
 		request.setAttribute("products", products);
 		request.setAttribute("emps", emps);
 		request.setAttribute("facs", facs);
+		/* request.setAttribute("bar_data1", bars); */
 
 		return FORM_VIEW;
 	}
