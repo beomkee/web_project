@@ -5,9 +5,9 @@ var id = "mf_num";
 var columLength = colNames.length - 1;
 
 // ajaxURl설정=====================
-var deleteUrl = "deleteMf.do";
-var searchUrl = "searchMf.do";
-var insertUrl = "insertUpdateMf.do";
+var deleteUrl = "mf/deleteMf.do";
+var searchUrl = "mf/searchMf.do";
+var insertUrl = "mf/insertUpdateMf.do";
 
 // 검색폼 초기화===================
 function reset() {

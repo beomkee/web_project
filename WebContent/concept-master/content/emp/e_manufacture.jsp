@@ -122,7 +122,7 @@
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 				<div class="card">
-					<h5 class="card-header">Mix Charts</h5>
+					<h5 class="card-header">Polar Charts</h5>
 					<div class="card-body">
 						<canvas id="chartjs_polar"></canvas>
 					</div>
@@ -147,11 +147,9 @@
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
 	
 	<!--======================= BarChart 스크립트 =======================  -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
 	<script src="<%=request.getContextPath() %>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
 	<script>
 		//bar graph 속성=====================
-		var barGraph = {};
 		var barKey = "January," + "February," + "March," + "April," + "May,"
 				+ "June," + "July," + "August," + "September," + "October,"
 				+ "November," + "December";
@@ -159,8 +157,8 @@
 		var barValue2 = "65, 87, 54, 15, 65, 45, 85, 32, 47, 85, 96, 15";
 		var name = "mf";
 		var keyData = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ];
-		var data1 = {};
-		var data2 = {};
+		var data1 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
+		var data2 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 		var data3 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 
 		var mix = null;
@@ -185,33 +183,19 @@
 			chart.data.datasets.pop();
 			chart.update();
 		}
-		var ttt =  {
-					label : 'sw_12345',
-					data : data1,
-					backgroundColor : "rgba(89, 105, 255,0.5)",
-					borderColor : "rgba(89, 105, 255,0.7)",
-					borderWidth : 2
-		}
-		var aaa= {
+		
+		function changeData(chart, datas) {	
+				chart.data.datasets.push({
 					label : 'yi_45678',
 					data : data2,
 					backgroundColor : "rgba(255, 64, 123,0.5)",
 					borderColor : "rgba(255, 64, 123,0.7)",
 					borderWidth : 2
-				} 
-		
-		function changeData(chart, datas) {	
-				chart.data.datasets.push({
-					datas
 				});
 			console.dir(chart.data.datasets);
 		    chart.update();
-		}
-		 
-		function add() {
-			barChart.addData([ data1[1], data2[2] ],
-					months[(barChart.datasets[0].bars.length) % 12]);
-		}
+		} 
+		
 		function makeBarGraph() {
 			$.ajax({
 				type : "POST",
@@ -235,8 +219,3 @@
 		}
 	</script>
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>
-	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/mixChart.js"></script> --%>
-	<%-- <script src="<%=request.getContextPath()%>/concept-master/customJs/curveChart.js"></script> --%>
-	<script>
-		
-	</script>

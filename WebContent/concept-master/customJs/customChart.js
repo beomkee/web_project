@@ -4,8 +4,8 @@ var chartjs_line = document.getElementById('chartjs_line').getContext('2d');
 var LineOptions = {
 	type : 'line',
 	data : {
-		labels : keyData
-		/*datasets : [ {
+		labels : keyData,
+		datasets : [ {
 			label : '라인별생산량',
 			data : data1,
 
@@ -18,7 +18,7 @@ var LineOptions = {
 			backgroundColor : "rgba(255, 64, 123,0.5)",
 			borderColor : "rgba(255, 64, 123,0.7)",
 			borderWidth : 2
-		} ]*/
+		} ]
 	},
 	options : {
 		legend : {
@@ -55,8 +55,8 @@ var chartjs_bar = document.getElementById("chartjs_bar").getContext('2d');
 var barOptions = {
 	type : 'bar',
 	data : {
-		labels : keyData
-		/*datasets : [ {
+		labels : keyData,
+		datasets : [ {
 			label : 'sw_12345',
 			data : data1,
 			backgroundColor : "rgba(89, 105, 255,0.5)",
@@ -68,7 +68,7 @@ var barOptions = {
 			backgroundColor : "rgba(255, 64, 123,0.5)",
 			borderColor : "rgba(255, 64, 123,0.7)",
 			borderWidth : 2
-		} ]*/
+		} ]
 	},
 	options : {
 		scales : {

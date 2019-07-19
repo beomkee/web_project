@@ -1,5 +1,3 @@
-<%@page import="model.LoginUser"%>
-<%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>개인 정보 상세</title>
 <div class="dashboard-wrapper">
@@ -26,7 +24,7 @@
 				<div class="card">
 					<h5 class="card-header">${user.name}'s Profile</h5>
 					<div class="card-body">
-						<form action="<%=request.getContextPath()%>/changePW.do" method="post">
+						<form action="<%=request.getContextPath()%>/profile/changePW.do" method="post">
 							<input type="hidden" name="id" id="id" value="${user.id}" />
 							<table class="table table-hover">
 								<tbody>

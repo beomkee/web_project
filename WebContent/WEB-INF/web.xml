@@ -32,19 +32,24 @@
 			poolName=dow
 		</param-value>
 	</context-param>
-
+	
 	<servlet>
-		<servlet-name>ControllerUsingURI</servlet-name>
-		<servlet-class>controller.ControllerUsingURI</servlet-class>
-		<init-param>
-			<param-name>configFile</param-name>
-			<param-value>/WEB-INF/commandHandlerURI.properties</param-value>
-		</init-param>
+		<servlet-name>ManufactureAction</servlet-name>
+		<servlet-class>controller.MfAction</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ControllerUsingURI</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<servlet-name>ManufactureAction</servlet-name>
+		<url-pattern>/mf/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ProfileAction</servlet-name>
+		<servlet-class>controller.ProfileAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileAction</servlet-name>
+		<url-pattern>/profile/*</url-pattern>
 	</servlet-mapping>
 	
 	

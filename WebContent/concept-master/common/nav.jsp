@@ -2,12 +2,6 @@
 <%@page import="model.LoginUser"%>
 <%@page import="dao.UserDao"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	String checkId = (String)session.getAttribute("LOGINED_ID");
-	UserDao manager = UserDao.getInstance();
-	LoginUser user = manager.getUserInfo(checkId);
-%>
-<c:set var="user" value="<%=user%>" />
 <body>
     <div class="dashboard-main-wrapper">
         <div class="dashboard-header">
@@ -24,7 +18,7 @@
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">${user.name }님 로그인 환영합니다 </h5>
                                 </div>
-                                <a class="dropdown-item" href="<%=request.getContextPath() %>/concept-master/content/emp/e_profile.jsp"><i class="fas fa-user mr-2"></i>개인정보</a>
+                                <a class="dropdown-item" href="<%=request.getContextPath() %>/profile/e_profile.do"><i class="fas fa-user mr-2"></i>개인정보</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath() %>/concept-master/login/login.jsp"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
