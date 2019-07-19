@@ -75,9 +75,9 @@
 							</tbody>
 						</table>
 						<div style="text-align: right; margin-top: 10px">
-							<input type="button" onclick="search()" class="btn btn-outline-primary btn-xs" value="검색"> <input type="button"
-								onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="등록/수정"
-							> <input type="button" onclick="reset()" class="btn btn-outline-light btn-xs" value="초기화">
+							<input type="button" onclick="search()" class="btn btn-outline-primary btn-xs" value="검색">
+							<input type="button" onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="등록/수정">
+							<input type="button" onclick="reset()" class="btn btn-outline-light btn-xs" value="초기화">
 						</div>
 					</div>
 				</div>
@@ -145,9 +145,8 @@
 		var data = ${data};
 	</script>
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
-	
 	<!--======================= BarChart 스크립트 =======================  -->
-	<script src="<%=request.getContextPath() %>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
+	<script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
 	<script>
 		//bar graph 속성=====================
 		var barKey = "January," + "February," + "March," + "April," + "May,"
@@ -159,17 +158,15 @@
 		var keyData = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ];
 		var data1 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 		var data2 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
-		var data3 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 
 		var mix = null;
 		var bar = null;
 		var line = null;
 		var pie = null;
-		
-		function setData(){
+
+		function setData() {
 			data1 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
 			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
-			data3 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
 		}
 		function drawGraph() {
 			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
@@ -178,44 +175,41 @@
 			doughnut = new Chart(chartjs_doughnut, doughnutOptions);
 			polar = new Chart(chartjs_polar, polarOptions);
 		}
-		function removeData(chart) {		
+		function removeData(chart) {
 			chart.data.labels.pop();
 			chart.data.datasets.pop();
 			chart.update();
+			chart.data.datasets.pop();
+			chart.update();
 		}
-		
-		function changeData(chart, datas) {	
-				chart.data.datasets.push({
-					label : 'yi_45678',
-					data : data2,
-					backgroundColor : "rgba(255, 64, 123,0.5)",
-					borderColor : "rgba(255, 64, 123,0.7)",
-					borderWidth : 2
-				});
+
+		var aaa = {
+			label : 'sw_12345',
+			data : data1,
+			backgroundColor : "rgba(89, 105, 255,0.5)",
+			borderColor : "rgba(89, 105, 255,0.7)",
+			borderWidth : 2
+		};
+
+		var bbb = {
+			label : 'yi_45678',
+			data : data2,
+			backgroundColor : "rgba(255, 64, 123,0.5)",
+			borderColor : "rgba(255, 64, 123,0.7)",
+			borderWidth : 2
+		}
+
+		function addData() {
+			changeData(bar,aaa);
+			changeData(bar,bbb);
+		}
+
+		function changeData(chart, datas) {
+			chart.data.datasets.push(datas);
 			console.dir(chart.data.datasets);
-		    chart.update();
-		} 
-		
-		function makeBarGraph() {
-			$.ajax({
-				type : "POST",
-				url : "/ProjectNo1/graph/bar.do",
-				data : {
-					"barKey" : barKey,
-					"barValue1" : barValue1,
-					"barValue2" : barValue2
-				},
-				datatype : "json",
-				success : function(result) {
-					var json = JSON.parse(result);
-					//graphData = json;
-					barGraph = json;
-					data1 = json.data[0];
-					data2 = json.data[1];
-					console.log(json);
-					makeBar();
-				}
-			});
+			chart.update();
 		}
+
+		
 	</script>
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>

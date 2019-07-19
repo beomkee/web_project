@@ -51,6 +51,15 @@
 		<servlet-name>ProfileAction</servlet-name>
 		<url-pattern>/profile/*</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChartAction</servlet-name>
+		<servlet-class>controller.ChartAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChartAction</servlet-name>
+		<url-pattern>/chart/*</url-pattern>
+	</servlet-mapping>
 	
 	
 	<security-constraint>
