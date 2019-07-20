@@ -132,19 +132,13 @@
 	</div>
 	<!--======================= JqGrid 스크립트 =======================  -->
 	<script>
-		/* var facs = ${facs};
-		var emps = %{emps};
-		var products = ${products};
-		 */
-		function drawGraph() {
-			makeBarGraph();
-		}
 		//그리드 속성=====================
 		var colNames = ${colNames};
 		var colModel = ${colModel};
 		var data = ${data};
 	</script>
-	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
+	
+	
 	<!--======================= BarChart 스크립트 =======================  -->
 	<script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
 	<script>
@@ -159,15 +153,6 @@
 		var data1 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 		var data2 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
 
-		var mix = null;
-		var bar = null;
-		var line = null;
-		var pie = null;
-
-		function setData() {
-			data1 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
-			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
-		}
 		function drawGraph() {
 			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
 			line = new Chart(chartjs_line, LineOptions);
@@ -213,3 +198,4 @@
 		
 	</script>
 	<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>
+	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>

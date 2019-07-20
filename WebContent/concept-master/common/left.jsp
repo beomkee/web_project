@@ -14,22 +14,18 @@
 		position = "직원";
 		div = "e";
 		division = 1;
-		mainPath = "emp/main_e.jsp";
 	} else if (id.charAt(0) == '3') {
 		position = "파트너";
 		div = "p";
 		division = 3;
-		mainPath = "partner/main_p.jsp";
 	} else if (id.charAt(0) == '2') {
 		position = "매니저";
 		div = "m";
 		division = 2;
-		mainPath = "manager/main_m.jsp";
 	} else {
 		position = "ADMIN";
-		div = "m";
+		div = "a";
 		division = 4;
-		mainPath = "admin/main_a.jsp";
 	}
 	LeftMenuService leftService = LeftMenuService.getInstance();
 	List<LeftMenu> left = leftService.getLeftMenu(division);
@@ -46,7 +42,7 @@
 				<ul class="navbar-nav flex-column">
 					<li class="nav-divider">Menu</li>
 					 	<li class="nav-item ">
-							<a class="nav-link" href="<%= request.getContextPath() %>/concept-master/content/<%= mainPath %>">
+							<a class="nav-link" href="<%= request.getContextPath() %>/profile/main.do?div=<%= div %>">
 							<i class="fa fa-fw fa-user-circle"></i>Dashboard 
 							</a>
 						</li>

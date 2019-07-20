@@ -8,8 +8,7 @@
 		$(window).resize(function() {
 			$("#gridTable").setGridWidth($('#gridbody').width());
 		});
-		
-		
+		getChartData();
 	});
 	
 	
@@ -96,7 +95,7 @@
 //===================================================== 등록/수정 ====================================================== 	
 	function insertUpdate() {
 		setData();
-		if (isFilled()) {
+		if (!isFilled()) {
 			alert("입력란을 모두 채워주세요");
 		} else {
 			 $.ajax({                          

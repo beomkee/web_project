@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jdbc.JdbcUtil;
 import model.Manufactures;
@@ -85,6 +87,8 @@ public class ManufactureDao {
 				return true;
 			}
 		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
 		return false;
 	}
@@ -97,9 +101,12 @@ public class ManufactureDao {
 			pstmt.setString(1, num);
 			pstmt.executeUpdate();
 		} finally {
+			JdbcUtil.close(pstmt);
 		}
 	}
 
+	// 단일값 조회
+	// ===============================================================================================
 	public int maxNum(Connection conn, String num) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -112,6 +119,8 @@ public class ManufactureDao {
 			}
 			return maxNum + 1;
 		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
 	}
 
@@ -125,6 +134,7 @@ public class ManufactureDao {
 			}
 			pstmt.executeUpdate();
 		} finally {
+			JdbcUtil.close(pstmt);
 		}
 	}
 
@@ -140,11 +150,133 @@ public class ManufactureDao {
 			pstmt.setString(7, mfId);
 			pstmt.executeUpdate();
 		} finally {
+			JdbcUtil.close(pstmt);
 		}
 	}
 
-	// ====================================단일항목 조회
-	// 쿼리들========================================
+	// 차트 데이터 조회
+	// ==========================================================================================================
+	public Map<String, Map<Integer, Integer>> getLineData(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<Integer, Integer> sw = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> yi = new HashMap<Integer, Integer>();
+		Map<String, Map<Integer, Integer>> line = new HashMap<String, Map<Integer, Integer>>();
+		try {
+			pstmt = conn.prepareStatement("select DATE_FORMAT(mf_date,'%m') as month , sum(mf_count) as mf_sum from manufactures where f_num='sw_12345' group by month order by month desc limit 0,6");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					sw.put(rs.getInt("month"),rs.getInt("mf_sum"));
+				} while (rs.next());
+				line.put("sw_12345", sw);
+			}
+			pstmt = conn.prepareStatement("select DATE_FORMAT(mf_date,'%m') as month , sum(mf_count) as mf_sum from manufactures where f_num='yi_45678' group by month order by month desc limit 0,6");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					yi.put(rs.getInt("month"),rs.getInt("mf_sum"));
+				} while (rs.next());
+				line.put("yi_45678", yi);
+			}
+			return line;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public Map<String, Map<String, Integer>> getBarData(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Integer> sw = new HashMap<String, Integer>();
+		Map<String, Integer> yi = new HashMap<String, Integer>();
+		Map<String, Map<String, Integer>> bar = new HashMap<String, Map<String, Integer>>();
+		try {
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'sw_12345' and pl_num = 'p_1'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				sw.put("p_1", rs.getInt(1));
+			}
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'sw_12345' and pl_num = 'p_2'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				sw.put("p_2", rs.getInt(1));
+			}
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'sw_12345' and pl_num = 'p_2'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				sw.put("p_2", rs.getInt(1));
+			}
+			bar.put("sw_12345", sw);
+			
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'yi_45678' and pl_num = 'p_1'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				yi.put("p_1", rs.getInt(1));
+			}
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'yi_45678' and pl_num = 'p_2'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				yi.put("p_2", rs.getInt(1));
+			}
+			pstmt = conn.prepareStatement(
+					"select sum(mf_count) from manufactures where f_num = 'yi_45678' and pl_num = 'p_2'");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				yi.put("p_2", rs.getInt(1));
+			}
+			bar.put("yi_45678", yi);
+			return bar;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public Map<String, Integer> getPieData(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Integer> pie = new HashMap<String, Integer>(); 
+		try {
+			pstmt = conn.prepareStatement("select p_num, sum(mf_count) as mf_sum from manufactures where MONTH(mf_date) = 06 group by p_num order by mf_sum desc limit 0,6;");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					pie.put(rs.getString("p_num"),rs.getInt("mf_sum"));
+				} while (rs.next());
+			}
+			return pie;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public Map<String, Integer> getPolorData(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Integer> polor = new HashMap<String, Integer>(); 
+		try {
+			pstmt = conn.prepareStatement("select p_num, sum(mf_count) as mf_sum from manufactures group by p_num order by mf_sum desc limit 0,6");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					polor.put(rs.getString("p_num"),rs.getInt("mf_sum"));
+				} while (rs.next());
+			}
+			return polor;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	// 단일항목 조회
+	// 쿼리들===========================================================================================
 	public List<String> selectENum(Connection conn) throws SQLException {
 		List<String> list = new ArrayList<String>();
 		PreparedStatement pstmt = null;

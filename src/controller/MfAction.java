@@ -73,12 +73,15 @@ public class MfAction extends Action {
 	}
 
 	public String searchMfPOST(HttpServletRequest request, HttpServletResponse res) throws Exception {
+
 		String dataSet = request.getParameter("dataSet");
 		String[] datas = dataSet.split(",", 7);
+
 		/*
-		 * for (int i = 0; i < datas.length; i++) { System.out.println("데이터"+
-		 * (i+1)+": "+datas[i]); }
+		 * for (int i = 0; i < datas.length; i++) { System.out.println("데이터" + (i + 1) +
+		 * ": " + datas[i]); }
 		 */
+
 		List<Manufactures> searchList = manufacturesService.searchData(datas);
 
 		request.setAttribute("list", searchList);

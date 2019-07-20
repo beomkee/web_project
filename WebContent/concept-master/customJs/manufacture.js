@@ -8,6 +8,7 @@ var columLength = colNames.length - 1;
 var deleteUrl = "mf/deleteMf.do";
 var searchUrl = "mf/searchMf.do";
 var insertUrl = "mf/insertUpdateMf.do";
+var getDataUrl = "mfData.do";
 
 // 검색폼 초기화===================
 function reset() {

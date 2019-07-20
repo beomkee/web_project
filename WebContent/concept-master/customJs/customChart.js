@@ -1,21 +1,23 @@
-function makeBarGraph() {
+var mix = null;
+var bar = null;
+var line = null;
+var pie = null;
+
+function getChartData() {
 	$.ajax({
 		type : "POST",
-		url : "/ProjectNo1/chart/bar.do",
-		data : {
-			"barKey" : barKey,
-			"barValue1" : barValue1,
-			"barValue2" : barValue2
-		},
+		url : "/ProjectNo1/chart/" + getDataUrl,
+		data : {},
 		datatype : "json",
 		success : function(result) {
+			console.log(result);
 			var json = JSON.parse(result);
 			// graphData = json;
-			barGraph = json;
+			/*barGraph = json;
 			data1 = json.data[0];
 			data2 = json.data[1];
 			console.log(json);
-			makeBar();
+			makeBar();*/
 		}
 	});
 }
