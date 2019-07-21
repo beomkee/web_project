@@ -32,7 +32,18 @@ public class ProfileAction extends Action {
 		} else {
 			check = manager.userCheck(loginId, passwd);
 		}
+		String division = String.valueOf(loginId.charAt(0));
+		if (division.equals("1")) {
+			division = "E";
+		} else if (division.equals("2")) {
+			division = "M";
+		} else if (division.equals("3")) {
+			division = "P";
+		} else {
+			division = "A";
+		}
 		LoginUser user = manager.getUserInfo(loginId);
+		session.setAttribute("division", division);
 		session.setAttribute("user", user);
 		session.setAttribute("LOGINED_ID", loginId);
 		request.setAttribute("check", check);

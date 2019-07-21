@@ -33,6 +33,27 @@
 		</param-value>
 	</context-param>
 	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>LoginCheck</filter-name>
+		<filter-class>filter.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheck</filter-name>
+		<url-pattern>/*/*</url-pattern>
+	</filter-mapping>
+	
 	<servlet>
 		<servlet-name>ManufactureAction</servlet-name>
 		<servlet-class>controller.MfAction</servlet-class>
@@ -68,6 +89,15 @@
 	<servlet-mapping>
 		<servlet-name>NoticeAction</servlet-name>
 		<url-pattern>/notice/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MainAction</servlet-name>
+		<servlet-class>controller.MainAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainAction</servlet-name>
+		<url-pattern>/main/*</url-pattern>
 	</servlet-mapping>
 	
 	

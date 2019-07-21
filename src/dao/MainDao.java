@@ -10,17 +10,15 @@ import java.util.List;
 import jdbc.JdbcUtil;
 import model.Notice;
 
-public class NoticeDao {
+public class MainDao {
 
-	public List<Notice> getNoticeList(Connection conn, int startRow, int pageSize) throws SQLException {
+	public List<Notice> getNotice(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Notice> list = new ArrayList<Notice>();
 		Notice notice = null;
 		try {
-			pstmt = conn.prepareStatement("select * from notice_board order by n_num desc limit ?,?");
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, pageSize);
+			pstmt = conn.prepareStatement("select * from notice_board order by n_num desc limit 0,5");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				do {
@@ -41,12 +39,12 @@ public class NoticeDao {
 		}
 	}
 	
-	public int getMaxNum(Connection conn) throws SQLException {
+	public int lastNotice(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int num = 0;
 		try {
-			pstmt = conn.prepareStatement("select max(n_num) from notice_board");
+			pstmt = conn.prepareStatement("SELECT COUNT(*) AS lastnotice FROM notice_board WHERE MONTH(mod_date) = 07");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				num = rs.getInt(1);

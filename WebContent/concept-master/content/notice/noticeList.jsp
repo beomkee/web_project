@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="card">
-					<h5 class="card-header">공지사항</h5>
+					<h5 class="card-header">공지 사항</h5>
 					<div class="card-body">
 						<table class="table">
 							<thead>
@@ -20,12 +20,28 @@
 								<c:forEach var="notice" items="${notices}">
 									<tr>
 										<th scope="row">${notice.n_num }</th>
-										<td>${notice.title }</td>
+										<td><a href="<%=request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num}&pageNum=${pageNum}">${notice.title}</a></td>
 										<td style="text-align: center">${notice.mod_date}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<div style="text-align: center; margin-top: 10px">
+							<c:if test="${startPage > bottomLine }">
+								<a href="<%=request.getContextPath() %>/notice/nList.do?pageNum=${startPage - bottomLine}">[이전]</a>
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage}">
+								<a href="<%=request.getContextPath() %>/notice/nList.do?pageNum=${i}">[${i}] </a>
+							</c:forEach>
+							<c:if test="${endPage < pageCount}">
+								<a href="<%=request.getContextPath() %>/notice/nList.do?pageNum=${startPage + bottomLine}">[다음]</a>
+							</c:if>
+						</div>
+						<c:if test="${division eq 'M' }" >
+							<div style="text-align: right; margin-top: 10px">
+								<a href="<%=request.getContextPath() %>/notice/nWrite.do">[글쓰기]</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

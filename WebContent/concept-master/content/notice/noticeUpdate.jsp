@@ -7,22 +7,22 @@
 		<div class="row">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="card">
-					<h5 class="card-header">공지 작성</h5>
+					<h5 class="card-header">공지 수정</h5>
 					<div class="card-body">
-						<form action="notice/write.do" method="post">
+						<form action="notice/nUpdate.do" method="post">
 						<input type="hidden" name="writer" value="${user.id}">
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
 										<td class="bg-light text-dark">공지번호</td>
 										<td colspan="5">
-											<input type="text" name="n_num" id="n_num" class="form-control-small" value="${maxNum+1}" readonly="readonly">
+											<input type="text" name="n_num" id="n_num" class="form-control-small" value="${notice.n_num}" readonly="readonly">
 										</td>
 									</tr>
 									<tr>
 										<td class="bg-light text-dark">제목</td>
 										<td>
-											<input type="text" name="n_title" id="n_title" class="form-control">
+											<input type="text" name="n_title" id="n_title" value="${notice.title}" class="form-control">
 										</td>
 									</tr>
 									<tr>
@@ -35,7 +35,7 @@
 								</tbody>
 							</table>
 							<div style="text-align: right; margin-top: 10px">
-								<input type="submit" onclick="submitContents(this);" class="btn btn-outline-primary" value="작성"> 
+								<input type="submit" onclick="submitContents(this);" class="btn btn-outline-primary" value="수정"> 
 								<input type="button"  onclick="location.href='<%= request.getContextPath() %>/notice/nList.do?pageNum?${pageNum}'" class="btn btn-outline-success" value="목록보기" > 
 							</div>
 						</form>
@@ -47,7 +47,6 @@
 </div>
 <script type="text/javascript">
 var oEditors = [];
-
 var sLang = "ko_KR";	
 
 nhn.husky.EZCreator.createInIFrame({
@@ -65,6 +64,7 @@ nhn.husky.EZCreator.createInIFrame({
 					I18N_LOCALE : sLang
 				},
 				fOnAppLoad : function() {
+					pasteHTML();
 				},
 				fCreator : "createSEditor2"
 			});
@@ -76,6 +76,10 @@ function submitContents(elClickedObj) {
 	try {
 		elClickedObj.form.submit();
 	} catch(e) {}
+}
+function pasteHTML() {
+	var sHTML = '${notice.content}';
+	oEditors.getById["n_content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
 

@@ -2,13 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:if test="${check == 1 }">
 	<c:if test="${userDiv == 1 }">
-		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/profile/main.do?div=e">
+		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/main/mainUser.do">
 	</c:if>
 	<c:if test="${userDiv == 2 }">
-		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/profile/main.do?div=m">
+		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/main/mainManager.do">
 	</c:if>
 	<c:if test="${userDiv == 3 }">
-		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/profile/main.do?div=p">
+		<meta http-equiv="Refresh" content="0;url=<%=request.getContextPath()%>/main/mainPartner.do">
 	</c:if>
 </c:if>
 <c:if test="${check == 2 }">
