@@ -6314,7 +6314,7 @@ Vertical Timeline - by CodyHouse.co
 .chat-body{overflow: hidden;}
 
 .chat-module {
-    height: 100%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     flex: 1;
