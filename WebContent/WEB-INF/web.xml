@@ -99,6 +99,15 @@
 		<servlet-name>MainAction</servlet-name>
 		<url-pattern>/main/*</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EmailAction</servlet-name>
+		<servlet-class>controller.EmailAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmailAction</servlet-name>
+		<url-pattern>/email/*</url-pattern>
+	</servlet-mapping>
 	
 	
 	<security-constraint>

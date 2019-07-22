@@ -102,7 +102,7 @@
 									<h3 class="section-title">요약정보</h3>
 								</div>
 								<!-- =========== 이메일 요약 =========== -->
-								<div class="card">
+								<!-- <div class="card">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -145,7 +145,7 @@
 											<p class="msg">Urgent - You forgot your keys in the class room, please come imediatly!</p>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- =========== 공지 요약 =========== -->
 								<div class="card">
 									<div class="card-body">

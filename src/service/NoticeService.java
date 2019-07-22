@@ -126,4 +126,32 @@ public class NoticeService {
 			JdbcUtil.close(conn);
 		}
 	}
+	
+	public int preNotice(int n_num) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			int pre = noticeDao.preNotice(conn, n_num);
+			return pre;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public int nextNotice(int n_num) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			int next = noticeDao.nextNotice(conn, n_num);
+			return next;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 }

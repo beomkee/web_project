@@ -22,15 +22,14 @@ public class NoticeAction extends Action {
 		if (pageNum == null || pageNum == "") {
 			pageNum = "1";
 		}
-
 		int currentPage = Integer.parseInt(pageNum);
 		int count = noticeService.getNoticeCount();
-		int startRow = (currentPage - 1) * pageSize + 1;
+		int startRow = (currentPage - 1) * pageSize;
 		int endRow = currentPage * pageSize;
 		if (count < endRow) {
 			endRow = count;
 		}
-		int number = count - startRow + 1;
+		int number = count - ((currentPage - 1) * pageSize);
 
 		List<Notice> notices = noticeService.getNoticeList(startRow, pageSize);
 
@@ -73,6 +72,11 @@ public class NoticeAction extends Action {
 		Notice notice = new Notice();
 		notice = noticeService.getContent(nNum);
 
+		int pre = noticeService.preNotice(nNum);
+		int next = noticeService.nextNotice(nNum);
+		
+		request.setAttribute("pre", pre);
+		request.setAttribute("next", next);
 		request.setAttribute("minNum", minNum);
 		request.setAttribute("maxNum", maxNum);
 		request.setAttribute("notice", notice);

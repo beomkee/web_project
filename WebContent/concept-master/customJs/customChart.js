@@ -11,7 +11,7 @@ function getChartData() {
 		datatype : "json",
 		success : function(result) {
 			console.log(result);
-			var json = JSON.parse(result);
+			/*var json = JSON.parse(result);*/
 			// graphData = json;
 			/*barGraph = json;
 			data1 = json.data[0];

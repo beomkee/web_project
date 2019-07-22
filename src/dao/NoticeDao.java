@@ -150,4 +150,37 @@ public class NoticeDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public int preNotice(Connection conn, int n_num) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int pre = 0;
+		try {
+			pstmt = conn.prepareStatement("select n_num from notice_board where n_num = (select max(n_num) from notice_board where n_num < ?)");
+			pstmt.setInt(1, n_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				pre = rs.getInt(1);
+			}
+			return pre;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+	public int nextNotice(Connection conn, int n_num) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int next = 0;
+		try {
+			pstmt = conn.prepareStatement("select n_num from notice_board where n_num = (select min(n_num) from notice_board where n_num > ?)"); 
+			pstmt.setInt(1, n_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				next = rs.getInt(1);
+			}
+			return next;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
 }

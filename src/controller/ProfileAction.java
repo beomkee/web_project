@@ -24,27 +24,26 @@ public class ProfileAction extends Action {
 		UserDao manager = UserDao.getInstance();
 		HttpSession session = request.getSession();
 		int check = 0;
+		String division = String.valueOf(loginId.charAt(0));
 
 		if (loginId.equalsIgnoreCase("admin")) {
 			if (passwd.equals("1")) {
-				return "/concept-master/content/main_a.jsp";
+				check = 1;
+				division = "A";
 			}
 		} else {
 			check = manager.userCheck(loginId, passwd);
+			if (division.equals("1")) {
+				division = "E";
+			} else if (division.equals("2")) {
+				division = "M";
+			} else if (division.equals("3")) {
+				division = "P";
+			}
+			LoginUser user = manager.getUserInfo(loginId);
+			session.setAttribute("user", user);
 		}
-		String division = String.valueOf(loginId.charAt(0));
-		if (division.equals("1")) {
-			division = "E";
-		} else if (division.equals("2")) {
-			division = "M";
-		} else if (division.equals("3")) {
-			division = "P";
-		} else {
-			division = "A";
-		}
-		LoginUser user = manager.getUserInfo(loginId);
 		session.setAttribute("division", division);
-		session.setAttribute("user", user);
 		session.setAttribute("LOGINED_ID", loginId);
 		request.setAttribute("check", check);
 		request.setAttribute("loginId", loginId);
@@ -61,7 +60,7 @@ public class ProfileAction extends Action {
 	}
 
 	public String e_profileGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		
+
 		return "/concept-master/content/emp/e_profile.jsp";
 	}
 

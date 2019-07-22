@@ -45,13 +45,13 @@ public class MainService {
 		}
 	}
 	
-	public int getMinNum() {
+	public List<String> getEmailList() {
 		Connection conn = null;
-		int num = 0;
+		List<String> list = new ArrayList<String>();
 		try {
 			conn = ConnectionProvider.getConnection();
-			num = mainDao.getMinNum(conn);
-			return num;
+			list = mainDao.getEmails(conn);
+			return list;
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();
@@ -60,58 +60,6 @@ public class MainService {
 		}
 	}
 	
-
-	public Notice getContent(int nNum) {
-		Connection conn = null;
-		Notice notice = new Notice();
-		try {
-			conn = ConnectionProvider.getConnection();
-			notice = mainDao.getContent(conn, nNum);
-			return notice;
-		} catch (SQLException e) {
-			JdbcUtil.rollback(conn);
-			throw new RuntimeException();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-	}
 	
-	public void writeNotice(String writer, String title, String content) {
-		Connection conn = null;
-		try {
-			conn = ConnectionProvider.getConnection();
-			mainDao.writeNotice(conn, writer, title, content);
-		} catch (SQLException e) {
-			JdbcUtil.rollback(conn);
-			throw new RuntimeException();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-	}
-
-	public void updateNotice(String n_num, String title, String content) {
-		Connection conn = null;
-		try {
-			conn = ConnectionProvider.getConnection();
-			mainDao.updateNotice(conn, n_num, title, content);
-		} catch (SQLException e) {
-			JdbcUtil.rollback(conn);
-			throw new RuntimeException();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-	}
 	
-	public void deleteNotice(String n_num) {
-		Connection conn = null;
-		try {
-			conn = ConnectionProvider.getConnection();
-			mainDao.deleteNotice(conn, n_num);
-		} catch (SQLException e) {
-			JdbcUtil.rollback(conn);
-			throw new RuntimeException();
-		} finally {
-			JdbcUtil.close(conn);
-		}
-	}
 }

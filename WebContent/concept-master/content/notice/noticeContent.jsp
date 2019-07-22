@@ -27,12 +27,12 @@
 							<div style="float: left; margin-top: 10px">
 								<c:if test="${notice.n_num != minNum }">
 									<input type="button" class="btn btn-outline-dark"
-										onclick="location.href='<%= request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num -1}&pageNum=${pageNum}'" value="이전"
+										onclick="location.href='<%= request.getContextPath() %>/notice/nContent.do?nNum=${pre}&pageNum=${pageNum}'" value="이전"
 									>
 								</c:if>
 								<c:if test="${notice.n_num != maxNum }">
 									<input type="button" class="btn btn-outline-dark"
-										onclick="location.href='<%= request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num +1}&pageNum=${pageNum}'" value="다음"
+										onclick="location.href='<%= request.getContextPath() %>/notice/nContent.do?nNum=${next}&pageNum=${pageNum}'" value="다음"
 									>
 								</c:if>
 								<c:if test="${division eq 'M' }">
