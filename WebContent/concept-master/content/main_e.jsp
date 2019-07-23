@@ -1,5 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69149f1af4843e8b54cecbdd80acee1c"></script>
+<script>
+		var loactionX = 0;
+		var loactionY = 0;
+	</script>
+<c:if test="${user.f_num eq 'sw_12345' }">
+	<script>
+		loactionX = 37.266229;
+		loactionY = 126.999793;
+	</script>
+</c:if>
+<c:if test="${user.f_num eq 'yi_45678' }">
+	<script>
+		loactionX = 37.324824;
+		loactionY = 127.107421;
+	</script>
+</c:if>
+<script>
+var container = document.getElementById('map'); 
+
+var options = { 
+	center: new kakao.maps.LatLng(loactionX, loactionY), 
+	level: 3 
+};
+var map = new kakao.maps.Map(container, options); 
+</script>
 <title>직원 메인</title>
 <div class="dashboard-wrapper">
 	<div class="influence-profile">
@@ -16,38 +42,68 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="user-avatar text-center d-block">
-								<img src="<%=request.getContextPath()%>/concept-master/img/user/${LOGINED_ID}.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+								<a href="<%=request.getContextPath()%>/profile/e_profile.do">
+									<img src="<%=request.getContextPath()%>/concept-master/img/user/${LOGINED_ID}.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+								</a>
 							</div>
 							<div class="text-center">
 								<h2 class="font-24 mb-0">${user.name}</h2>
-								<p>${user.f_num}&nbsp;-&nbsp;${user.pl_num}</p>
+								<p>${user.id}</p>
 							</div>
 						</div>
 						<div class="card-body border-top">
 							<div class="">
 								<ul class="list-unstyled mb-0">
-									<li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>${user.email}</li>
-									<li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>${user.tel}</li>
+									<li class="mb-2">회사정보</li>
+									<li class="mb-2">
+										<i class="fas fa-fw fa-industry mr-2"></i>${user.f_num}
+									</li>
+									<li class="mb-2">
+										<i class="fas fa-fw fa-sitemap mr-2"></i>${user.pl_num}
+									</li>
+									<li class="mb-0">
+										<i class="fas fa-fw fa-id-badge mr-2"></i>${user.manager_num}
+									</li>
+									<li class="mb-2">&nbsp;</li>
+									<li class="mb-2">개인정보</li>
+									<li class="mb-2">
+										<i class="fas fa-fw fa-envelope mr-2"></i>${user.email}
+									</li>
+									<li class="mb-0">
+										<i class="fas fa-fw fa-phone mr-2"></i>${user.tel}
+									</li>
+									<li class="mb-0">
+										<i class="fas fa-fw fa-tag mr-2"></i>${user.birth}
+									</li>
 								</ul>
 							</div>
+						</div>
+						<div class="card-body border-top">
+							<div id="map" style="width:100%;height:250px;"></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xl-9 col-lg-9 col-md-7 col-sm-12 col-12">
 					<div class="influence-profile-content pills-regular">
 						<ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
-							<li class="nav-item"><a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab"
-								aria-controls="pills-campaign" aria-selected="true"
-							>전체요약</a></li>
-							<li class="nav-item"><a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab"
-								aria-controls="pills-packages" aria-selected="false"
-							>개인업무현황</a></li>
-							<li class="nav-item"><a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab"
-								aria-controls="pills-review" aria-selected="false"
-							>간편입력</a></li>
-							<li class="nav-item"><a class="nav-link" id="pills-msg-tab" data-toggle="pill" href="#pills-msg" role="tab" aria-controls="pills-msg"
-								aria-selected="false"
-							>EMAIL</a></li>
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab" aria-controls="pills-campaign"
+									aria-selected="true"
+								>전체요약</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages"
+									aria-selected="false"
+								>개인업무현황</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review"
+									aria-selected="false"
+								>간편입력</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-msg-tab" data-toggle="pill" href="#pills-msg" role="tab" aria-controls="pills-msg" aria-selected="false">EMAIL</a>
+							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
@@ -98,8 +154,44 @@
 										</div>
 									</div>
 								</div>
-								<div class="section-block">
-									<h3 class="section-title">요약정보</h3>
+								<!-- =========== 공지 요약 =========== -->
+								<div class="row">
+									<div class="card-body">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<div class="card">
+												<h5 class="card-header">최근 공지 사항</h5>
+												<div class="card-body p-0">
+													<div class="table-responsive">
+														<table class="table">
+															<thead class="bg-light">
+																<tr class="border-0" style="text-align: center">
+																	<th class="border-0">#</th>
+																	<th class="border-0">내용</th>
+																	<th class="border-0">등록일</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach var="notice" items="${notices}">
+																	<tr>
+																		<th>${notice.n_num }</th>
+																		<td>
+																			<a href="<%=request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num}&pageNum=1">${notice.title}</a>
+																		</td>
+																		<td style="text-align: center">${notice.mod_date}</td>
+																	</tr>
+																</c:forEach>
+																<tr>
+																	<td colspan="8">
+																		<a href="<%=request.getContextPath()%>/notice/nList.do" class="btn btn btn-outline-warning btn-sm float-right">View Details</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 								<!-- =========== 이메일 요약 =========== -->
 								<!-- <div class="card">
@@ -109,7 +201,7 @@
 												<div class="media influencer-profile-data d-flex align-items-center p-2">
 													<div class="media-body ">
 														<div class="influencer-profile-data">
-															<h3 class="m-b-10">읽지 않은 EMAIL</h3>
+															<h3 class="m-b-10">최근 보낸 이메일</h3>
 															<p>
 																<span class="m-r-20 text-info">최근 3개의 이메일만 표시됩니다 </span>
 															</p>
@@ -146,35 +238,6 @@
 										</div>
 									</div>
 								</div> -->
-								<!-- =========== 공지 요약 =========== -->
-								<div class="card">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-												<div class="media influencer-profile-data d-flex align-items-center p-2">
-													<div class="media-body">
-														<h3 class="m-b-10">최근 공지 사항</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="border-top card-footer p-0">
-										<table class="table">
-											<tbody>
-												<c:forEach var="notice" items="${notices}">
-													<tr>
-														<th scope="row">${notice.n_num }</th>
-														<td>
-															<a href="<%=request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num}&pageNum=1">${notice.title}</a>
-														</td>
-														<td style="text-align: center">${notice.mod_date}</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-								</div>
 								<!-- =========== 업무 요약 =========== -->
 								<div class="card">
 									<div class="card-body">
@@ -184,10 +247,18 @@
 													<div class="media-body">
 														<h3 class="m-b-10">최근 업무</h3>
 														<p>
-															<span class="m-r-20 d-inline-block">Draft Due Date<span class="m-l-10 d-inline-block text-primary">28 Jan 2018</span></span><span
-																class="m-r-20 d-inline-block"
-															> Publish Date<span class="m-l-10 text-secondary">20 March 2018</span></span><span class="m-r-20">Ends<span class="m-l-10 text-info">10
-																	July, 2018</span></span>
+															<span class="m-r-20 d-inline-block">
+																Draft Due Date
+																<span class="m-l-10 d-inline-block text-primary">28 Jan 2018</span>
+															</span>
+															<span class="m-r-20 d-inline-block">
+																Publish Date
+																<span class="m-l-10 text-secondary">20 March 2018</span>
+															</span>
+															<span class="m-r-20">
+																Ends
+																<span class="m-l-10 text-info">10 July, 2018</span>
+															</span>
 														</p>
 													</div>
 												</div>
@@ -226,11 +297,18 @@
 													<div class="media-body">
 														<h3 class="m-b-10">[&nbsp;] 관리</h3>
 														<p>
-															<span class="m-r-20 d-inline-block">Draft Due Date <span class="m-l-10 text-primary">05 Feb 2018</span></span> <span
-																class="m-r-20 d-inline-block"
-															> Publish Date <span class="m-l-10 text-secondary">14 May 2018</span></span><span class="m-r-20 d-inline-block">Ends<span
-																class="m-l-10 text-info"
-															>16 Aug, 2018</span></span>
+															<span class="m-r-20 d-inline-block">
+																Draft Due Date
+																<span class="m-l-10 text-primary">05 Feb 2018</span>
+															</span>
+															<span class="m-r-20 d-inline-block">
+																Publish Date
+																<span class="m-l-10 text-secondary">14 May 2018</span>
+															</span>
+															<span class="m-r-20 d-inline-block">
+																Ends
+																<span class="m-l-10 text-info">16 Aug, 2018</span>
+															</span>
 														</p>
 													</div>
 												</div>
@@ -407,15 +485,23 @@
 													<label class="col-sm-3 col-form-label text-sm-right">Min check</label>
 													<div class="col-sm-6">
 														<div class="custom-controls-stacked">
-															<label class="custom-control custom-checkbox"> <input id="ck1" name="ck1" type="checkbox" data-parsley-multiple="groups"
-																value="bar" data-parsley-mincheck="2" data-parsley-errors-container="#error-container1" class="custom-control-input"
-															><span class="custom-control-label">Option 1</span>
-															</label> <label class="custom-control custom-checkbox"> <input id="ck2" name="ck2" type="checkbox" data-parsley-multiple="groups"
-																value="bar2" data-parsley-mincheck="2" data-parsley-errors-container="#error-container1" class="custom-control-input"
-															><span class="custom-control-label">Option 2</span>
-															</label> <label class="custom-control custom-checkbox"> <input id="ck3" name="ck3" type="checkbox" data-parsley-multiple="groups"
-																value="bar3" data-parsley-mincheck="2" required="" data-parsley-errors-container="#error-container1" class="custom-control-input"
-															><span class="custom-control-label">Option 3</span>
+															<label class="custom-control custom-checkbox">
+																<input id="ck1" name="ck1" type="checkbox" data-parsley-multiple="groups" value="bar" data-parsley-mincheck="2"
+																	data-parsley-errors-container="#error-container1" class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 1</span>
+															</label>
+															<label class="custom-control custom-checkbox">
+																<input id="ck2" name="ck2" type="checkbox" data-parsley-multiple="groups" value="bar2" data-parsley-mincheck="2"
+																	data-parsley-errors-container="#error-container1" class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 2</span>
+															</label>
+															<label class="custom-control custom-checkbox">
+																<input id="ck3" name="ck3" type="checkbox" data-parsley-multiple="groups" value="bar3" data-parsley-mincheck="2" required=""
+																	data-parsley-errors-container="#error-container1" class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 3</span>
 															</label>
 															<div id="error-container1"></div>
 														</div>
@@ -425,15 +511,23 @@
 													<label class="col-sm-3 col-form-label text-sm-right">Max check</label>
 													<div class="col-sm-6">
 														<div class="custom-controls-stacked">
-															<label class="custom-control custom-checkbox"> <input type="checkbox" value="bar" id="e1" data-parsley-multiple="group1"
-																data-parsley-errors-container="#error-container2" class="custom-control-input"
-															><span class="custom-control-label">Option 1</span>
-															</label> <label class="custom-control custom-checkbox"> <input type="checkbox" value="bar" id="e2" data-parsley-multiple="group1"
-																data-parsley-errors-container="#error-container2" class="custom-control-input"
-															><span class="custom-control-label">Option 2</span>
-															</label> <label class="custom-control custom-checkbox"> <input type="checkbox" value="bar" id="e3" data-parsley-multiple="group1"
-																data-parsley-maxcheck="1" data-parsley-errors-container="#error-container2" class="custom-control-input"
-															><span class="custom-control-label">Option 3</span>
+															<label class="custom-control custom-checkbox">
+																<input type="checkbox" value="bar" id="e1" data-parsley-multiple="group1" data-parsley-errors-container="#error-container2"
+																	class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 1</span>
+															</label>
+															<label class="custom-control custom-checkbox">
+																<input type="checkbox" value="bar" id="e2" data-parsley-multiple="group1" data-parsley-errors-container="#error-container2"
+																	class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 2</span>
+															</label>
+															<label class="custom-control custom-checkbox">
+																<input type="checkbox" value="bar" id="e3" data-parsley-multiple="group1" data-parsley-maxcheck="1"
+																	data-parsley-errors-container="#error-container2" class="custom-control-input"
+																>
+																<span class="custom-control-label">Option 3</span>
 															</label>
 															<div id="error-container2"></div>
 														</div>

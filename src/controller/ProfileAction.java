@@ -25,7 +25,6 @@ public class ProfileAction extends Action {
 		HttpSession session = request.getSession();
 		int check = 0;
 		String division = String.valueOf(loginId.charAt(0));
-
 		if (loginId.equalsIgnoreCase("admin")) {
 			if (passwd.equals("1")) {
 				check = 1;
@@ -50,13 +49,6 @@ public class ProfileAction extends Action {
 		request.setAttribute("userDiv", div);
 
 		return "/concept-master/login/userDivider.jsp";
-	}
-
-	public String mainGET(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-		String div = req.getParameter("div");
-
-		return "/concept-master/content/main_" + div + ".jsp";
 	}
 
 	public String e_profileGET(HttpServletRequest request, HttpServletResponse res) throws Exception {

@@ -108,8 +108,6 @@
 		<servlet-name>EmailAction</servlet-name>
 		<url-pattern>/email/*</url-pattern>
 	</servlet-mapping>
-	
-	
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>my-secure-app</web-resource-name>

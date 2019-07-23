@@ -15,6 +15,7 @@ public class MainAction extends Action {
 	MainService mainService = new MainService();
 
 	public String mainUserGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		
 		List<Notice> notices = mainService.getNotice();
 		int lastNotice = mainService.lastNotice();
 

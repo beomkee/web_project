@@ -10,6 +10,10 @@ var searchUrl = "mf/searchMf.do";
 var insertUrl = "mf/insertUpdateMf.do";
 var getDataUrl = "mfData.do";
 
+//Chart 속성=====================
+var label1 = "yi_45678";
+var label2 = "sw_12345";
+
 // 검색폼 초기화===================
 function reset() {
 	$('#mf_num').val(' --- ');

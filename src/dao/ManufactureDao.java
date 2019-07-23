@@ -206,10 +206,10 @@ public class ManufactureDao {
 				sw.put("p_2", rs.getInt(1));
 			}
 			pstmt = conn.prepareStatement(
-					"select sum(mf_count) from manufactures where f_num = 'sw_12345' and pl_num = 'p_2'");
+					"select sum(mf_count) from manufactures where f_num = 'sw_12345' and pl_num = 'p_3'");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				sw.put("p_2", rs.getInt(1));
+				sw.put("p_3", rs.getInt(1));
 			}
 			bar.put("sw_12345", sw);
 			
@@ -226,10 +226,10 @@ public class ManufactureDao {
 				yi.put("p_2", rs.getInt(1));
 			}
 			pstmt = conn.prepareStatement(
-					"select sum(mf_count) from manufactures where f_num = 'yi_45678' and pl_num = 'p_2'");
+					"select sum(mf_count) from manufactures where f_num = 'yi_45678' and pl_num = 'p_3'");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				yi.put("p_2", rs.getInt(1));
+				yi.put("p_3", rs.getInt(1));
 			}
 			bar.put("yi_45678", yi);
 			return bar;
@@ -244,7 +244,7 @@ public class ManufactureDao {
 		ResultSet rs = null;
 		Map<String, Integer> pie = new HashMap<String, Integer>(); 
 		try {
-			pstmt = conn.prepareStatement("select p_num, sum(mf_count) as mf_sum from manufactures where MONTH(mf_date) = 06 group by p_num order by mf_sum desc limit 0,6;");
+			pstmt = conn.prepareStatement("select p_num, sum(mf_count) as mf_sum from manufactures where MONTH(mf_date) = 06 group by p_num order by mf_sum desc limit 0,6");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				do {

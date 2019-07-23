@@ -8,7 +8,6 @@
 		$(window).resize(function() {
 			$("#gridTable").setGridWidth($('#gridbody').width());
 		});
-		getChartData();
 	});
 	
 	

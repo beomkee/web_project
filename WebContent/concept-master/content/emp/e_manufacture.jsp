@@ -95,107 +95,63 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-				<div class="card">
-					<h5 class="card-header">Line Charts</h5>
-					<div class="card-body">
-						<canvas id="chartjs_line"></canvas>
+		<div class="card">
+		<div class="card-header" id="headingEight">
+			<h5 class="mb-0">
+				<button onclick="getChartData()" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+					<span class="fas fa-angle-down mr-3"></span>
+					생산 데이터 분석
+				</button>
+			</h5>
+		</div>
+		<div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion3">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<div class="card">
+							<h5 class="card-header">공장 별 최근 6개월 생산 현황</h5>
+							<div class="card-body">
+								<canvas id="chartjs_line"></canvas>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-				<div class="card">
-					<h5 class="card-header">Bar Charts</h5>
-					<div class="card-body">
-						<canvas id="chartjs_bar"></canvas>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<div class="card">
+							<h5 class="card-header">생산라인별 총 생산 현황</h5>
+							<div class="card-body">
+								<canvas id="chartjs_bar"></canvas>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-				<div class="card">
-					<h5 class="card-header">Pie Charts</h5>
-					<div class="card-body">
-						<canvas id=chartjs_doughnut></canvas>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<div class="card">
+							<h5 class="card-header">지난달 상품 생산량 상위6</h5>
+							<div class="card-body">
+								<canvas id=chartjs_doughnut></canvas>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-				<div class="card">
-					<h5 class="card-header">Polar Charts</h5>
-					<div class="card-body">
-						<canvas id="chartjs_polar"></canvas>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<div class="card">
+							<h5 class="card-header">총 상품 생산량 상위6</h5>
+							<div class="card-body">
+								<canvas id="chartjs_polar"></canvas>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--======================= JqGrid 스크립트 =======================  -->
-	<script>
-		//그리드 속성=====================
-		var colNames = ${colNames};
-		var colModel = ${colModel};
-		var data = ${data};
-	</script>
-	
-	
-	<!--======================= BarChart 스크립트 =======================  -->
-	<script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
-	<script>
-		//bar graph 속성=====================
-		var barKey = "January," + "February," + "March," + "April," + "May,"
-				+ "June," + "July," + "August," + "September," + "October,"
-				+ "November," + "December";
-		var barValue1 = "30 ,65 ,97,84,78,94,15,35,65,75,15,35";
-		var barValue2 = "65, 87, 54, 15, 65, 45, 85, 32, 47, 85, 96, 15";
-		var name = "mf";
-		var keyData = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ];
-		var data1 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
-		var data2 = [ 5, 2, 1, 6, 4, 8, 6, 1, 6, 5, 4, 8 ];
-
-		function drawGraph() {
-			data2 = [ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ];
-			line = new Chart(chartjs_line, LineOptions);
-			bar = new Chart(chartjs_bar, barOptions);
-			doughnut = new Chart(chartjs_doughnut, doughnutOptions);
-			polar = new Chart(chartjs_polar, polarOptions);
-		}
-		function removeData(chart) {
-			chart.data.labels.pop();
-			chart.data.datasets.pop();
-			chart.update();
-			chart.data.datasets.pop();
-			chart.update();
-		}
-
-		var aaa = {
-			label : 'sw_12345',
-			data : data1,
-			backgroundColor : "rgba(89, 105, 255,0.5)",
-			borderColor : "rgba(89, 105, 255,0.7)",
-			borderWidth : 2
-		};
-
-		var bbb = {
-			label : 'yi_45678',
-			data : data2,
-			backgroundColor : "rgba(255, 64, 123,0.5)",
-			borderColor : "rgba(255, 64, 123,0.7)",
-			borderWidth : 2
-		}
-
-		function addData() {
-			changeData(bar,aaa);
-			changeData(bar,bbb);
-		}
-
-		function changeData(chart, datas) {
-			chart.data.datasets.push(datas);
-			console.dir(chart.data.datasets);
-			chart.update();
-		}
-
-		
-	</script>
-	<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>
-	<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
+</div>
+<!--======================= JqGrid 스크립트 =======================  -->
+<script>
+	//그리드 속성=====================
+	var colNames = ${colNames};
+	var colModel = ${colModel};
+	var data = ${data};
+</script>
+<!--======================= BarChart 스크립트 =======================  -->
+<script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
+<script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
+<script src="<%=request.getContextPath()%>/concept-master/customJs/customChart.js"></script>
