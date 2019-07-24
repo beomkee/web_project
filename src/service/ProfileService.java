@@ -28,4 +28,34 @@ public class ProfileService {
 			JdbcUtil.close(conn);
 		}
 	}
+	
+	public int getMaxSale() {
+		Connection conn = null;
+		int ms = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			ms = pfDao.getMaxSale(conn);
+			return ms;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public int getMaxMf() {
+		Connection conn = null;
+		int ms = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			ms = pfDao.getMaxMf(conn);
+			return ms;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 }

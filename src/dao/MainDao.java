@@ -80,9 +80,9 @@ public class MainDao {
 							sale.setS_num(rs.getString("s_num"));
 							sale.setMf_num(rs.getString("mf_num"));
 							sale.setE_id(rs.getString("e_id"));
-							sale.setE_id(rs.getString("c_id"));
-							sale.setC_id(rs.getString("p_num"));
-							sale.setP_num(rs.getString("s_obtain_date"));
+							sale.setC_id(rs.getString("c_id"));
+							sale.setP_num(rs.getString("p_num"));
+							sale.setS_obtain_date(rs.getString("s_obtain_date"));
 							sale.setS_obtain_date(rs.getString("s_obtain_date"));
 							sale.setS_contract_sum(rs.getString("s_contract_sum"));
 							list.add(sale);

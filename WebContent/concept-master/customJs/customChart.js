@@ -9,7 +9,7 @@ function getChartData() {
 	$.ajax({
 		type : "POST",
 		url : "/ProjectNo1/chart/" + getDataUrl,
-		data : {},
+		data : {"fac" : fac},
 		datatype : "json",
 		success : function(result) {
 			chardatas = result.split('&');

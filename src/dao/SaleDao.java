@@ -18,23 +18,24 @@ public class SaleDao {
 
 	// 생산데이터
 	// 조회============================================================================================================
-	public List<Manufactures> selectManufactures(Connection conn) throws SQLException {
-		Manufactures manufactures = null;
-		List<Manufactures> list = new ArrayList<Manufactures>();
+	public List<Sales> selectManufactures(Connection conn) throws SQLException {
+		Sales sales = null;
+		List<Sales> list = new ArrayList<Sales>();
 
-		try (PreparedStatement pstmt = conn.prepareStatement("select * from manufactures")) {
+		try (PreparedStatement pstmt = conn.prepareStatement("select * from sales")) {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				do {
-					manufactures = new Manufactures();
-					manufactures.setMf_num(rs.getString("mf_num"));
-					manufactures.setF_num(rs.getString("f_num"));
-					manufactures.setPl_num(rs.getString("pl_num"));
-					manufactures.setE_id(rs.getString("e_id"));
-					manufactures.setP_num(rs.getString("p_num"));
-					manufactures.setMf_count(rs.getString("mf_count"));
-					manufactures.setMf_date(rs.getString("mf_date"));
-					list.add(manufactures);
+					sales = new Sales();
+					sales.setS_num(rs.getString("s_num"));
+					sales.setMf_num(rs.getString("mf_num"));
+					sales.setE_id(rs.getString("e_id"));
+					sales.setC_id(rs.getString("c_id"));
+					sales.setP_num(rs.getString("p_num"));
+					sales.setS_obtain_date(rs.getString("s_obtain_date"));
+					sales.setS_contract_sum(rs.getString("s_contract_sum"));
+					sales.setS_complete_date(rs.getString("s_complete_date"));
+					list.add(sales);
 				} while (rs.next());
 			}
 			return list;
@@ -81,7 +82,7 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from manufactures where mf_num = ?");
+			pstmt = conn.prepareStatement("select * from sales where s_num = ?");
 			pstmt.setString(1, num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -113,7 +114,7 @@ public class SaleDao {
 		ResultSet rs = null;
 		int maxNum = 0;
 		try {
-			pstmt = conn.prepareStatement("select max(mf_num) from manufactures");
+			pstmt = conn.prepareStatement("select max(s_num) from sales");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				maxNum = rs.getInt(1);
@@ -128,7 +129,7 @@ public class SaleDao {
 	public void insert(Connection conn, String[] dataset, int num) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("insert into manufactures values(?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("insert into sales(s_num, mf_num,e_id,c_id, p_num, s_obtain_date, s_contract_sum) values(?,?,?,?,?,?,?)");
 			pstmt.setInt(1, num);
 			for (int i = 1; i < dataset.length; i++) {
 				pstmt.setString(i + 1, dataset[i]);
@@ -143,8 +144,8 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		String mfId = dataset[0];
 		try {
-			pstmt = conn.prepareStatement("update manufactures "
-					+ "set f_num = ?, pl_num = ?,e_id = ?,p_num = ?, mf_count = ?, mf_date = ? where mf_num = ?");
+			pstmt = conn.prepareStatement("update sales "
+					+ "set mf_num = ?, e_id = ? ,c_id = ?, p_num = ?, s_obtain_date = ?, s_contract_sum = ?, s_complete_date = ? where s_num = ?");
 			for (int i = 1; i < dataset.length; i++) {
 				pstmt.setString(i, dataset[i]);
 			}

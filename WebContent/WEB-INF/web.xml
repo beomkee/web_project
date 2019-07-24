@@ -108,6 +108,15 @@
 		<servlet-name>EmailAction</servlet-name>
 		<url-pattern>/email/*</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ComAction</servlet-name>
+		<servlet-class>controller.ComAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ComAction</servlet-name>
+		<url-pattern>/com/*</url-pattern>
+	</servlet-mapping>
 	
 	<!-- <security-constraint>
 		<web-resource-collection>

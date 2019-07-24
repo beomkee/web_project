@@ -327,6 +327,29 @@ public class ManufactureDao {
 			return list;
 		}
 	}
+	
+	public String selectFac(Connection conn, String id) throws SQLException {
+		String list = "";
+		try (PreparedStatement pstmt = conn.prepareStatement("select f_num from employee where e_id = ?")) {
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				list = rs.getString("f_num");
+			}
+			return list;
+		}
+	}
+	public String selectPl(Connection conn, String id) throws SQLException {
+		String list = "";
+		try (PreparedStatement pstmt = conn.prepareStatement("select pl_num from employee where e_id = ?")) {
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				list = rs.getString("pl_num");
+			}
+			return list;
+		}
+	}
 
 	public List<String> selectProNum(Connection conn) throws SQLException {
 		List<String> list = new ArrayList<String>();

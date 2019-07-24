@@ -198,4 +198,32 @@ public class ManufacturesService {
 		}
 		return list;
 	}
+	public String facNum(String id) {
+		Connection conn = null;
+		String fac = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			fac = dataDao.selectFac(conn, id);
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		return fac;
+	}
+	public String plNum(String id) {
+		Connection conn = null;
+		String fac = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			fac = dataDao.selectPl(conn, id);
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		return fac;
+	}
 }

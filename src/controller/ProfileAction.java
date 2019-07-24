@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,12 @@ import com.sist.msk.Action;
 import dao.UserDao;
 import model.ChangePwRequest;
 import model.LoginUser;
+import model.Manufactures;
+import model.Sales;
 import service.ChangePwService;
+import service.ManufacturesService;
 import service.ProfileService;
+import service.SalesService;
 
 public class ProfileAction extends Action {
 
@@ -44,7 +49,7 @@ public class ProfileAction extends Action {
 			LoginUser user = manager.getUserInfo(loginId);
 			session.setAttribute("user", user);
 		}
-		
+
 		session.setAttribute("division", division);
 		session.setAttribute("LOGINED_ID", loginId);
 		request.setAttribute("check", check);
@@ -79,19 +84,65 @@ public class ProfileAction extends Action {
 			return "/concept-master/content/emp/e_profile.jsp";
 		}
 	}
-	
-public String worksGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		
+
+	public String worksGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
+
 		HttpSession session = request.getSession();
 		String pl = (String) session.getAttribute("pl");
 		String id = (String) session.getAttribute("LOGINED_ID");
 		ProfileService profileService = new ProfileService();
-		
+
+		ManufacturesService manufacturesService = new ManufacturesService();
+		int maxSale = profileService.getMaxSale();
+		int maxMf = profileService.getMaxMf();
 		List works = profileService.getWorks(id, pl);
-		
+
+		List<String> products = null;
+		products = manufacturesService.proNums();
+		String fac = manufacturesService.facNum(id);
+		String pl_num = manufacturesService.plNum(id);
+
 		request.setAttribute("pl", pl);
+		request.setAttribute("maxMf", maxMf);
+		request.setAttribute("maxSale", maxSale);
 		request.setAttribute("works", works);
+		request.setAttribute("fac", fac);
+		request.setAttribute("pl_num", pl_num);
+		request.setAttribute("products", products);
 
 		return "/concept-master/content/emp/e_works.jsp";
+	}
+
+	public String insertWorksPOST(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		
+		String pl = request.getParameter("pl");
+		String datas = "";
+		if (pl.equals("mf")) {
+			ManufacturesService manufacturesService = new ManufacturesService();
+			datas += request.getParameter("mf_num") + ",";
+			datas += request.getParameter("f_num") + ",";
+			datas += request.getParameter("pl_num") + ",";
+			datas += request.getParameter("e_id") + ",";
+			datas += request.getParameter("p_num") + ",";
+			datas += request.getParameter("mf_count") + ",";
+			datas += request.getParameter("mf_date");
+			String[] dataset = datas.split(",");
+			List<Manufactures> list = new ArrayList<Manufactures>();
+			list = manufacturesService.insertUpdate(dataset);
+		} else {
+			SalesService salesService = new SalesService();
+			datas += request.getParameter("s_num") + ",";
+			datas += request.getParameter("mf_num") + ",";
+			datas += request.getParameter("e_id") + ",";
+			datas += request.getParameter("c_id") + ",";
+			datas += request.getParameter("p_num") + ",";
+			datas += request.getParameter("s_obtain_date") + ",";
+			datas += request.getParameter("s_contract_sum");
+			String[] dataset = datas.split(",");
+			List<Sales> list = new ArrayList<Sales>();
+			list = salesService.insertUpdate(dataset);
+		} 
+		
+		return "/concept-master/content/emp/insertWorksPro.jsp";
 	}
 }

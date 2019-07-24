@@ -19,8 +19,8 @@ import model.Sales;
 public class SalesService {
 	private SaleDao dataDao = new SaleDao();
 
-	public List<Manufactures> selectData() {
-		List<Manufactures> list = new ArrayList<Manufactures>();
+	public List<Sales> selectData() {
+		List<Sales> list = new ArrayList<Sales>();
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -49,9 +49,9 @@ public class SalesService {
 		}
 	}
 
-	public List<Manufactures> insertUpdate(String[] dataset) {
+	public List<Sales> insertUpdate(String[] dataset) {
 		Connection conn = null;
-		List<Manufactures> list = new ArrayList<Manufactures>();
+		List<Sales> list = new ArrayList<Sales>();
 		try {
 			conn = ConnectionProvider.getConnection();
 			boolean isExist = dataDao.isExist(conn, dataset[0]);
@@ -73,9 +73,9 @@ public class SalesService {
 		}
 	}
 
-	public List<Manufactures> delete(String num) {
+	public List<Sales> delete(String num) {
 		Connection conn = null;
-		List<Manufactures> list = new ArrayList<Manufactures>();
+		List<Sales> list = new ArrayList<Sales>();
 		try {
 			conn = ConnectionProvider.getConnection();
 			dataDao.delete(conn, num);
