@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import dao.UserDao;
 import model.ChangePwRequest;
 import model.LoginUser;
 import service.ChangePwService;
+import service.ProfileService;
 
 public class ProfileAction extends Action {
 
@@ -42,6 +44,7 @@ public class ProfileAction extends Action {
 			LoginUser user = manager.getUserInfo(loginId);
 			session.setAttribute("user", user);
 		}
+		
 		session.setAttribute("division", division);
 		session.setAttribute("LOGINED_ID", loginId);
 		request.setAttribute("check", check);
@@ -75,5 +78,20 @@ public class ProfileAction extends Action {
 			request.setAttribute("stat", stat);
 			return "/concept-master/content/emp/e_profile.jsp";
 		}
+	}
+	
+public String worksGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String pl = (String) session.getAttribute("pl");
+		String id = (String) session.getAttribute("LOGINED_ID");
+		ProfileService profileService = new ProfileService();
+		
+		List works = profileService.getWorks(id, pl);
+		
+		request.setAttribute("pl", pl);
+		request.setAttribute("works", works);
+
+		return "/concept-master/content/emp/e_works.jsp";
 	}
 }

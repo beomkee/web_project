@@ -12,8 +12,9 @@ import java.util.Map;
 
 import jdbc.JdbcUtil;
 import model.Manufactures;
+import model.Sales;
 
-public class ManufactureDao {
+public class SaleDao {
 
 	// 생산데이터
 	// 조회============================================================================================================

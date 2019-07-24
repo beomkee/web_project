@@ -1,19 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="<%=request.getContextPath()%>/concept-master/smartediter/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-<title>이메일</title>
-<div class="dashboard-wrapper">
 	<div class="container-fluid dashboard-content">
 		<div class="row">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="email-head">
 					<div class="email-head-title">
-						이메일 쓰기
+						새로운 이메일 작성
 						<span class="icon mdi mdi-edit"></span>
 					</div>
 				</div>
-				<form action="email/sendEmail.do" method="post">
-					<input type="hidden" name="writer" value="${user.id}">
+				<form action="main/sendEmail.do" method="post">
 					<div class="email-compose-fields">
 						<div class="to">
 							<div class="form-group row pt-0">
@@ -57,7 +54,6 @@
 						<div class="email action-send">
 							<div class="col-md-12 ">
 								<div class="form-group" style="text-align: right">
-									<input type="button" class="btn btn-warning btn-space" onclick="location.href='<%=request.getContextPath()%>/email/sendList.do'" value="보낸이메일">
 									<input type="submit" class="btn btn-primary btn-space" onclick="submitContents(this);" value="Send">
 									<button class="btn btn-secondary btn-space" type="button">
 										<i class="icon s7-close"></i> Cancel
@@ -86,27 +82,27 @@ nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: "e_content",
 	sSkinURI: "<%=request.getContextPath()%>/concept-master/smartediter/SmartEditor2Skin.html",
-					htParams : {
-						bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-						bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-						bUseModeChanger : false, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-						//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
-						//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
-						fOnBeforeUnload : function() {
-						},
-						I18N_LOCALE : sLang
+				htParams : {
+					bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+					bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+					bUseModeChanger : false, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+					//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+					//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+					fOnBeforeUnload : function() {
 					},
-					fOnAppLoad : function() {
-					},
-					fCreator : "createSEditor2"
-				});
+					I18N_LOCALE : sLang
+				},
+				fOnAppLoad : function() {
+				},
+				fCreator : "createSEditor2"
+			});
 
-		function submitContents(elClickedObj) {
-			oEditors.getById["e_content"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
-			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("n_content").value를 이용해서 처리하면 됩니다.
-			try {
-				elClickedObj.form.submit();
-			} catch (e) {
-			}
+	function submitContents(elClickedObj) {
+		oEditors.getById["e_content"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("n_content").value를 이용해서 처리하면 됩니다.
+		try {
+			elClickedObj.form.submit();
+		} catch (e) {
 		}
-	</script>
+	}
+</script>

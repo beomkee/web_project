@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" style="margin-left: auto; margin-right: auto;">
 				<div class="card">
-					<img class="card-img-top" src="<%= request.getContextPath()%>/concept-master/assets/images/card-img.jpg" alt="Card image cap">
+					<img class="card-img-top" src="<%= request.getContextPath()%>/concept-master/img/emailsuccess.png" alt="Card image cap">
 					<div class="card-header">email send success</div>
 					<div class="card-body">
 						<p class="card-text">${receiver}으로이메일 전송이 완료되었습니다.</p>
