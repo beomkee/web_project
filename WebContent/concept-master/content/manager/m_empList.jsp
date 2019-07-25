@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="<%=request.getContextPath()%>/concept-master/customJs/commonGrid.js"></script>
 <title>직원 관리</title>
 <div class="dashboard-wrapper">

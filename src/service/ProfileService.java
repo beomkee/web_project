@@ -161,4 +161,34 @@ public class ProfileService {
 			JdbcUtil.close(conn);
 		}
 	}
+
+	public List<String> getUsers() {
+		Connection conn = null;
+		List<String> list = new ArrayList<String>();
+		try {
+			conn = ConnectionProvider.getConnection();
+			list = pfDao.getUsers(conn);
+			return list;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public int sendMessage(String[] receivers, String title, String content) {
+		Connection conn = null;
+		int stat = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			stat = pfDao.sendMessage(conn, receivers, title, content);
+			return stat;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 }

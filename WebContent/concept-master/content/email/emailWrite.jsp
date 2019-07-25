@@ -71,13 +71,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	function aaaa(){
-		console.log($('#receiver option:selected').val());
-		console.log($('#e_title').val());
-		console.log($('#e_content').val());
-		confirm("aaaa");
-	}
-	
 var oEditors = [];
 
 var sLang = "ko_KR";	

@@ -98,7 +98,7 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	public List<Message> getMessage(Connection conn, String id) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -127,13 +127,15 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 	public List<Message> getMessages(Connection conn, String id) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Message> list = new ArrayList<Message>();
 		Message ms = null;
 		try {
-			pstmt = conn.prepareStatement("select * from message where receiver = ? and readcount = 0 order by num desc limit 0,5");
+			pstmt = conn.prepareStatement(
+					"select * from message where receiver = ? and readcount = 0 order by num desc limit 0,5");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -155,7 +157,7 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	public Message getMsDetail(Connection conn, String num) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -168,14 +170,14 @@ public class ProfileDao {
 			pstmt.setString(1, num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-					ms = new Message();
-					ms.setNum(rs.getInt("num"));
-					ms.setTitle(rs.getString("title"));
-					ms.setContent(rs.getString("content"));
-					ms.setTo(rs.getString("to"));
-					ms.setFrom(rs.getString("receiver"));
-					ms.setReg_date(rs.getDate("reg_date"));
-					ms.setReadcount(rs.getInt("readcount"));
+				ms = new Message();
+				ms.setNum(rs.getInt("num"));
+				ms.setTitle(rs.getString("title"));
+				ms.setContent(rs.getString("content"));
+				ms.setTo(rs.getString("to"));
+				ms.setFrom(rs.getString("receiver"));
+				ms.setReg_date(rs.getDate("reg_date"));
+				ms.setReadcount(rs.getInt("readcount"));
 			}
 			return ms;
 		} finally {
@@ -183,7 +185,7 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	public int getMaxNum(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -200,6 +202,7 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 	public int getMinNum(Connection conn) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -216,13 +219,14 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	public int preMs(Connection conn, String n_num) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int pre = 0;
 		try {
-			pstmt = conn.prepareStatement("select num from message where num = (select max(num) from message where num < ?)");
+			pstmt = conn.prepareStatement(
+					"select num from message where num = (select max(num) from message where num < ?)");
 			pstmt.setString(1, n_num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -233,18 +237,55 @@ public class ProfileDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
 	public int nextMs(Connection conn, String n_num) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int next = 0;
 		try {
-			pstmt = conn.prepareStatement("select num from message where num = (select min(num) from message where num > ?)"); 
+			pstmt = conn.prepareStatement(
+					"select num from message where num = (select min(num) from message where num > ?)");
 			pstmt.setString(1, n_num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				next = rs.getInt(1);
 			}
 			return next;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	public List<String> getUsers(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		try {
+			pstmt = conn.prepareStatement("select e_id from employee");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					list.add(rs.getString("e_id"));
+				} while (rs.next());
+			}
+			return list;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public int sendMessage(Connection conn, String[] receivers, String title, String content) throws SQLException {
+		PreparedStatement pstmt = null;
+		int stat = 0;
+		try {
+			for (String to : receivers) {
+				pstmt = conn.prepareStatement("insert into message(num,title,content,receiver,reg_date,readcount,re_level) values(0,?,?,?,now(),0,0)");
+				pstmt.setString(1, title);
+				pstmt.setString(2, content);
+				pstmt.setString(3, to);
+				stat = pstmt.executeUpdate();
+			}
+			return stat;
 		} finally {
 			JdbcUtil.close(pstmt);
 		}

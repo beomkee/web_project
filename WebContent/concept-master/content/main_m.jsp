@@ -45,7 +45,7 @@
 						<div class="card border-3 border-top border-top-primary">
 							<div class="card-body">
 								<h5 class="text-muted">
-									<a href="<%=request.getContextPath()%>/manager/empManage.do"> 담당 직원 </a>
+									<a href="<%=request.getContextPath()%>/manager/empList.do"> 담당 직원 </a>
 								</h5>
 								<div class="metric-value d-inline-block">
 									<h1 class="mb-1">${myEmps}</h1>

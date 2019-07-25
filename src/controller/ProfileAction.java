@@ -161,22 +161,52 @@ public class ProfileAction extends Action {
 	}
 
 	public String messageDetialGET(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
+
 		String num = req.getParameter("num");
 		ProfileService profileService = new ProfileService();
 		Message ms = profileService.getMsDetail(num);
 		req.setAttribute("ms", ms);
-		
+
 		int maxNum = profileService.getMaxNum();
 		int minNum = profileService.getMinNum();
 		int pre = profileService.preNotice(num);
 		int next = profileService.nextNotice(num);
-		
+
 		req.setAttribute("pre", pre);
 		req.setAttribute("next", next);
 		req.setAttribute("minNum", minNum);
 		req.setAttribute("maxNum", maxNum);
-		
+
 		return "/concept-master/content/message/messageDetail.jsp";
+	}
+
+	public String sendMessageGET(HttpServletRequest request, HttpServletResponse res) throws Exception {
+
+		ProfileService profileService = new ProfileService();
+		List<String> users = profileService.getUsers();
+		request.setAttribute("users", users);
+
+		return "/concept-master/content/message/messageWrite.jsp";
+	}
+
+	public String sendMessagePOST(HttpServletRequest request, HttpServletResponse res) throws Exception {
+		
+		ProfileService profileService = new ProfileService();
+		List<String> users = profileService.getUsers();
+		request.setAttribute("users", users);
+
+		String[] receivers =  request.getParameterValues("receiver");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		int stat = profileService.sendMessage(receivers, title, content);
+
+		if (stat == 1) {
+			request.setAttribute("stat", "success");
+		} else {
+			request.setAttribute("stat", "fail");
+		}
+		
+		return "/concept-master/content/message/messageWrite.jsp";
 	}
 }

@@ -1,5 +1,6 @@
 <%@page import="JSON.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="<%=request.getContextPath()%>/concept-master/customJs/commonGrid.js"></script>
 <title>판매 현황</title>
 <div class="dashboard-wrapper">
@@ -19,38 +20,33 @@
 						<table class="table table-bordered">
 							<tbody>
 								<tr>
-									<td class="bg-light text-dark">생산번호</td>
+									<td class="bg-light text-dark">판매번호</td>
 									<td colspan="5">
-										<input type="text" name="mf_num" id="mf_num" class="form-control-small" value=" --- " readonly="readonly">
+										<input type="text" name="s_num" id="s_num" class="form-control-small" value="" readonly="readonly">
 									</td>
 								</tr>
 								<tr>
-									<td class="bg-light text-dark">공장번호</td>
+									<td class="bg-light text-dark">생산번호</td>
 									<td>
-										<select class="form-control form-control-sm" name="f_num" id="f_num">
+										<select class="form-control form-control-sm" name="mf_num" id="mf_num" required="required">
 											<option></option>
-											<c:forEach var="fac" items="${facs}">
-												<option value="${fac}">${fac}</option>
+											<c:forEach var="mf_num" items="${mf_nums}">
+												<option value="${mf_num}">${mf_num}</option>
 											</c:forEach>
-										</select>
-									</td>
-									<td class="bg-light text-dark">생산라인</td>
-									<td>
-										<select class="form-control form-control-sm" name="pl_num" id="pl_num">
-											<option></option>
-											<option value="p_1">p_1</option>
-											<option value="p_2">p_2</option>
-											<option value="p_3">p_3</option>
 										</select>
 									</td>
 									<td class="bg-light text-dark">담당직원</td>
 									<td>
-										<select class="form-control form-control-sm" name="e_id" id="e_id">
+										<select class="form-control form-control-sm" name="e_id" id="e_id" required="required">
 											<option></option>
-											<c:forEach var="emp" items="${emps}">
-												<option value="${emp}">${emp}</option>
+											<c:forEach var="e_id" items="${e_ids}">
+												<option value="${e_id}">${e_id}</option>
 											</c:forEach>
 										</select>
+									</td>
+									<td class="bg-light text-dark">거래처</td>
+									<td>
+										<input type="text" name="c_id" id="c_id" class="form-control-small" required="required">
 									</td>
 								</tr>
 								<tr>
@@ -63,20 +59,20 @@
 											</c:forEach>
 										</select>
 									</td>
-									<td class="bg-light text-dark">생산수량</td>
+									<td class="bg-light text-dark">판매일자</td>
 									<td>
-										<input type="number" min="1000" step="500" name="mf_count" id="mf_count" class="form-control-small">
+										<input type="date" name="s_obtain_date" id="s_obtain_date" class="form-control-small">
 									</td>
-									<td class="bg-light text-dark">생산일자</td>
+									<td class="bg-light text-dark">판매수량</td>
 									<td>
-										<input type="date" name="mf_date" id="mf_date" class="form-control-small">
+										<input type="number" min="1000" step="500" name="s_contract_sum" id="s_contract_sum" class="form-control-small">
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div style="text-align: right; margin-top: 10px">
 							<input type="button" onclick="search()" class="btn btn-outline-primary btn-xs" value="검색">
-							<input type="button" onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="등록/수정">
+							<input type="button" onclick="insertUpdate()" class="btn btn-outline-success btn-xs" value="수정">
 							<input type="button" onclick="reset()" class="btn btn-outline-light btn-xs" value="초기화">
 						</div>
 					</div>
@@ -145,13 +141,81 @@
 	</div>
 </div>
 <!--======================= JqGrid 스크립트 =======================  -->
-<script>
-	//그리드 속성=====================
-	var colNames = ${colNames};
-	var colModel = ${colModel};
-	var data = ${data};
-	var fac = "";
-</script>
+<!--======================= JqGrid 스크립트 =======================  -->
+		<script>
+			//그리드 속성=====================
+			var colNames = ${colNames};
+			var colModel = ${colModel};
+			var data = ${data};
+			var fac = "";
+
+			var id = "e_id";
+			var columLength = colNames.length - 1;
+			var id, passwd, name, tel, birth, manager_num, f_num, pl_num, email;
+
+			// 그리드항목 검색폼 전환==========
+			function dubleClick(values) {
+				$('#id').val(values[0]);
+				$('#passwd').val(values[1]);
+				$('#name').val(values[2]);
+				var tel2 = values[3].substring(4, 8);
+				var tel3 = values[3].substring(9);
+				$('#tel2').val(tel2);
+				$('#tel3').val(tel3);
+				$('#birth').val(values[4]);
+				//$('#manager_num').val(values[5]);
+				$('#f_num').val(values[6]);
+				$('#pl_num').val(values[7]);
+				$('#email').val(values[8]);
+			}
+
+			// 검색폼 초기화===================
+			function reset() {
+				$('#id').val('');
+				$('#passwd').val('');
+				$('#name').val('');
+				$('#pl_num').val('');
+				$('#email').val('');
+				$('#tel1').val('010');
+				$('#tel2').val('');
+				$('#tel3').val('');
+				$('#birth').val('');
+				makeTable('gridTable', list, colNames, colModel);
+			}
+
+			// 검색폼 데이터 세팅==============
+			function setData() {
+				id = $('#id').val();
+				passwd = $('#passwd').val();
+				name = $('#name').val();
+				tel = $('#tel1 option:selected').val() + $('#tel2').val()
+						+ $('#tel3').val();
+				birth = $('#birth').val();
+				manager_num = $('#manage').val();
+				f_num = $('#f_num').val();
+				pl_num = $('#pl_num option:selected').val();
+				email = $('#email').val();
+				dataSet = id + "," + passwd + "," + name + "," + tel + ","
+						+ birth + "," + manager_num + "," + birth + "," + f_num
+						+ "," + pl_num + "," + email;
+			}
+
+			// 검색폼 입력여부 확인============
+			function isFilled() {
+				setData();
+				if (id == null || passwd == null || name == null || tel == null
+						|| birth == null || manager_num == null
+						|| f_num == null || pl_num == null || email == null
+						|| email == null || id == "" || passwd == ""
+						|| name == "" || tel == "" || birth == ""
+						|| manager_num == "" || f_num == "" || pl_num == ""
+						|| email == "") {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		</script>
 <!--======================= BarChart 스크립트 =======================  -->
 <script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
 <script src="<%=request.getContextPath()%>/concept-master/customJs/manufacture.js"></script>
