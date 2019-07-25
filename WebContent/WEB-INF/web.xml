@@ -117,6 +117,15 @@
 		<servlet-name>ComAction</servlet-name>
 		<url-pattern>/com/*</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManagerAction</servlet-name>
+		<servlet-class>controller.ManagerAction</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManagerAction</servlet-name>
+		<url-pattern>/manager/*</url-pattern>
+	</servlet-mapping>
 	
 	<!-- <security-constraint>
 		<web-resource-collection>

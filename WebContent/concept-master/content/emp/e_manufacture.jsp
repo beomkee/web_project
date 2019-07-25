@@ -150,6 +150,7 @@
 	var colNames = ${colNames};
 	var colModel = ${colModel};
 	var data = ${data};
+	var fac = "";
 </script>
 <!--======================= BarChart 스크립트 =======================  -->
 <script src="<%=request.getContextPath()%>/concept-master/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>

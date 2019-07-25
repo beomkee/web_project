@@ -7,8 +7,11 @@ import java.util.List;
 
 import dao.MainDao;
 import dao.NoticeDao;
+import dao.UserDao;
 import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
+import model.Factory;
+import model.LoginUser;
 import model.Notice;
 import model.SendEmail;
 
@@ -106,4 +109,64 @@ public class MainService {
 		}
 	}
 	
+	public int unReadMs(String id) {
+		Connection conn = null;
+		int num = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			num = mainDao.unReadMs(conn, id);
+			return num;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public List<LoginUser> getMainEmp(String id) {
+		Connection conn = null;
+		List<LoginUser> list = new ArrayList<LoginUser>();
+		try {
+			conn = ConnectionProvider.getConnection();
+			list = mainDao.getMainEmp(conn, id);
+			return list;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public int getMyEmps(String id) {
+		Connection conn = null;
+		int num = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			num = mainDao.getMyEmps(conn, id);
+			return num;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+	public Factory getFac(String id) {
+		Connection conn = null;
+		Factory fac = new Factory();
+		int num = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			fac = mainDao.getFac(conn, id);
+			return fac;
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+	}
 }

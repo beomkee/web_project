@@ -15,6 +15,8 @@ import dao.UserDao;
 import model.ChangePwRequest;
 import model.LoginUser;
 import model.Manufactures;
+import model.Message;
+import model.Notice;
 import model.Sales;
 import service.ChangePwService;
 import service.ManufacturesService;
@@ -114,7 +116,7 @@ public class ProfileAction extends Action {
 	}
 
 	public String insertWorksPOST(HttpServletRequest request, HttpServletResponse res) throws Exception {
-		
+
 		String pl = request.getParameter("pl");
 		String datas = "";
 		if (pl.equals("mf")) {
@@ -141,8 +143,40 @@ public class ProfileAction extends Action {
 			String[] dataset = datas.split(",");
 			List<Sales> list = new ArrayList<Sales>();
 			list = salesService.insertUpdate(dataset);
-		} 
-		
+		}
+
 		return "/concept-master/content/emp/insertWorksPro.jsp";
+	}
+
+	public String messageGET(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("LOGINED_ID");
+		ProfileService profileService = new ProfileService();
+		List<Message> mss = profileService.getMessage(id);
+
+		request.setAttribute("mss", mss);
+
+		return "/concept-master/content/message/messageList.jsp";
+	}
+
+	public String messageDetialGET(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		
+		String num = req.getParameter("num");
+		ProfileService profileService = new ProfileService();
+		Message ms = profileService.getMsDetail(num);
+		req.setAttribute("ms", ms);
+		
+		int maxNum = profileService.getMaxNum();
+		int minNum = profileService.getMinNum();
+		int pre = profileService.preNotice(num);
+		int next = profileService.nextNotice(num);
+		
+		req.setAttribute("pre", pre);
+		req.setAttribute("next", next);
+		req.setAttribute("minNum", minNum);
+		req.setAttribute("maxNum", maxNum);
+		
+		return "/concept-master/content/message/messageDetail.jsp";
 	}
 }

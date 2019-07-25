@@ -85,7 +85,9 @@
 									<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
 										<div class="card border-3 border-top border-top-primary">
 											<div class="card-body">
-												<h5 class="text-muted">최근 업무</h5>
+												<h5 class="text-muted">
+													<a href="<%=request.getContextPath()%>/profile/works.do"> 최근 업무 </a>
+												</h5>
 												<div class="metric-value d-inline-block">
 													<h1 class="mb-1">${lastWort}</h1>
 												</div>
@@ -98,9 +100,11 @@
 									<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
 										<div class="card border-3 border-top border-top-primary">
 											<div class="card-body">
-												<h5 class="text-muted">읽지 않은 쪽지</h5>
+												<h5 class="text-muted">
+													<a href="<%=request.getContextPath()%>/profile/message.do"> 읽지 않은 쪽지 </a>
+												</h5>
 												<div class="metric-value d-inline-block">
-													<h1 class="mb-1">2</h1>
+													<h1 class="mb-1">${unReadMs}</h1>
 												</div>
 											</div>
 										</div>
@@ -108,7 +112,9 @@
 									<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
 										<div class="card border-3 border-top border-top-primary">
 											<div class="card-body">
-												<h5 class="text-muted">최근 보낸 이메일</h5>
+												<h5 class="text-muted">
+													<a href="<%=request.getContextPath()%>/email/sendList.do"> 최근 보낸 이메일 </a>
+												</h5>
 												<div class="metric-value d-inline-block">
 													<h1 class="mb-1">${lastEmail }</h1>
 												</div>
@@ -121,7 +127,9 @@
 									<div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
 										<div class="card border-3 border-top border-top-primary">
 											<div class="card-body">
-												<h5 class="text-muted">최근공지</h5>
+												<h5 class="text-muted">
+													<a href="<%=request.getContextPath()%>/notice/nList.do"> 최근공지 </a>
+												</h5>
 												<div class="metric-value d-inline-block">
 													<h1 class="mb-1">${lastNotice}</h1>
 												</div>
@@ -151,7 +159,7 @@
 															<tbody>
 																<c:forEach var="notice" items="${notices}">
 																	<tr>
-																		<th>${notice.n_num }</th>
+																		<th style="text-align: center">${notice.n_num }</th>
 																		<td>
 																			<a href="<%=request.getContextPath() %>/notice/nContent.do?nNum=${notice.n_num}&pageNum=1">${notice.title}</a>
 																		</td>
@@ -160,9 +168,60 @@
 																</c:forEach>
 																<tr>
 																	<td colspan="8">
-																		<a href="<%=request.getContextPath()%>/notice/nList.do" class="btn btn btn-outline-warning btn-sm float-right">View Details</a>
+																		<a href="<%=request.getContextPath()%>/notice/nList.do" class="btn btn btn-outline-warning btn-sm float-right">Notice Details</a>
 																	</td>
 																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- =========== 안읽은 쪽지 =========== -->
+								<div class="row">
+									<div class="card-body">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<div class="card">
+												<h5 class="card-header">읽지 않은 쪽지</h5>
+												<div class="card-body p-0">
+													<div class="table-responsive">
+														<table class="table">
+															<c:if test="${unReadMs == 0 }">
+																<thead class="bg-light">
+																	<tr>
+																		<th scope="col" style="text-align: center">읽지않은 쪽지가 없습니다</th>
+																	</tr>
+																</thead>
+															</c:if>
+															<c:if test="${unReadMs != 0 }">
+																<thead>
+																	<tr class="bg-light">
+																		<th scope="col" style="text-align: center">To.</th>
+																		<th scope="col" width="60%" style="text-align: center">내용</th>
+																		<th scope="col" style="text-align: center">받은날짜</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach var="ms" items="${mss}">
+																		<tr>
+																			<td style="text-align: center">${ms.to}</td>
+																			<td>
+																				<c:if test="${ms.readcount == 0}">
+																					<span class="badge badge-secondary">unRead</span>
+																				</c:if>
+																				<a href="<%=request.getContextPath() %>/profile/messageDetial.do?num=${ms.num}">${ms.title}</a>
+																			</td>
+																			<td style="text-align: center">${ms.reg_date}</td>
+																		</tr>
+																	</c:forEach>
+															</c:if>
+															<tr>
+																<td colspan="8">
+																	<a href="<%=request.getContextPath()%>/profile/message.do" class="btn btn btn-outline-warning btn-sm float-right">Message Details</a>
+																</td>
+															</tr>
 															</tbody>
 														</table>
 													</div>
@@ -204,7 +263,7 @@
 																	</c:forEach>
 																	<tr>
 																		<td colspan="8">
-																			<a href="<%=request.getContextPath()%>/profile/works.do" class="btn btn btn-outline-warning btn-sm float-right">View Details</a>
+																			<a href="<%=request.getContextPath()%>/profile/works.do" class="btn btn btn-outline-warning btn-sm float-right">Works Details</a>
 																		</td>
 																	</tr>
 																</tbody>
@@ -233,7 +292,7 @@
 																	</c:forEach>
 																	<tr>
 																		<td colspan="8">
-																			<a href="<%=request.getContextPath()%>/profile/works.do" class="btn btn btn-outline-warning btn-sm float-right">View Details</a>
+																			<a href="<%=request.getContextPath()%>/profile/works.do" class="btn btn btn-outline-warning btn-sm float-right">Works Details</a>
 																		</td>
 																	</tr>
 																</tbody>
@@ -266,7 +325,7 @@
 															<tbody>
 																<c:forEach var="email" items="${emails}">
 																	<tr>
-																		<th scope="row">${email.num}</th>
+																		<th style="text-align: center" scope="row">${email.num}</th>
 																		<td style="text-align: center">${email.writer}</td>
 																		<td style="text-align: center">${email.to}</td>
 																		<td>
@@ -277,7 +336,7 @@
 																</c:forEach>
 																<tr>
 																	<td colspan="8">
-																		<a href="<%=request.getContextPath()%>/email/sendList.do" class="btn btn btn-outline-warning btn-sm float-right">View Details</a>
+																		<a href="<%=request.getContextPath()%>/email/sendList.do" class="btn btn btn-outline-warning btn-sm float-right">Email Details</a>
 																	</td>
 																</tr>
 															</tbody>

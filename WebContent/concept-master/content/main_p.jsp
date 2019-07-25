@@ -39,14 +39,14 @@
 	                                <div class="row">
 	                                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
 	                                        <div class="text-center">
-	                                            <img src="assets/images/avatar-1.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+	                                            <img src="<%= request.getContextPath() %>/concept-master/img/aser/${user.id}.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
 	                                            </div>
 	                                        </div>
 	                                        <div class="col-xl-10 col-lg-8 col-md-8 col-sm-8 col-12">
 	                                            <div class="user-avatar-info">
 	                                                <div class="m-b-20">
 	                                                    <div class="user-avatar-name">
-	                                                        <h2 class="mb-1">Henry Barbara</h2>
+	                                                        <h2 class="mb-1">${user.name}</h2>
 	                                                    </div>
 	                                                    <div class="rating-star  d-inline-block">
 	                                                        <i class="fa fa-fw fa-star"></i>
