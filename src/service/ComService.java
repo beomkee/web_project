@@ -130,4 +130,20 @@ public class ComService {
 			}
 			return data;
 		}
+		
+		
+		public List<Sales> selectSaleData(String fNum) {
+			Connection conn = null;
+			List<Sales> list = new ArrayList<Sales>();
+			try {
+				conn = ConnectionProvider.getConnection();
+				list = dataDao.selectSaleData(conn, fNum);
+				return list;
+			} catch (SQLException e) {
+				JdbcUtil.rollback(conn);
+				throw new RuntimeException();
+			} finally {
+				JdbcUtil.close(conn);
+			}
+		}
 }

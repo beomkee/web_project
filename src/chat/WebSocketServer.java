@@ -24,7 +24,7 @@ public class WebSocketServer {
 				id = message.substring(message.indexOf(":[") + 2, message.indexOf("]"));
 				System.out.println("id:[" + id + "]");
 			}
-			String movemessage = session.getId() + ":" + message;
+			String movemessage = message;
 			for (Session client : clients) {
 				if (!client.equals(session)) {
 					if (id == null) {

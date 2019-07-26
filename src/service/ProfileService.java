@@ -177,12 +177,12 @@ public class ProfileService {
 		}
 	}
 	
-	public int sendMessage(String[] receivers, String title, String content) {
+	public int sendMessage(String id, String[] receivers, String title, String content) {
 		Connection conn = null;
 		int stat = 0;
 		try {
 			conn = ConnectionProvider.getConnection();
-			stat = pfDao.sendMessage(conn, receivers, title, content);
+			stat = pfDao.sendMessage(conn, id, receivers, title, content);
 			return stat;
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

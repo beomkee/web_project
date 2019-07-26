@@ -13,7 +13,7 @@
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
-										<td class="bg-light text-dark" colspan="2">${ms.to}님이 보낸 쪽지</td>
+										<td class="bg-light text-dark" colspan="2">${ms.from}님이 보낸 쪽지</td>
 									</tr>
 									<tr>
 										<td class="bg-light text-dark" width="15%" style="text-align: center">${ms.reg_date}</td>

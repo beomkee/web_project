@@ -21,13 +21,19 @@
 									<tr>
 										<td style="text-align: center">${ms.to}</td>
 										<td>
-										<c:if test="${ms.readcount == 0}">
-										 <span class="badge badge-secondary">unRead</span>
-										</c:if>
-										<a href="<%=request.getContextPath() %>/profile/messageDetial.do?num=${ms.num}">${ms.title}</a></td>
+											<c:if test="${ms.readcount == 0}">
+												<span class="badge badge-secondary">unRead</span>
+											</c:if>
+											<a href="<%=request.getContextPath() %>/profile/messageDetial.do?num=${ms.num}">${ms.title}</a>
+										</td>
 										<td style="text-align: center">${ms.reg_date}</td>
 									</tr>
 								</c:forEach>
+								<tr>
+									<td colspan="8">
+										<a href="<%=request.getContextPath()%>/profile/sendMessage.do" class="btn btn btn-outline-warning btn-sm float-right">쪽지 보내기</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<%-- <div style="text-align: center; margin-top: 10px">

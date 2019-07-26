@@ -195,17 +195,26 @@ public class ProfileAction extends Action {
 		List<String> users = profileService.getUsers();
 		request.setAttribute("users", users);
 
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("LOGINED_ID");
+		
 		String[] receivers =  request.getParameterValues("receiver");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
-		int stat = profileService.sendMessage(receivers, title, content);
-
+		System.out.println(id+","+title+","+"content");
+		for (String ste : receivers) {
+			System.out.println(ste);
+		}
+		int stat = profileService.sendMessage(id, receivers, title, content);
+		System.out.println(stat);
 		if (stat == 1) {
 			request.setAttribute("stat", "success");
+			System.out.println("@@");
 		} else {
 			request.setAttribute("stat", "fail");
+			System.out.println("$$");
 		}
+		
 		
 		return "/concept-master/content/message/messageWrite.jsp";
 	}

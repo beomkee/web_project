@@ -114,8 +114,8 @@ public class ProfileDao {
 					ms.setNum(rs.getInt("num"));
 					ms.setTitle(rs.getString("title"));
 					ms.setContent(rs.getString("content"));
-					ms.setTo(rs.getString("to"));
-					ms.setFrom(rs.getString("receiver"));
+					ms.setTo(rs.getString("receiver"));
+					ms.setFrom(rs.getString("from"));
 					ms.setReg_date(rs.getDate("reg_date"));
 					ms.setReadcount(rs.getInt("readcount"));
 					list.add(ms);
@@ -144,8 +144,8 @@ public class ProfileDao {
 					ms.setNum(rs.getInt("num"));
 					ms.setTitle(rs.getString("title"));
 					ms.setContent(rs.getString("content"));
-					ms.setTo(rs.getString("to"));
-					ms.setFrom(rs.getString("receiver"));
+					ms.setTo(rs.getString("receiver"));
+					ms.setFrom(rs.getString("from"));
 					ms.setReg_date(rs.getDate("reg_date"));
 					ms.setReadcount(rs.getInt("readcount"));
 					list.add(ms);
@@ -174,8 +174,8 @@ public class ProfileDao {
 				ms.setNum(rs.getInt("num"));
 				ms.setTitle(rs.getString("title"));
 				ms.setContent(rs.getString("content"));
-				ms.setTo(rs.getString("to"));
-				ms.setFrom(rs.getString("receiver"));
+				ms.setTo(rs.getString("receiver"));
+				ms.setFrom(rs.getString("from"));
 				ms.setReg_date(rs.getDate("reg_date"));
 				ms.setReadcount(rs.getInt("readcount"));
 			}
@@ -274,15 +274,16 @@ public class ProfileDao {
 		}
 	}
 	
-	public int sendMessage(Connection conn, String[] receivers, String title, String content) throws SQLException {
+	public int sendMessage(Connection conn, String id, String[] receivers, String title, String content) throws SQLException {
 		PreparedStatement pstmt = null;
 		int stat = 0;
 		try {
-			for (String to : receivers) {
-				pstmt = conn.prepareStatement("insert into message(num,title,content,receiver,reg_date,readcount,re_level) values(0,?,?,?,now(),0,0)");
+			for (String receiver : receivers) {
+				pstmt = conn.prepareStatement("insert into message values(0, ?, ?, ?, ?, now(), 0, 0, 0)");
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
-				pstmt.setString(3, to);
+				pstmt.setString(3, id);
+				pstmt.setString(4, receiver);
 				stat = pstmt.executeUpdate();
 			}
 			return stat;

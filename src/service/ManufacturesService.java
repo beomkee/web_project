@@ -183,6 +183,21 @@ public class ManufacturesService {
 		}
 		return list;
 	}
+	
+	public List<String> empNums2() {
+		Connection conn = null;
+		List<String> list = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			list = dataDao.selectENum2(conn);
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		return list;
+	}
 
 	public List<String> facNums() {
 		Connection conn = null;
@@ -190,6 +205,20 @@ public class ManufacturesService {
 		try {
 			conn = ConnectionProvider.getConnection();
 			list = dataDao.selectFNum(conn);
+		} catch (SQLException e) {
+			JdbcUtil.rollback(conn);
+			throw new RuntimeException();
+		} finally {
+			JdbcUtil.close(conn);
+		}
+		return list;
+	}
+	public List<String> selectManuNum() {
+		Connection conn = null;
+		List<String> list = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			list = dataDao.selectManuNum(conn);
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException();

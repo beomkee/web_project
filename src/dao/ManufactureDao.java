@@ -295,6 +295,24 @@ public class ManufactureDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	public List<String> selectENum2(Connection conn) throws SQLException {
+		List<String> list = new ArrayList<String>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select e_id from employee where pl_num in ('s_1','s_2','s_3')");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				do {
+					list.add(rs.getString("e_id"));
+				} while (rs.next());
+			}
+			return list;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 
 	public List<String> selectCNum(Connection conn) throws SQLException {
 		List<String> list = new ArrayList<String>();
@@ -383,7 +401,7 @@ public class ManufactureDao {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				do {
-					list.add(rs.getString("s_num"));
+					list.add(rs.getString("mf_num"));
 				} while (rs.next());
 			}
 			return list;

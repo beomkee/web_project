@@ -12,6 +12,7 @@ import java.util.Map;
 import jdbc.JdbcUtil;
 import model.ChangePwRequest;
 import model.Manufactures;
+import model.Sales;
 
 public class ComDao {
 
@@ -216,6 +217,40 @@ public class ComDao {
 				}
 				return polor;
 			} finally {
+				JdbcUtil.close(pstmt);
+			}
+		}
+		
+		public List<Sales> selectSaleData(Connection conn, String fNum) throws SQLException {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<Sales> list = new ArrayList<Sales>();
+			Sales sales = null;
+			try {
+				pstmt = conn.prepareStatement("select s.* from sales s, employee e where e.f_num = ? and e.e_id = s.e_id");
+				pstmt.setString(1, fNum);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					do {
+						sales = new Sales();
+						sales.setS_num(rs.getString("s_num"));
+						sales.setMf_num(rs.getString("mf_num"));
+						sales.setE_id(rs.getString("e_id"));
+						sales.setC_id(rs.getString("c_id"));
+						sales.setP_num(rs.getString("p_num"));
+						sales.setS_obtain_date(rs.getString("s_obtain_date"));
+						sales.setS_contract_sum(rs.getString("s_contract_sum"));
+						/*if (rs.getString("s_complete_date") == null) {
+							sales.setS_complete_date("");
+						}else {*/
+							sales.setS_complete_date(rs.getString("s_complete_date"));
+						//}
+						list.add(sales);
+					} while (rs.next());
+				}
+				return list;
+			} finally {
+				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
 		}

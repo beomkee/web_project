@@ -10,13 +10,16 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.msk.Action;
 
+import JSON.JSONObject;
 import JSON.JqGridJSONObject;
 import model.ChangePwRequest;
 import model.LoginUser;
 import model.Manufactures;
+import model.Sales;
 import model.WriteRequest;
 import service.ComService;
 import service.ManagerService;
+import service.ManufacturesService;
 
 public class ManagerAction extends Action {
 
@@ -150,37 +153,40 @@ public class ManagerAction extends Action {
 		String id = (String) session.getAttribute("LOGINED_ID");
 		String f_num = comService.getFNum(id);
 
-		int pageSize = 10;
-		String pageNum = request.getParameter("pageNum");
-		if (pageNum == null || pageNum == "") {
-			pageNum = "1";
+		JqGridJSONObject json = new JqGridJSONObject();
+		List<Sales> list = null;
+		String cols = "판매번호,생산번호,담당직원,고객번호,상품번호,판매일자,거래일자,완료일,삭제";
+		String mods = "s_num,mf_num,e_id,c_id,p_num,s_obtain_date,s_contract_sum,s_complete_date";
+		String ops = "0,0,0,0,0,0,0,0";
+		json.putKey(cols);
+		json.putVal(mods);
+		json.setOption(ops);
+		list = comService.selectSaleData(f_num);
+		
+		String data = "[";
+		for (Object ob : list) {
+			data += ob.toString() + ",";
 		}
-		int currentPage = Integer.parseInt(pageNum);
-		int count = comService.getFacMfCount(f_num);
-		int startRow = (currentPage - 1) * pageSize;
-		int endRow = currentPage * pageSize;
-		if (count < endRow) {
-			endRow = count;
-		}
-		int number = count - ((currentPage - 1) * pageSize);
+		data = data.substring(0, data.length() - 1);
+		data += "]";
 
-		List f_mfs = comService.getFMf(id, startRow, pageSize);
+		ManufacturesService manufacturesService = new ManufacturesService();
+		
+		List<String> products = null;
+		products = manufacturesService.proNums();
 
-		int bottomLine = 3;
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		int startPage = 1 + (currentPage - 1) / bottomLine * bottomLine;
-		int endPage = startPage + bottomLine - 1;
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
+		List<String> emps = null;
+		emps = manufacturesService.empNums2();
 
-		request.setAttribute("f_num", f_num);
-		request.setAttribute("f_mfs", f_mfs);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage", endPage);
-		request.setAttribute("bottomLine", bottomLine);
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("number", number);
+		List<String> mfs = null;
+		mfs = manufacturesService.selectManuNum();
+
+		request.setAttribute("colNames", json.getKey());
+		request.setAttribute("colModel", json.getValue());
+		request.setAttribute("data", data);
+		request.setAttribute("products", products);
+		request.setAttribute("e_ids", emps);
+		request.setAttribute("mf_nums", mfs);
 
 		return "/concept-master/content/manager/m_sales.jsp";
 	}

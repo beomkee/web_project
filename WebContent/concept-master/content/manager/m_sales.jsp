@@ -21,8 +21,12 @@
 							<tbody>
 								<tr>
 									<td class="bg-light text-dark">판매번호</td>
-									<td colspan="5">
+									<td >
 										<input type="text" name="s_num" id="s_num" class="form-control-small" value="" readonly="readonly">
+									</td>
+									<td class="bg-light text-dark">거래처</td>
+									<td colspan="3">
+										<input type="text" name="c_id" id="c_id" class="form-control-small" required="required">
 									</td>
 								</tr>
 								<tr>
@@ -44,12 +48,6 @@
 											</c:forEach>
 										</select>
 									</td>
-									<td class="bg-light text-dark">거래처</td>
-									<td>
-										<input type="text" name="c_id" id="c_id" class="form-control-small" required="required">
-									</td>
-								</tr>
-								<tr>
 									<td class="bg-light text-dark">상품번호</td>
 									<td>
 										<select class="form-control form-control-sm" name="p_num" id="p_num">
@@ -59,6 +57,8 @@
 											</c:forEach>
 										</select>
 									</td>
+								</tr>
+								<tr>
 									<td class="bg-light text-dark">판매일자</td>
 									<td>
 										<input type="date" name="s_obtain_date" id="s_obtain_date" class="form-control-small">
@@ -66,6 +66,10 @@
 									<td class="bg-light text-dark">판매수량</td>
 									<td>
 										<input type="number" min="1000" step="500" name="s_contract_sum" id="s_contract_sum" class="form-control-small">
+									</td>
+									<td class="bg-light text-dark">완료일</td>
+									<td>
+										<input type="date" name="s_complete_date" id="s_complete_date" class="form-control-small">
 									</td>
 								</tr>
 							</tbody>
@@ -147,69 +151,59 @@
 			var colNames = ${colNames};
 			var colModel = ${colModel};
 			var data = ${data};
+			
 			var fac = "";
-
 			var id = "e_id";
 			var columLength = colNames.length - 1;
-			var id, passwd, name, tel, birth, manager_num, f_num, pl_num, email;
+			var s_num,mf_num,e_id,c_id,p_num,s_obtain_date,s_contract_sum,s_complete_date;
 
 			// 그리드항목 검색폼 전환==========
 			function dubleClick(values) {
-				$('#id').val(values[0]);
-				$('#passwd').val(values[1]);
-				$('#name').val(values[2]);
-				var tel2 = values[3].substring(4, 8);
-				var tel3 = values[3].substring(9);
-				$('#tel2').val(tel2);
-				$('#tel3').val(tel3);
-				$('#birth').val(values[4]);
-				//$('#manager_num').val(values[5]);
-				$('#f_num').val(values[6]);
-				$('#pl_num').val(values[7]);
-				$('#email').val(values[8]);
+				$('#s_num').val(values[0]);
+				$('#mf_num').val(values[1]);
+				$('#e_id').val(values[2]);
+				$('#c_id').val(values[3]);
+				$('#p_num').val(values[4]);
+				$('#s_obtain_date').val(values[5]);
+				$('#s_contract_sum').val(values[6]);
+				$('#s_complete_date').val(values[7]);
 			}
 
 			// 검색폼 초기화===================
 			function reset() {
-				$('#id').val('');
-				$('#passwd').val('');
-				$('#name').val('');
-				$('#pl_num').val('');
-				$('#email').val('');
-				$('#tel1').val('010');
-				$('#tel2').val('');
-				$('#tel3').val('');
-				$('#birth').val('');
+				$('#s_num').val('');
+				$('#mf_num').val('');
+				$('#e_id').val('');
+				$('#c_id').val('');
+				$('#p_num').val('');
+				$('#s_obtain_date').val('');
+				$('#s_contract_sum').val('');
+				$('#s_complete_date').val('');
 				makeTable('gridTable', list, colNames, colModel);
 			}
 
 			// 검색폼 데이터 세팅==============
 			function setData() {
-				id = $('#id').val();
-				passwd = $('#passwd').val();
-				name = $('#name').val();
-				tel = $('#tel1 option:selected').val() + $('#tel2').val()
-						+ $('#tel3').val();
-				birth = $('#birth').val();
-				manager_num = $('#manage').val();
-				f_num = $('#f_num').val();
-				pl_num = $('#pl_num option:selected').val();
-				email = $('#email').val();
-				dataSet = id + "," + passwd + "," + name + "," + tel + ","
-						+ birth + "," + manager_num + "," + birth + "," + f_num
-						+ "," + pl_num + "," + email;
+				s_num = $('#s_num').val();
+				mf_num = $('#mf_num option:selected').val();
+				e_id = $('#e_id option:selected').val();
+				c_id = $('#tel1 c_id').val();
+				p_num = $('#p_num option:selected').val();
+				s_obtain_date = $('#s_obtain_date').val();
+				s_contract_sum = $('#s_contract_sum').val();
+				s_complete_date = $('#s_complete_date').val();
+				dataSet = s_num + "," + mf_num + "," + e_id + "," + c_id + ","
+						+ p_num + "," + s_obtain_date + "," + s_contract_sum + "," + s_complete_date;
 			}
 
 			// 검색폼 입력여부 확인============
 			function isFilled() {
 				setData();
-				if (id == null || passwd == null || name == null || tel == null
-						|| birth == null || manager_num == null
-						|| f_num == null || pl_num == null || email == null
-						|| email == null || id == "" || passwd == ""
-						|| name == "" || tel == "" || birth == ""
-						|| manager_num == "" || f_num == "" || pl_num == ""
-						|| email == "") {
+				if (s_num == null || mf_num == null || e_id == null || c_id == null
+						|| p_num == null || s_obtain_date == null
+						|| s_contract_sum == null || s_complete_date == null  || s_num == "" || mf_num == ""
+						|| e_id == "" || c_id == "" || p_num == ""
+						|| s_obtain_date == "" || s_contract_sum == "" || s_complete_date == "") {
 					return false;
 				} else {
 					return true;
